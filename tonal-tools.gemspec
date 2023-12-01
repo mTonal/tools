@@ -2,12 +2,12 @@ lib = File.expand_path('../lib', __FILE__)
 
 Gem::Specification.new do |spec|
   spec.name        = "tonal-tools"
-  spec.version     = "0.1.0"
+  spec.version     = "0.1.1"
   spec.summary     = "Tonal tools"
   spec.description = "Basic tools, utilities and conveniences for microtonal music making and analysis"
   spec.authors     = ["Jose Hales-Garcia"]
   spec.email       = "jose@halesgarcia.com"
-  spec.homepage    = "https://jolohaga.github.io/tonal-tools/"
+  spec.homepage    = "https://mtonal.github.io/tools/"
   spec.metadata = {
     "source_code_uri" => "https://github.com/mTonal/tools"
   }
