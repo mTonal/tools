@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>
+  Class: Tonal::Ratio::Approximations
+  
+    &mdash; Documentation by YARD 0.9.34
+  
+</title>
+
+  <link rel="stylesheet" href="../../css/style.css" type="text/css" />
+
+  <link rel="stylesheet" href="../../css/common.css" type="text/css" />
+
+<script type="text/javascript">
+  pathId = "Tonal::Ratio::Approximations";
+  relpath = '../../';
+</script>
+
+
+  <script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="../../js/app.js"></script>
+
+
+  </head>
+  <body>
+    <div class="nav_wrap">
+      <iframe id="nav" src="../../class_list.html?1"></iframe>
+      <div id="resizer"></div>
+    </div>
+
+    <div id="main" tabindex="-1">
+      <div id="header">
+        <div id="menu">
+  
+    <a href="../../_index.html">Index (A)</a> &raquo;
+    <span class='title'><span class='object_link'><a href="../../Tonal.html" title="Tonal (module)">Tonal</a></span></span> &raquo; <span class='title'><span class='object_link'><a href="../Ratio.html" title="Tonal::Ratio (class)">Ratio</a></span></span>
+     &raquo; 
+    <span class="title">Approximations</span>
+  
+</div>
+
+        <div id="search">
+  
+    <a class="full_list_link" id="class_list_link"
+        href="../../class_list.html">
+
+        <svg width="24" height="24">
+          <rect x="0" y="4" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="12" width="24" height="4" rx="1" ry="1"></rect>
+          <rect x="0" y="20" width="24" height="4" rx="1" ry="1"></rect>
+        </svg>
+    </a>
+  
+</div>
+        <div class="clear"></div>
+      </div>
+
+      <div id="content"><h1>Class: Tonal::Ratio::Approximations
+  
+  
+  
+</h1>
+<div class="box_info">
+  
+  <dl>
+    <dt>Inherits:</dt>
+    <dd>
+      <span class="inheritName">Object</span>
+      
+        <ul class="fullTree">
+          <li>Object</li>
+          
+            <li class="next">Tonal::Ratio::Approximations</li>
+          
+        </ul>
+        <a href="#" class="inheritanceTree">show all</a>
+      
+    </dd>
+  </dl>
+  
+
+  
+  
+  <dl>
+      <dt>Extended by:</dt>
+      <dd>Forwardable</dd>
+  </dl>
+  
+  
+  
+  
+
+  
+
+  
+  <dl>
+    <dt>Defined in:</dt>
+    <dd>lib/tonal/approximations.rb</dd>
+  </dl>
+  
+</div>
+
+
+  
+    <h2>
+      Constant Summary
+      <small><a href="#" class="constants_summary_toggle">collapse</a></small>
+    </h2>
+
+    <dl class="constants">
+      
+        <dt id="DEFAULT_MAX_PRIME-constant" class="">DEFAULT_MAX_PRIME =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Float</span><span class='op'>::</span><span class='const'>INFINITY</span></pre></dd>
+      
+        <dt id="DEFAULT_MAX_GRID_SCALE-constant" class="">DEFAULT_MAX_GRID_SCALE =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>100</span></pre></dd>
+      
+        <dt id="DEFAULT_MAX_GRID_BOUNDARY-constant" class="">DEFAULT_MAX_GRID_BOUNDARY =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>5</span></pre></dd>
+      
+        <dt id="DEFAULT_DEPTH-constant" class="">DEFAULT_DEPTH =
+          
+        </dt>
+        <dd><pre class="code"><span class='const'>Float</span><span class='op'>::</span><span class='const'>INFINITY</span></pre></dd>
+      
+        <dt id="DEFAULT_COMPLEXITY_AMOUNT-constant" class="">DEFAULT_COMPLEXITY_AMOUNT =
+          
+        </dt>
+        <dd><pre class="code"><span class='float'>50.0</span></pre></dd>
+      
+        <dt id="CONVERGENT_LIMIT-constant" class="">CONVERGENT_LIMIT =
+          
+        </dt>
+        <dd><pre class="code"><span class='int'>10</span></pre></dd>
+      
+    </dl>
+  
+
+
+
+
+  <h2>Instance Attribute Summary <small><a href="#" class="summary_toggle">collapse</a></small></h2>
+  <ul class="summary">
+    
+      <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ratio-instance_method" title="#ratio (instance method)">#<strong>ratio</strong>  &#x21d2; Object </a>
+    
+
+    
+  </span>
+  
+  
+  
+    
+      <span class="note title readonly">readonly</span>
+    
+    
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Returns the value of attribute ratio.</p>
+</div></span>
+  
+</li>
+
+    
+  </ul>
+
+
+
+
+  
+    <h2>
+      Class Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#neighbors-class_method" title="neighbors (class method)">.<strong>neighbors</strong>(vacinity:, away: 1)  &#x21d2; Array </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An array of Tonal::Ratio neighbors in the scaled ratio’s grid neighborhood.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+    <h2>
+      Instance Method Summary
+      <small><a href="#" class="summary_toggle">collapse</a></small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#by_continued_fraction-instance_method" title="#by_continued_fraction (instance method)">#<strong>by_continued_fraction</strong>(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_DEPTH, max_prime: DEFAULT_MAX_PRIME, conv_limit: CONVERGENT_LIMIT)  &#x21d2; Array </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Of ratios within cent tolerance of self found using continued fraction approximation.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#by_neighborhood-instance_method" title="#by_neighborhood (instance method)">#<strong>by_neighborhood</strong>(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_DEPTH, max_prime: DEFAULT_MAX_PRIME, max_boundary: DEFAULT_MAX_GRID_BOUNDARY, max_scale: DEFAULT_MAX_GRID_SCALE)  &#x21d2; Array </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Of ratios within cent tolerance of self found on the ratio grid.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#by_quotient_walk-instance_method" title="#by_quotient_walk (instance method)">#<strong>by_quotient_walk</strong>(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_DEPTH, max_prime: DEFAULT_MAX_PRIME, conv_limit: CONVERGENT_LIMIT)  &#x21d2; Array </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Of ratios within cent tolerance of self found using a quotient walk on the fraction tree.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#by_tree_path-instance_method" title="#by_tree_path (instance method)">#<strong>by_tree_path</strong>(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_DEPTH, max_prime: DEFAULT_MAX_PRIME)  &#x21d2; Array </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Of fraction tree ratios within cent tolerance of self.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#initialize-instance_method" title="#initialize (instance method)">#<strong>initialize</strong>(ratio:)  &#x21d2; Approximations </a>
+    
+
+    
+  </span>
+  
+  
+    <span class="note title constructor">constructor</span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A new instance of Approximations.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#neighborhood-instance_method" title="#neighborhood (instance method)">#<strong>neighborhood</strong>(scale: 2**0, boundary: 1)  &#x21d2; Array </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Of bounding ratios in the ratio grid vacinity of antecedent/consequent scaled by scale.</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+  <div id="constructor_details" class="method_details_list">
+  <h2>Constructor Details</h2>
+  
+    <div class="method_details first">
+  <h3 class="signature first" id="initialize-instance_method">
+  
+    #<strong>initialize</strong>(ratio:)  &#x21d2; <tt><span class='object_link'><a href="" title="Tonal::Ratio::Approximations (class)">Approximations</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a new instance of Approximations.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Raises:</p>
+<ul class="raise">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>ArgumentError</tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+15
+16
+17
+18</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/approximations.rb', line 15</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='label'>ratio:</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>Tonal::Ratio required</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>unless</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Ratio.html" title="Tonal::Ratio (class)">Ratio</a></span></span><span class='rparen'>)</span>
+  <span class='ivar'>@ratio</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+  
+</div>
+
+  <div id="instance_attr_details" class="attr_details">
+    <h2>Instance Attribute Details</h2>
+    
+      
+      <span id=""></span>
+      <div class="method_details first">
+  <h3 class="signature first" id="ratio-instance_method">
+  
+    #<strong>ratio</strong>  &#x21d2; <tt>Object</tt>  <span class="extras">(readonly)</span>
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the value of attribute ratio.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+13
+14
+15</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/approximations.rb', line 13</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ratio'>ratio</span>
+  <span class='ivar'>@ratio</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+
+  <div id="class_method_details" class="method_details_list">
+    <h2>Class Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="neighbors-class_method">
+  
+    .<strong>neighbors</strong>(vacinity:, away: 1)  &#x21d2; <tt><span class='object_link'><a href="../../Array.html" title="Array (class)">Array</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns an array of Tonal::Ratio neighbors in the scaled ratio’s grid neighborhood.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>Tonal::Ratio::Approximations.neighbors(vacinity: (3/2r).ratio(reduced:false).scale(256), away: 1)
+  =&gt; [(768/513), (767/512), (768/512), (769/512), (768/511)]</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>away</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Integer.html" title="Integer (class)">Integer</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the neighbors distance away from self’s antecedent and consequent</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Array.html" title="Array (class)">Array</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an array of Tonal::Ratio neighbors in the scaled ratio’s grid neighborhood</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/approximations.rb', line 136</span>
+
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_neighbors'>neighbors</span><span class='lparen'>(</span><span class='label'>vacinity:</span><span class='comma'>,</span> <span class='label'>away:</span> <span class='int'>1</span><span class='rparen'>)</span>
+  <span class='lbracket'>[</span><span class='id identifier rubyid_vacinity'>vacinity</span><span class='comma'>,</span>
+   <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='op'>+</span><span class='id identifier rubyid_away'>away</span><span class='comma'>,</span> <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_consequent'>consequent</span><span class='rparen'>)</span><span class='comma'>,</span>
+   <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='op'>-</span><span class='id identifier rubyid_away'>away</span><span class='comma'>,</span> <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_consequent'>consequent</span><span class='rparen'>)</span><span class='comma'>,</span>
+   <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='comma'>,</span> <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_consequent'>consequent</span><span class='op'>+</span><span class='id identifier rubyid_away'>away</span><span class='rparen'>)</span><span class='comma'>,</span>
+   <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='comma'>,</span> <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_consequent'>consequent</span><span class='op'>-</span><span class='id identifier rubyid_away'>away</span><span class='rparen'>)</span><span class='comma'>,</span>
+   <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='op'>+</span><span class='id identifier rubyid_away'>away</span><span class='comma'>,</span> <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_consequent'>consequent</span><span class='op'>+</span><span class='id identifier rubyid_away'>away</span><span class='rparen'>)</span><span class='comma'>,</span>
+   <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='op'>+</span><span class='id identifier rubyid_away'>away</span><span class='comma'>,</span> <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_consequent'>consequent</span><span class='op'>-</span><span class='id identifier rubyid_away'>away</span><span class='rparen'>)</span><span class='comma'>,</span>
+   <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='op'>-</span><span class='id identifier rubyid_away'>away</span><span class='comma'>,</span> <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_consequent'>consequent</span><span class='op'>+</span><span class='id identifier rubyid_away'>away</span><span class='rparen'>)</span><span class='comma'>,</span>
+   <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='op'>-</span><span class='id identifier rubyid_away'>away</span><span class='comma'>,</span> <span class='id identifier rubyid_vacinity'>vacinity</span><span class='period'>.</span><span class='id identifier rubyid_consequent'>consequent</span><span class='op'>-</span><span class='id identifier rubyid_away'>away</span><span class='rparen'>)</span><span class='rbracket'>]</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+
+    
+      <div class="method_details first">
+  <h3 class="signature first" id="by_continued_fraction-instance_method">
+  
+    #<strong>by_continued_fraction</strong>(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_DEPTH, max_prime: DEFAULT_MAX_PRIME, conv_limit: CONVERGENT_LIMIT)  &#x21d2; <tt><span class='object_link'><a href="../../Array.html" title="Array (class)">Array</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns of ratios within cent tolerance of self found using continued fraction approximation.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>Tonal::Ratio.ed(12,1).by_continued_fraction
+=&gt; [(18/17), (196/185), (1657/1564), (7893/7450), (18904/17843), (3118/2943), (1461/1379), (89/84), (17/16)]</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cents_tolerance</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>Tonal::Cents::TOLERANCE</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>depth</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>DEFAULT_DEPTH</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_prime</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>DEFAULT_MAX_PRIME</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>conv_limit</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>CONVERGENT_LIMIT</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Array.html" title="Array (class)">Array</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>of ratios within cent tolerance of self found using continued fraction approximation</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/approximations.rb', line 29</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_by_continued_fraction'>by_continued_fraction</span><span class='lparen'>(</span><span class='label'>cents_tolerance:</span> <span class='const'><span class='object_link'><a href="../../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html" title="Tonal::Cents (class)">Cents</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html#TOLERANCE-constant" title="Tonal::Cents::TOLERANCE (constant)">TOLERANCE</a></span></span><span class='comma'>,</span> <span class='label'>depth:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_DEPTH-constant" title="Tonal::Ratio::Approximations::DEFAULT_DEPTH (constant)">DEFAULT_DEPTH</a></span></span><span class='comma'>,</span> <span class='label'>max_prime:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_MAX_PRIME-constant" title="Tonal::Ratio::Approximations::DEFAULT_MAX_PRIME (constant)">DEFAULT_MAX_PRIME</a></span></span><span class='comma'>,</span> <span class='label'>conv_limit:</span> <span class='const'><span class='object_link'><a href="#CONVERGENT_LIMIT-constant" title="Tonal::Ratio::Approximations::CONVERGENT_LIMIT (constant)">CONVERGENT_LIMIT</a></span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_self_in_cents'>self_in_cents</span> <span class='op'>=</span> <span class='id identifier rubyid_to_cents'>to_cents</span>
+  <span class='id identifier rubyid_within'>within</span> <span class='op'>=</span> <span class='id identifier rubyid_cents_tolerance'>cents_tolerance</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html" title="Tonal::Cents (class)">Cents</a></span></span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_cents_tolerance'>cents_tolerance</span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html" title="Tonal::Cents (class)">Cents</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Cents.html#initialize-instance_method" title="Tonal::Cents#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>cents:</span> <span class='id identifier rubyid_cents_tolerance'>cents_tolerance</span><span class='rparen'>)</span>
+  <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_results'>results</span><span class='op'>|</span>
+    <span class='const'>ContinuedFraction</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='period'>.</span><span class='id identifier rubyid_to_f'>to_f</span><span class='op'>/</span><span class='id identifier rubyid_consequent'>consequent</span><span class='comma'>,</span> <span class='id identifier rubyid_conv_limit'>conv_limit</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_convergents_as_rationals'>convergents_as_rationals</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_convergent'>convergent</span><span class='op'>|</span>
+      <span class='id identifier rubyid_ratio2'>ratio2</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_convergent'>convergent</span><span class='period'>.</span><span class='id identifier rubyid_numerator'>numerator</span><span class='comma'>,</span><span class='id identifier rubyid_convergent'>convergent</span><span class='period'>.</span><span class='id identifier rubyid_denominator'>denominator</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_results'>results</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_ratio2'>ratio2</span> <span class='kw'>if</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_within_cents?'>within_cents?</span><span class='lparen'>(</span><span class='id identifier rubyid_self_in_cents'>self_in_cents</span><span class='comma'>,</span> <span class='id identifier rubyid_ratio2'>ratio2</span><span class='period'>.</span><span class='id identifier rubyid_to_cents'>to_cents</span><span class='comma'>,</span> <span class='id identifier rubyid_within'>within</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_ratio2'>ratio2</span><span class='period'>.</span><span class='id identifier rubyid_within_prime?'>within_prime?</span><span class='lparen'>(</span><span class='id identifier rubyid_max_prime'>max_prime</span><span class='rparen'>)</span>
+      <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;=</span> <span class='id identifier rubyid_depth'>depth</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span><span class='period'>.</span><span class='id identifier rubyid_sort'>sort</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="by_neighborhood-instance_method">
+  
+    #<strong>by_neighborhood</strong>(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_DEPTH, max_prime: DEFAULT_MAX_PRIME, max_boundary: DEFAULT_MAX_GRID_BOUNDARY, max_scale: DEFAULT_MAX_GRID_SCALE)  &#x21d2; <tt><span class='object_link'><a href="../../Array.html" title="Array (class)">Array</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns of ratios within cent tolerance of self found on the ratio grid.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>Tonal::Ratio.new(3,2).by_neighborhood(max_prime: 23, cents_tolerance: 5, max_boundary: 10, max_scale: 60)
+=&gt; [(175/117), (176/117)]</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cents_tolerance</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>Tonal::Cents::TOLERANCE</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the maximum cents self is allowed from grid ratios</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>depth</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>DEFAULT_DEPTH</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the maximum depth the array will get</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_prime</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>DEFAULT_MAX_PRIME</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the maximum prime the grid ratios will contain</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_boundary</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>DEFAULT_MAX_GRID_BOUNDARY</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the maximum distance grid ratios will be from the scaled ratio</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_scale</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>DEFAULT_MAX_GRID_SCALE</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the maximum self will be scaled</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Array.html" title="Array (class)">Array</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>of ratios within cent tolerance of self found on the ratio grid</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/approximations.rb', line 92</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_by_neighborhood'>by_neighborhood</span><span class='lparen'>(</span><span class='label'>cents_tolerance:</span> <span class='const'><span class='object_link'><a href="../../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html" title="Tonal::Cents (class)">Cents</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html#TOLERANCE-constant" title="Tonal::Cents::TOLERANCE (constant)">TOLERANCE</a></span></span><span class='comma'>,</span> <span class='label'>depth:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_DEPTH-constant" title="Tonal::Ratio::Approximations::DEFAULT_DEPTH (constant)">DEFAULT_DEPTH</a></span></span><span class='comma'>,</span> <span class='label'>max_prime:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_MAX_PRIME-constant" title="Tonal::Ratio::Approximations::DEFAULT_MAX_PRIME (constant)">DEFAULT_MAX_PRIME</a></span></span><span class='comma'>,</span> <span class='label'>max_boundary:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_MAX_GRID_BOUNDARY-constant" title="Tonal::Ratio::Approximations::DEFAULT_MAX_GRID_BOUNDARY (constant)">DEFAULT_MAX_GRID_BOUNDARY</a></span></span><span class='comma'>,</span> <span class='label'>max_scale:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_MAX_GRID_SCALE-constant" title="Tonal::Ratio::Approximations::DEFAULT_MAX_GRID_SCALE (constant)">DEFAULT_MAX_GRID_SCALE</a></span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_self_in_cents'>self_in_cents</span> <span class='op'>=</span> <span class='id identifier rubyid_to_cents'>to_cents</span>
+  <span class='id identifier rubyid_within'>within</span> <span class='op'>=</span> <span class='id identifier rubyid_cents_tolerance'>cents_tolerance</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html" title="Tonal::Cents (class)">Cents</a></span></span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_cents_tolerance'>cents_tolerance</span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html" title="Tonal::Cents (class)">Cents</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Cents.html#initialize-instance_method" title="Tonal::Cents#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>cents:</span> <span class='id identifier rubyid_cents_tolerance'>cents_tolerance</span><span class='rparen'>)</span>
+  <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_results'>results</span><span class='op'>|</span>
+    <span class='id identifier rubyid_scale'>scale</span> <span class='op'>=</span> <span class='int'>1</span>
+    <span class='id identifier rubyid_boundary'>boundary</span> <span class='op'>=</span> <span class='int'>1</span>
+
+    <span class='kw'>while</span> <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_depth'>depth</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_scale'>scale</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_max_scale'>max_scale</span> <span class='kw'>do</span>
+      <span class='kw'>while</span> <span class='id identifier rubyid_boundary'>boundary</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_max_boundary'>max_boundary</span>
+        <span class='id identifier rubyid_vacinity'>vacinity</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:to_basic_ratio</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_to_basic_ratio'>to_basic_ratio</span><span class='period'>.</span><span class='id identifier rubyid_scale'>scale</span><span class='lparen'>(</span><span class='id identifier rubyid_scale'>scale</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_scale'>scale</span><span class='lparen'>(</span><span class='id identifier rubyid_scale'>scale</span><span class='rparen'>)</span>
+        <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_neighbors'>neighbors</span><span class='lparen'>(</span><span class='label'>away:</span> <span class='id identifier rubyid_boundary'>boundary</span><span class='comma'>,</span> <span class='label'>vacinity:</span> <span class='id identifier rubyid_vacinity'>vacinity</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_neighbor'>neighbor</span><span class='op'>|</span>
+          <span class='id identifier rubyid_results'>results</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_neighbor'>neighbor</span> <span class='kw'>if</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_within_cents?'>within_cents?</span><span class='lparen'>(</span><span class='id identifier rubyid_self_in_cents'>self_in_cents</span><span class='comma'>,</span> <span class='id identifier rubyid_neighbor'>neighbor</span><span class='period'>.</span><span class='id identifier rubyid_to_cents'>to_cents</span><span class='comma'>,</span> <span class='id identifier rubyid_within'>within</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_neighbor'>neighbor</span><span class='period'>.</span><span class='id identifier rubyid_within_prime?'>within_prime?</span><span class='lparen'>(</span><span class='id identifier rubyid_max_prime'>max_prime</span><span class='rparen'>)</span>
+        <span class='kw'>end</span>
+        <span class='id identifier rubyid_boundary'>boundary</span> <span class='op'>+=</span> <span class='int'>1</span>
+      <span class='kw'>end</span>
+      <span class='id identifier rubyid_boundary'>boundary</span> <span class='op'>=</span> <span class='int'>1</span>
+      <span class='id identifier rubyid_scale'>scale</span> <span class='op'>+=</span> <span class='int'>1</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span><span class='period'>.</span><span class='id identifier rubyid_uniq'>uniq</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_r</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_r'>r</span><span class='op'>|</span> <span class='id identifier rubyid_r'>r</span> <span class='op'>==</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_sort'>sort</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="by_quotient_walk-instance_method">
+  
+    #<strong>by_quotient_walk</strong>(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_DEPTH, max_prime: DEFAULT_MAX_PRIME, conv_limit: CONVERGENT_LIMIT)  &#x21d2; <tt><span class='object_link'><a href="../../Array.html" title="Array (class)">Array</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns of ratios within cent tolerance of self found using a quotient walk on the fraction tree.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>Tonal::Ratio.ed(12,1).by_quotient_walk(max_prime: 89)
+=&gt; [(18/17), (196/185), (89/84), (71/67), (53/50), (35/33), (17/16)]</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cents_tolerance</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>Tonal::Cents::TOLERANCE</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>depth</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>DEFAULT_DEPTH</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_prime</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>DEFAULT_MAX_PRIME</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Array.html" title="Array (class)">Array</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>of ratios within cent tolerance of self found using a quotient walk on the fraction tree</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/approximations.rb', line 49</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_by_quotient_walk'>by_quotient_walk</span><span class='lparen'>(</span><span class='label'>cents_tolerance:</span> <span class='const'><span class='object_link'><a href="../../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html" title="Tonal::Cents (class)">Cents</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html#TOLERANCE-constant" title="Tonal::Cents::TOLERANCE (constant)">TOLERANCE</a></span></span><span class='comma'>,</span> <span class='label'>depth:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_DEPTH-constant" title="Tonal::Ratio::Approximations::DEFAULT_DEPTH (constant)">DEFAULT_DEPTH</a></span></span><span class='comma'>,</span> <span class='label'>max_prime:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_MAX_PRIME-constant" title="Tonal::Ratio::Approximations::DEFAULT_MAX_PRIME (constant)">DEFAULT_MAX_PRIME</a></span></span><span class='comma'>,</span> <span class='label'>conv_limit:</span> <span class='const'><span class='object_link'><a href="#CONVERGENT_LIMIT-constant" title="Tonal::Ratio::Approximations::CONVERGENT_LIMIT (constant)">CONVERGENT_LIMIT</a></span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_self_in_cents'>self_in_cents</span> <span class='op'>=</span> <span class='id identifier rubyid_to_cents'>to_cents</span>
+  <span class='id identifier rubyid_within'>within</span> <span class='op'>=</span> <span class='id identifier rubyid_cents_tolerance'>cents_tolerance</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html" title="Tonal::Cents (class)">Cents</a></span></span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_cents_tolerance'>cents_tolerance</span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html" title="Tonal::Cents (class)">Cents</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Cents.html#initialize-instance_method" title="Tonal::Cents#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>cents:</span> <span class='id identifier rubyid_cents_tolerance'>cents_tolerance</span><span class='rparen'>)</span>
+
+  <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_results'>results</span><span class='op'>|</span>
+    <span class='const'>FractionTree</span><span class='period'>.</span><span class='id identifier rubyid_quotient_walk'>quotient_walk</span><span class='lparen'>(</span><span class='id identifier rubyid_to_f'>to_f</span><span class='comma'>,</span> <span class='label'>limit:</span> <span class='id identifier rubyid_conv_limit'>conv_limit</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_node'>node</span><span class='op'>|</span>
+      <span class='id identifier rubyid_ratio2'>ratio2</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_weight'>weight</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_results'>results</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_ratio2'>ratio2</span> <span class='kw'>if</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_within_cents?'>within_cents?</span><span class='lparen'>(</span><span class='id identifier rubyid_self_in_cents'>self_in_cents</span><span class='comma'>,</span> <span class='id identifier rubyid_ratio2'>ratio2</span><span class='period'>.</span><span class='id identifier rubyid_to_cents'>to_cents</span><span class='comma'>,</span> <span class='id identifier rubyid_within'>within</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_ratio2'>ratio2</span><span class='period'>.</span><span class='id identifier rubyid_within_prime?'>within_prime?</span><span class='lparen'>(</span><span class='id identifier rubyid_max_prime'>max_prime</span><span class='rparen'>)</span>
+      <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;=</span> <span class='id identifier rubyid_depth'>depth</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span><span class='period'>.</span><span class='id identifier rubyid_sort'>sort</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="by_tree_path-instance_method">
+  
+    #<strong>by_tree_path</strong>(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_DEPTH, max_prime: DEFAULT_MAX_PRIME)  &#x21d2; <tt><span class='object_link'><a href="../../Array.html" title="Array (class)">Array</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns of fraction tree ratios within cent tolerance of self.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>Tonal::Ratio.ed(12,1).by_tree_path(max_prime: 17)
+=&gt; [(18/17), (35/33), (17/16)]</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>cents_tolerance</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>Tonal::Cents::TOLERANCE</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>depth</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>DEFAULT_DEPTH</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>max_prime</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>DEFAULT_MAX_PRIME</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Array.html" title="Array (class)">Array</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>of fraction tree ratios within cent tolerance of self</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/approximations.rb', line 70</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_by_tree_path'>by_tree_path</span><span class='lparen'>(</span><span class='label'>cents_tolerance:</span> <span class='const'><span class='object_link'><a href="../../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html" title="Tonal::Cents (class)">Cents</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html#TOLERANCE-constant" title="Tonal::Cents::TOLERANCE (constant)">TOLERANCE</a></span></span><span class='comma'>,</span> <span class='label'>depth:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_DEPTH-constant" title="Tonal::Ratio::Approximations::DEFAULT_DEPTH (constant)">DEFAULT_DEPTH</a></span></span><span class='comma'>,</span> <span class='label'>max_prime:</span> <span class='const'><span class='object_link'><a href="#DEFAULT_MAX_PRIME-constant" title="Tonal::Ratio::Approximations::DEFAULT_MAX_PRIME (constant)">DEFAULT_MAX_PRIME</a></span></span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_self_in_cents'>self_in_cents</span> <span class='op'>=</span> <span class='id identifier rubyid_to_cents'>to_cents</span>
+  <span class='id identifier rubyid_within'>within</span> <span class='op'>=</span> <span class='id identifier rubyid_cents_tolerance'>cents_tolerance</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html" title="Tonal::Cents (class)">Cents</a></span></span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_cents_tolerance'>cents_tolerance</span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="../Cents.html" title="Tonal::Cents (class)">Cents</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="../Cents.html#initialize-instance_method" title="Tonal::Cents#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>cents:</span> <span class='id identifier rubyid_cents_tolerance'>cents_tolerance</span><span class='rparen'>)</span>
+  <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_results'>results</span><span class='op'>|</span>
+    <span class='const'>FractionTree</span><span class='period'>.</span><span class='id identifier rubyid_path_to'>path_to</span><span class='lparen'>(</span><span class='id identifier rubyid_to_f'>to_f</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_node'>node</span><span class='op'>|</span>
+      <span class='id identifier rubyid_ratio2'>ratio2</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_node'>node</span><span class='period'>.</span><span class='id identifier rubyid_weight'>weight</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_results'>results</span> <span class='op'>&lt;&lt;</span> <span class='id identifier rubyid_ratio2'>ratio2</span> <span class='kw'>if</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_within_cents?'>within_cents?</span><span class='lparen'>(</span><span class='id identifier rubyid_self_in_cents'>self_in_cents</span><span class='comma'>,</span> <span class='id identifier rubyid_ratio2'>ratio2</span><span class='period'>.</span><span class='id identifier rubyid_to_cents'>to_cents</span><span class='comma'>,</span> <span class='id identifier rubyid_within'>within</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_ratio2'>ratio2</span><span class='period'>.</span><span class='id identifier rubyid_within_prime?'>within_prime?</span><span class='lparen'>(</span><span class='id identifier rubyid_max_prime'>max_prime</span><span class='rparen'>)</span>
+      <span class='kw'>break</span> <span class='kw'>if</span> <span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_length'>length</span> <span class='op'>&gt;=</span> <span class='id identifier rubyid_depth'>depth</span>
+    <span class='kw'>end</span>
+  <span class='kw'>end</span><span class='period'>.</span><span class='id identifier rubyid_sort'>sort</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="neighborhood-instance_method">
+  
+    #<strong>neighborhood</strong>(scale: 2**0, boundary: 1)  &#x21d2; <tt><span class='object_link'><a href="../../Array.html" title="Array (class)">Array</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns of bounding ratios in the ratio grid vacinity of antecedent/consequent scaled by scale.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>Tonal::ReducedRatio.new(3,2).neighborhood(scale: 256, boundary: 2)
+  =&gt; [(768/514), (766/512), (768/513), (767/512), (768/512), (769/512), (768/511), (770/512), (768/510)]</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>scale</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Integer.html" title="Integer (class)">Integer</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>2**0</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>used to scale antecedent/consequent on coordinate system</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>boundary</span>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Integer.html" title="Integer (class)">Integer</a></span></tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>limit within which to calculate neighboring ratios</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="../../Array.html" title="Array (class)">Array</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>of bounding ratios in the ratio grid vacinity of antecedent/consequent scaled by scale</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+120
+121
+122
+123
+124
+125
+126
+127
+128</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/approximations.rb', line 120</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_neighborhood'>neighborhood</span><span class='lparen'>(</span><span class='label'>scale:</span> <span class='int'>2</span><span class='op'>**</span><span class='int'>0</span><span class='comma'>,</span> <span class='label'>boundary:</span> <span class='int'>1</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_scale'>scale</span> <span class='op'>=</span> <span class='id identifier rubyid_scale'>scale</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span>
+  <span class='id identifier rubyid_vacinity'>vacinity</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_respond_to?'>respond_to?</span><span class='lparen'>(</span><span class='symbol'>:to_basic_ratio</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_to_basic_ratio'>to_basic_ratio</span><span class='period'>.</span><span class='id identifier rubyid_scale'>scale</span><span class='lparen'>(</span><span class='id identifier rubyid_scale'>scale</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_scale'>scale</span><span class='lparen'>(</span><span class='id identifier rubyid_scale'>scale</span><span class='rparen'>)</span>
+  <span class='const'>SortedSet</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_ratio_list'>ratio_list</span><span class='op'>|</span>
+                  <span class='int'>1</span><span class='period'>.</span><span class='id identifier rubyid_upto'>upto</span><span class='lparen'>(</span><span class='id identifier rubyid_boundary'>boundary</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_away'>away</span><span class='op'>|</span>
+                    <span class='id identifier rubyid_ratio_list'>ratio_list</span> <span class='op'>&lt;&lt;</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_neighbors'>neighbors</span><span class='lparen'>(</span><span class='label'>away:</span> <span class='id identifier rubyid_away'>away</span><span class='comma'>,</span> <span class='label'>vacinity:</span> <span class='id identifier rubyid_vacinity'>vacinity</span><span class='rparen'>)</span>
+                  <span class='kw'>end</span>
+                <span class='kw'>end</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_a'>to_a</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+
+      <div id="footer">
+  Generated on Thu Nov 30 21:41:47 2023 by
+  <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.9.34 (ruby-3.2.2).
+</div>
+
+    </div>
+  </body>
+</html>
