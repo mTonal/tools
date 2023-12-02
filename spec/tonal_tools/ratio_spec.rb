@@ -444,4 +444,33 @@ RSpec.describe Tonal::Ratio do
       expect(subject.lcm(5/4r)).to eq 4
     end
   end
+
+  describe "#label" do
+    let(:arg2) { nil }
+
+    context "with numerator less than 7 digits long" do
+      let(:arg1) { 3/2r }
+
+      it "returns the ratio" do
+        expect(subject.label).to eq "3/2"
+      end
+    end
+
+    context "with numerator greater than 7 digits long" do
+      let(:arg1) { 2**(1.0/12) }
+
+      it "does something" do
+        expect(subject.label).to eq "1.06"
+      end
+    end
+
+    context "with a provided label" do
+      let(:arg1) { 2**(1.0/12) }
+      let(:label) { "2^(1/12)" }
+
+      it "returns the provided label" do
+        expect(described_class.new(arg1, arg2, label: label).label).to eq label
+      end
+    end
+  end
 end

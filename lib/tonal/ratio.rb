@@ -469,7 +469,7 @@ class Tonal::Ratio
     # Return label, if defined; or,
     # Return the "antecedent/consequent", if antecedent is less than 7 digits long; or
     # Return the floating point representation rounded to 2 digits of precision
-    @label || ((Math.log10(antecedent).to_i + 1) <= 6 ? "#{antecedent}/#{consequent}" : to_f.round(2))
+    (@label || ((Math.log10(antecedent).to_i + 1) <= 6 ? "#{antecedent}/#{consequent}" : to_f.round(2))).to_s
   end
 
   # @return [String] the string representation of Tonal::Ratio

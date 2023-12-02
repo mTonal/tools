@@ -35,15 +35,15 @@ RSpec.describe Tonal::Ratio::Approximations do
 
       context "with defaults" do
         it "returns ratios up to the default depth" do
-          expect(ratio.by_continued_fraction.length).to be <= Tonal::Ratio::Approximations::CONVERGENT_LIMIT
+          expect(ratio.approx.by_continued_fraction.length).to be <= Tonal::Ratio::Approximations::CONVERGENT_LIMIT
         end
 
         it "returns ratios that are within 5 cents of self" do
-          expect(ratio.by_continued_fraction.all?{|r| r.cent_diff(ratio) <= Tonal::Cents::TOLERANCE}).to be true
+          expect(ratio.approx.by_continued_fraction.all?{|r| r.cent_diff(ratio) <= Tonal::Cents::TOLERANCE}).to be true
         end
 
         it "returns ratios with maximum primes limited only by the depth of the search" do
-          expect(ratio.by_continued_fraction.all?{|r| r.max_prime <= 2549 }).to be true
+          expect(ratio.approx.by_continued_fraction.all?{|r| r.max_prime <= 2549 }).to be true
         end
       end
     end
@@ -53,7 +53,7 @@ RSpec.describe Tonal::Ratio::Approximations do
       let(:max_prime) { 89 }
 
       it "returns ratios with max prime" do
-        expect(ratio.by_quotient_walk(max_prime: max_prime)).to eq [(18/17r), (196/185r), (89/84r), (71/67r), (53/50r), (35/33r), (17/16r)]
+        expect(ratio.approx.by_quotient_walk(max_prime: max_prime)).to eq [(18/17r), (196/185r), (89/84r), (71/67r), (53/50r), (35/33r), (17/16r)]
       end
     end
 
@@ -62,7 +62,7 @@ RSpec.describe Tonal::Ratio::Approximations do
       let(:depth) { 10 }
 
       it "returns 10 ratios" do
-        expect(ratio.by_tree_path(depth: depth).count).to eq 10
+        expect(ratio.approx.by_tree_path(depth: depth).count).to eq 10
       end
     end
 
@@ -74,7 +74,7 @@ RSpec.describe Tonal::Ratio::Approximations do
         let(:max_prime) { 23 }
         let(:max_boundary) { 10 }
         let(:max_scale) { 60 }
-        let(:ratios) { ratio.by_neighborhood(max_prime: max_prime, max_boundary: max_boundary, max_scale: max_scale) }
+        let(:ratios) { ratio.approx.by_neighborhood(max_prime: max_prime, max_boundary: max_boundary, max_scale: max_scale) }
         let(:ratio_in_cents) { ratio.to_cents }
 
         it "returns a set of ratios within 5¢ of ratio and with max prime of 23" do
