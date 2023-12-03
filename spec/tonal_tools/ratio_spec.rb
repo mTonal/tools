@@ -373,16 +373,46 @@ RSpec.describe Tonal::Ratio do
     end
   end
 
-  describe "comparison" do
-    let(:arg1) { 3/2r }
-    let(:arg2) { nil }
+  describe "Comparison" do
+    context "with identical antecedent/consequent" do
+      let(:arg1) { 3/2r }
+      let(:arg2) { nil }
 
-    it "works as expected" do
-      expect(subject == subject).to be true
-      expect(subject < subject).to be false
-      expect(subject > subject).to be false
-      expect(subject >= subject).to be true
-      expect(subject <= subject).to be true
+      it "works as expected" do
+        expect(subject == subject).to be true
+        expect(subject < subject).to be false
+        expect(subject > subject).to be false
+        expect(subject >= subject).to be true
+        expect(subject <= subject).to be true
+      end
+    end
+
+    context "with different antecedent/consequent" do
+      context "and antecedent/consequent are congruent" do
+        let(:ratio) { described_class.new(3,2)}
+        let(:other_ratio) { described_class.new(6,4) }
+
+        it "ratios are considered equivalent" do
+          expect(ratio == other_ratio).to be true
+          expect(ratio < other_ratio).to be false
+          expect(ratio > other_ratio).to be false
+          expect(ratio >= other_ratio).to be true
+          expect(ratio <= other_ratio).to be true
+        end
+      end
+
+      context "and antecedent/consequent are incongruent" do
+        let(:ratio) { described_class.new(3,2)}
+        let(:other_ratio) { described_class.new(7,4) }
+
+        it "ratios are considered different" do
+          expect(ratio == other_ratio).to be false
+          expect(ratio < other_ratio).to be true
+          expect(ratio > other_ratio).to be false
+          expect(ratio >= other_ratio).to be false
+          expect(ratio <= other_ratio).to be true
+        end
+      end
     end
   end
 
