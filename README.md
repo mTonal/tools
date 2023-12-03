@@ -1,4 +1,4 @@
-# tools
+# tonal/tools
 
 A collection of methods, tools, utilities and conveniences for microtonal music making and analysis.
 
