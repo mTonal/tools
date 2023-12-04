@@ -1,0 +1,11 @@
+commas:
+  # Interval between two enharmonically equivalent notes, as B# and C, in the Pythogorean tuning. ~23 cents
+  ditonic: 531441/524288
+  # The interval between a just major third (5:4) and a Pythogorean third (81:64). ~22 cents
+  syntonic: 81/80
+  # Difference between the syntonic and ditonic commas. ~2 cents
+  schisma: 32805/32768
+  diaschisma: 2048/2025
+  dieses1: 648/625
+  dieses2: 128/125
+  septimal: 64/63

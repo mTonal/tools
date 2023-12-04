@@ -1,9 +1,12 @@
 module Tonal
+  require "yaml"
+  require "json"
   require "prime"
   require "matrix"
   require "sorted_set"
   require "continued_fractions"
   require "fraction_tree"
+  require "tonal/comma"
   require "tonal/cents"
   require "tonal/hertz"
   require "tonal/log"
