@@ -3822,7 +3822,7 @@
   <span class='comment'># Return label, if defined; or,
 </span>  <span class='comment'># Return the &quot;antecedent/consequent&quot;, if antecedent is less than 7 digits long; or
 </span>  <span class='comment'># Return the floating point representation rounded to 2 digits of precision
-</span>  <span class='ivar'>@label</span> <span class='op'>||</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Math.html" title="Math (module)">Math</a></span></span><span class='period'>.</span><span class='id identifier rubyid_log10'>log10</span><span class='lparen'>(</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='op'>&lt;=</span> <span class='int'>6</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_consequent'>consequent</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='op'>:</span> <span class='id identifier rubyid_to_f'>to_f</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='rparen'>)</span>
+</span>  <span class='lparen'>(</span><span class='ivar'>@label</span> <span class='op'>||</span> <span class='lparen'>(</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Math.html" title="Math (module)">Math</a></span></span><span class='period'>.</span><span class='id identifier rubyid_log10'>log10</span><span class='lparen'>(</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_i'>to_i</span> <span class='op'>+</span> <span class='int'>1</span><span class='rparen'>)</span> <span class='op'>&lt;=</span> <span class='int'>6</span> <span class='op'>?</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='embexpr_end'>}</span><span class='tstring_content'>/</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_consequent'>consequent</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span> <span class='op'>:</span> <span class='id identifier rubyid_to_f'>to_f</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -6227,7 +6227,7 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Nov 30 21:41:47 2023 by
+  Generated on Mon Dec  4 11:08:15 2023 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
