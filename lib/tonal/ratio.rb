@@ -474,7 +474,7 @@ class Tonal::Ratio
 
   # @return [String] the string representation of Tonal::Ratio
   # @example
-  #   Tonal::Ratio.new(3, 2).inspect => "[3, 2]"
+  #   Tonal::Ratio.new(3, 2).inspect => "(3/2)"
   #
   def inspect
     "(#{antecedent}/#{consequent})"
