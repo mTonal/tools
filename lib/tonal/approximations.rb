@@ -30,7 +30,7 @@ class Tonal::Ratio
       self_in_cents = to_cents
       within = cents_tolerance.kind_of?(Tonal::Cents) ? cents_tolerance : Tonal::Cents.new(cents: cents_tolerance)
       [].tap do |results|
-        ContinuedFraction.new(antecedent.to_f/consequent, conv_limit).convergents_as_rationals.each do |convergent|
+        ContinuedFraction.new(antecedent.to_f/consequent, conv_limit).convergents.each do |convergent|
           ratio2 = ratio.class.new(convergent.numerator,convergent.denominator)
           results << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && ratio2.within_prime?(max_prime)
           break if results.length >= depth
