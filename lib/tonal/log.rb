@@ -15,6 +15,8 @@ class Tonal::Log
   #
   def initialize(logarithmand: nil, logarithm: nil, base: nil)
     raise ArgumentError, "logarithmand or logarithm must be provided" if logarithmand.nil? && logarithm.nil?
+    raise ArgumentError, "logarithmand must be Numeric" unless logarithmand.kind_of?(Numeric) || logarithmand.nil?
+    raise ArgumentError, "logarithm must be Numeric" unless logarithm.kind_of?(Numeric) || logarithm.nil?
 
     if logarithmand && logarithm && base
       @logarithmand = logarithmand
@@ -97,8 +99,6 @@ class Tonal::Log
     end
   end
 
-  # TODO Explain how this works
-  #
   def method_missing(op, *args, &blk)
     rhs = args.collect do |arg|
       arg.kind_of?(self.class) ? arg.inspect : arg
@@ -108,11 +108,6 @@ class Tonal::Log
     case result
     when Numeric
       self.class.new(result)
-    # Work this case out
-    #when Array
-    #  result.collect do |e|
-    #    e.kind_of?(Numeric) ? Cents.new(e) : e
-    #  end
     else
       result
     end

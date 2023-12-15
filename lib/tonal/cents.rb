@@ -68,7 +68,7 @@ class Tonal::Cents
   end
 
   # @return
-  #   [Cents] nearest hundredth cent difference
+  #   [Tonal::Cents] nearest hundredth cent difference
   # @example
   #   Tonal::Cents.new(701.9550008653874).nearest_hundredth_difference => 1.955000865387433
   #
@@ -76,7 +76,10 @@ class Tonal::Cents
     self.class.new(cents: (value - nearest_hundredth))
   end
 
-  # TODO: Document or Consider if needed
+  # @return [Array] a tuple of self offset positively/negatively by limit
+  # @example
+  #   Tonal::Cents.new(cents: 100.0).plus_minus
+  #   => [95.0, 105.0]
   #
   def plus_minus(limit = 5)
     [self - limit, self + limit]
@@ -133,11 +136,6 @@ class Tonal::Cents
     case result
     when Numeric
       self.class.new(cents: result)
-    # TODO: Work this case out or remove
-    #when Array
-    #  result.collect do |e|
-    #    e.kind_of?(Numeric) ? Cents.new(e) : e
-    #  end
     else
       result
     end

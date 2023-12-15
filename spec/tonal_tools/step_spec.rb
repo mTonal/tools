@@ -81,11 +81,11 @@ RSpec.describe Tonal::Step do
     end
   end
 
-  describe "#cents" do
+  describe "#to_cents" do
     let(:ratio) { 3/2r }
 
     it "returns self converted to cents within 100th accuracy" do
-      expect(subject.cents).to eq 701.96
+      expect(subject.to_cents).to eq 701.96
     end
   end
 

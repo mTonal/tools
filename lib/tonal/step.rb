@@ -36,7 +36,7 @@ class Tonal::Step
     ratio.to_r
   end
 
-  def cents
+  def to_cents
     ratio.to_cents
   end
 

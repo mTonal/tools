@@ -11,7 +11,7 @@ class Prime
 end
 
 class Numeric
-  # @return [Array], a tuple of self offset positively/negatively
+  # @return [Array] a tuple of self offset positively/negatively
   # @example
   #   Math::PI.plus_minus(3)
   #     => [6.141592653589793, 0.14159265358979312]
@@ -74,7 +74,7 @@ class Numeric
 
   # @return [Tonal::Cents] of self interpreted as a ratio
   # @example
-  #   (3/2r).cents => 701.96
+  #   (3/2r).to_cents => 701.96
   #
   def to_cents
     self.log2.to_cents
@@ -371,8 +371,9 @@ class Array
   end
   alias :vector :to_vector
 
-  # @return [Integer] least common multiple of elements of self
-  # @example TODO
+  # @return [Integer] least common multiple of integer elements of self
+  # @example
+  #   [3, 2, 7].lcm => 42
   #
   def lcm
     self.reduce(1, :lcm)
@@ -413,11 +414,6 @@ class Array
     self.map{|r| r.to_cents}
   end
   alias :cents :to_cents
-
-  # TODO: Consider removing
-  #def cons_diff(cons=2)
-  #  self.each_cons(cons).map{|a,b| (a - b).abs }
-  #end
 
   # @return [Float] the mean of the elements of self
   # @example

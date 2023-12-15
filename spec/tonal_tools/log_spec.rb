@@ -8,6 +8,24 @@ RSpec.describe Tonal::Log do
   subject { described_class.new(logarithmand: logarithmand, logarithm: logarithm, base: base) }
 
   describe "initialization" do
+    describe "requirements" do
+      context "with non-primative logarithmand" do
+        let(:logarithmand) { Tonal::Ratio.new(3,2) }
+
+        it "rejects them" do
+          expect{ subject }.to raise_error ArgumentError, "logarithmand must be Numeric"
+        end
+      end
+
+      context "with non-primative logarithm" do
+        let(:logarithm) { Tonal::Log2.new(logarithm: 0.5849625007211562) }
+
+        it "rejects them" do
+          expect{ subject }.to raise_error ArgumentError, "logarithm must be Numeric"
+        end
+      end
+    end
+
     context "logarithmand, logarithm and base are provided" do
       context "base is aligned" do
         it "all arguments are accepted without change" do

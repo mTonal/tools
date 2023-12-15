@@ -9,14 +9,6 @@ RSpec.describe Tonal::Log2 do
     it "accept Numerics" do
       expect(subject.logarithm).to eq Math.log2(logarithmand)
     end
-
-    context "with Tonal::Ratio" do
-      let(:logarithmand) { Tonal::Ratio.new(3/2r) }
-
-      it "accepts them and sets its logarithm to the arg converted by Math.log2" do
-        expect(subject.logarithm).to eq Math.log2(3/2r)
-      end
-    end
   end
 
   describe "#step" do

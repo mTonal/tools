@@ -147,7 +147,7 @@ class Tonal::Ratio
   # @param base
   #
   def to_log(base=2)
-    Tonal::Log.new(logarithmand: self, base: base)
+    Tonal::Log.new(logarithmand: to_r, base: base)
   end
   alias :log :to_log
 
@@ -156,7 +156,7 @@ class Tonal::Ratio
   #   Tonal::ReducedRatio.new(3,2).to_log2 => 0.5849625007211562
   #
   def to_log2
-    Tonal::Log2.new(logarithmand: self)
+    Tonal::Log2.new(logarithmand: to_r)
   end
   alias :log2 :to_log2
 
@@ -165,7 +165,7 @@ class Tonal::Ratio
   #   Tonal::Ratio.new(3,2).to_cents => 701.96
   #
   def to_cents
-    Tonal::Cents.new(ratio: self)
+    Tonal::Cents.new(ratio: to_r)
   end
   alias :cents :to_cents
 
@@ -255,16 +255,19 @@ class Tonal::Ratio
     self
   end
 
-  # @return [Tonal::ReducedRatio] the mirror of self along the axis (default 1/1)
+  # @return [Tonal::Ratio] the mirror of self along the axis (default 1/1)
   # @example
-  #   Tonal::ReducedRatio.new(4,3).mirror => (3/2)
+  #   Tonal::Ratio.new(4,3).mirror => (3/2)
   # @param axis
   #
   def mirror(axis=1/1r)
     (self.class.new(axis) ** 2) / self
   end
 
-  # TODO: Justify or remove
+  # @return [Tonal::Ratio]
+  # @example
+  #   Tonal::Ratio.new(4/3r).mirror2(4/2r) => (3/8)
+  # @param ratio
   #
   def mirror2(ratio)
     self.class.new(invert.to_r / ratio)

@@ -2,7 +2,7 @@ lib = File.expand_path('../lib', __FILE__)
 
 Gem::Specification.new do |spec|
   spec.name        = "tonal-tools"
-  spec.version     = "1.0.2"
+  spec.version     = "1.0.3"
   spec.summary     = "Tonal tools"
   spec.description = "Basic tools, utilities and conveniences for microtonal music making and analysis"
   spec.authors     = ["Jose Hales-Garcia"]
@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.metadata = {
     "source_code_uri" => "https://github.com/mTonal/tools"
   }
-  spec.required_ruby_version = Gem::Requirement.new(">= 3.1.2")
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.1")
   spec.required_rubygems_version = Gem::Requirement.new(">= 3.1")
   spec.files       = Dir.glob(["lib/**/*", "data/**/*"])
   spec.add_runtime_dependency "yaml", ["~> 0.2"]
