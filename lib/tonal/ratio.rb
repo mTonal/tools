@@ -482,6 +482,7 @@ class Tonal::Ratio
   def inspect
     "(#{antecedent}/#{consequent})"
   end
+  alias :to_s :inspect
 
   def +(rhs)
     operate(rhs, :+)

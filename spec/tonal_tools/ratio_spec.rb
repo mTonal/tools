@@ -98,6 +98,10 @@ RSpec.describe Tonal::Ratio do
     let(:arg1) { 3/2r }
     let(:arg2) { nil }
 
+    describe "#to_s" do
+      it { expect(subject.to_s).to eq "(3/2)" }
+    end
+
     describe "#to_a" do
       it "returns an array" do
         expect(subject.to_a).to be_a_kind_of(Array)
