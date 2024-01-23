@@ -2,7 +2,7 @@ require "date"
 
 Gem::Specification.new do |spec|
   spec.name        = "tonal-tools"
-  spec.version     = "1.2.0"
+  spec.version     = "1.3.0"
   spec.summary     = "Tonal tools"
   spec.description = "Basic tools, utilities and conveniences for microtonal music making and analysis"
   spec.authors     = ["Jose Hales-Garcia"]

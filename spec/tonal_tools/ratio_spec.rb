@@ -493,7 +493,7 @@ RSpec.describe Tonal::Ratio do
     context "with numerator greater than 7 digits long" do
       let(:arg1) { 2**(1.0/12) }
 
-      it "does something" do
+      it "presents a compact format" do
         expect(subject.label).to eq "1.06"
       end
     end

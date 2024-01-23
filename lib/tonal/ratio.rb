@@ -456,6 +456,7 @@ class Tonal::Ratio
     ratio = ratio.ratio
     [self - ratio, self + ratio]
   end
+  alias :min_plus :plus_minus
 
   # @return [Cents] cent difference between self and other ratio
   # @example

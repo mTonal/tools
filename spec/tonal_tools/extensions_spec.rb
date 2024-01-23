@@ -10,9 +10,21 @@ RSpec.describe "Extensions" do
   end
 
   describe "Numeric extensions" do
-    describe "#plus_minus(n)" do
-      it "returns a tuple with the plus and minus n of self" do
+    describe "#modulo_translate" do
+      it "translates the number within the give modulo range" do
+        expect(Math::PI.modulo_translate(-3, 3)).to eq -2.858407346410207
+      end
+    end
+
+    describe "#plus_minus" do
+      it "returns a tuple with the given argument added and subtracted from self" do
         expect(5.plus_minus(2)).to eq [7, 3]
+      end
+    end
+
+    describe "div_times" do
+      it "returns a tuple with the given argument divided and multiplied into self" do
+        expect((3/2r).div_times(9/8r)).to eq [4/3r, 27/16r]
       end
     end
 
@@ -271,6 +283,24 @@ RSpec.describe "Extensions" do
     describe "#ratio_from_prime_divisions" do
       it "returns the ratio constructed from prime division arrays" do
         expect([[[3, 1]], [[2, 1]]].ratio_from_prime_divisions).to eq 3/2r
+      end
+    end
+
+    describe "#translate" do
+      it "translates the values of array the given amount" do
+        expect([0.24184760813024642, 0.49344034900361244, 0.07231824070126536].translate(-0.07231824070126536)).to eq [0.16952936742898106, 0.4211221083023471, 0.0]
+      end
+    end
+
+    describe "#rescale" do
+      it "rescales the array by the given minimum/maximum" do
+        expect([0.24184760813024642, 0.49344034900361244, 0.07231824070126536].rescale(0,3)).to eq [1.207697464132658, 3.0, 0.0]
+      end
+    end
+
+    describe "#modulo_translate" do
+      it "translates the array's elements within the modulo range" do
+        expect([-6.617469071022061, 4.755369851099594, 7.588140911919945, -6.49706614430203].modulo_translate(-3, 5)).to eq [2.382530928977939, 4.755369851099594, -1.411859088080055, 2.50293385569797]
       end
     end
   end
