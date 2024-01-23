@@ -300,7 +300,7 @@ RSpec.describe "Extensions" do
 
     describe "#modulo_translate" do
       it "translates the array's elements within the modulo range" do
-        expect([-6.617469071022061, 4.755369851099594, 7.588140911919945, -6.49706614430203].modulo_translate(-3, 5)).to eq [2.382530928977939, 4.755369851099594, -1.411859088080055, 2.50293385569797]
+        expect([-6.617469071022061, 4.755369851099594, 7.588140911919945, -6.49706614430203].modulo_translate(-3, 5)).to eq [1.382530928977939, 4.755369851099594, -0.411859088080055, 1.50293385569797]
       end
     end
   end

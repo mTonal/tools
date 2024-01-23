@@ -379,12 +379,12 @@ class Array
   # @return [Array] translated modularly
   # @example
   #   [-6.617469071022061, 4.755369851099594, 7.588140911919945, -6.49706614430203].modulo_translate(-3, 5)
-  #   => [2.382530928977939, 4.755369851099594, -1.411859088080055, 2.50293385569797]
+  #   => [1.382530928977939, 4.755369851099594,-0.411859088080055,  1.50293385569797]
   # @param lower the lower bound of the modulo range
   # @param upper the upper bound of the modulo range
   #
   def modulo_translate(lower=0, upper)
-    range = upper - lower + 1
+    range = (upper - lower) == 0 ? 1 : upper - lower
     map do |value|
       (value - lower) % range + lower
     end
