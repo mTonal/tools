@@ -9,7 +9,6 @@ class Tonal::Cents
   CENT_SCALE = 1200.0
   TOLERANCE = 5
   PRECISION = 2
-  DEFAULT_ROUNDING_PRECISION = 2
 
   attr_reader :log, :ratio
 
@@ -100,7 +99,7 @@ class Tonal::Cents
   # https://embeddeduse.com/2019/08/26/qt-compare-two-floats/
   #
   def <=>(rhs)
-    rhs.kind_of?(self.class) ? value.round(2) <=> rhs.value.round(2) : value.round(2) <=> rhs.round(2)
+    rhs.kind_of?(self.class) ? value.round(PRECISION) <=> rhs.value.round(PRECISION) : value.round(PRECISION) <=> rhs.round(PRECISION)
   end
 
   private

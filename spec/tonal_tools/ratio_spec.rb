@@ -59,7 +59,7 @@ RSpec.describe Tonal::Ratio do
     let(:n) { rand(100)+1 }
 
     it "returns a ratio who's numerator and denominator are one apart" do
-      expect(described_class.superparticular(n)).to eq described_class.new(n, n-1)
+      expect(described_class.superparticular(n)).to eq described_class.new(n+1, n)
     end
   end
 
@@ -68,12 +68,16 @@ RSpec.describe Tonal::Ratio do
     let(:partient) { rand(10) }
 
     it "returns a ratio who's numerator and denominator are a partient apart" do
-      expect(described_class.superpartient(n, partient)).to eq described_class.new(n, n-partient)
+      expect(described_class.superpartient(n, summand: partient)).to eq described_class.new(n+partient, n)
     end
   end
 
   describe ".random_ratio" do
     it { expect(described_class.random_ratio).to be_a_kind_of(Tonal::Ratio) }
+
+    context "when reduced is true" do
+      it { expect(described_class.random_ratio(reduced: true)).to be_a_kind_of(Tonal::ReducedRatio) }
+    end
   end
 
   describe ".ed" do
@@ -354,7 +358,7 @@ RSpec.describe Tonal::Ratio do
 
     describe "#efficiency" do
       it "returns the difference between self and its step for a given modulo" do
-        expect(subject.efficiency(12)).to eq -1.9600000000000364
+        expect(subject.efficiency(12)).to eq -1.96
       end
     end
 

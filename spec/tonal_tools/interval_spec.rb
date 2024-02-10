@@ -55,12 +55,22 @@ RSpec.describe Tonal::Interval do
     end
   end
 
-  describe "#normalize" do
+  describe "#denominize" do
     let(:lower_ratio) { 3/2r }
     let(:upper_ratio) { 7/4r }
 
-    it "returns the interval endpoints normalized to their lcm" do
-      expect(described_class.new(lower_ratio, upper_ratio).normalize).to eq [7/4r, 6/4r]
+    it "returns the interval endpoints with their denominators equalized" do
+      expect(described_class.new(lower_ratio, upper_ratio).denominize).to eq [7/4r, 6/4r]
+    end
+  end
+
+  describe "#ratio" do
+    let(:lower_ratio) { 3/2r }
+    let(:upper_ratio) { 7/4r }
+
+    it "returns the interval as a Tonal::ReducedRatio" do
+      expect(described_class.new(lower_ratio, upper_ratio).ratio).to be_a_kind_of(Tonal::ReducedRatio)
+      expect(described_class.new(lower_ratio, upper_ratio).ratio).to eq 12/7r
     end
   end
 

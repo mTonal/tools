@@ -2,7 +2,7 @@ class Tonal::Interval
   extend Forwardable
   include Comparable
 
-  def_delegators :@interval, :to_r, :antecedent, :consequent
+  def_delegators :@interval, :to_r, :antecedent, :consequent, :to_cents
 
   attr_reader :lower_ratio, :upper_ratio, :interval
 
@@ -13,6 +13,7 @@ class Tonal::Interval
     @upper_ratio = upper_ratio.ratio
     @interval = @upper_ratio / @lower_ratio
   end
+  alias :ratio :interval
   alias :lower :lower_ratio
   alias :upper :upper_ratio
   alias :numerator :antecedent
@@ -22,7 +23,7 @@ class Tonal::Interval
     [lower_ratio, upper_ratio]
   end
 
-  def normalize
+  def denominize
     ratios = to_a
     lcm = ratios.denominators.lcm
     ratios.map{|r| Tonal::Ratio.new(lcm / r.denominator * r.numerator, lcm)}

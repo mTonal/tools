@@ -1,8 +1,9 @@
 require "date"
+require_relative "lib/tonal/attributions"
 
 Gem::Specification.new do |spec|
   spec.name        = "tonal-tools"
-  spec.version     = "1.3.1"
+  spec.version     = Tonal::TOOLS_VERSION
   spec.summary     = "Tonal tools"
   spec.description = "Basic tools, utilities and conveniences for microtonal music making and analysis"
   spec.authors     = ["Jose Hales-Garcia"]
