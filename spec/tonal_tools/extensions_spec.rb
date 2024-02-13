@@ -262,9 +262,9 @@ RSpec.describe "Extensions" do
       end
     end
 
-    describe "#normalize" do
-      it "returns an array of normalized ratios" do
-        expect([4/3r, 3/2r].normalize).to eq [Tonal::Ratio.new(8,6), Tonal::Ratio.new(9,6)]
+    describe "#denominize" do
+      it "returns an array of ratios with equalized denominators" do
+        expect([4/3r, 3/2r].denominize).to eq [Tonal::Ratio.new(8,6), Tonal::Ratio.new(9,6)]
       end
     end
 

@@ -324,11 +324,11 @@ class Array
   def denominators = self.map(&:denominator)
   alias :consequents :denominators
 
-  # @return [Array] an array of normalized ratios
+  # @return [Array] an array of ratios with equalized denominators
   # @example
-  #   [4/3r, 3/2r].normalize => [(8/6), (9/6)]
+  #   [4/3r, 3/2r].denominize => [(8/6), (9/6)]
   #
-  def normalize
+  def denominize
     l = denominators.lcm
     map{|r| Tonal::Ratio.new(l / r.denominator * r.numerator, l)}
   end
@@ -349,8 +349,9 @@ class Array
   # @return [Tonal::ReducedRatio] ratio reconstructed from the result of a prime factor decomposition
   # @example
   #   [[[3, 1]], [[2, 1]]].ratio_from_prime_divisions => (3/2)
+  # @reduced [Boolean] if a reduced or unreduced ratio is returned
   #
-  def ratio_from_prime_divisions = Tonal::Ratio.new(Prime.int_from_prime_division(self.first), Prime.int_from_prime_division(self.last))
+  def ratio_from_prime_divisions(reduced: false) = reduced ? Tonal::ReducedRatio.new(Prime.int_from_prime_division(self.first), Prime.int_from_prime_division(self.last)) : Tonal::Ratio.new(Prime.int_from_prime_division(self.first), Prime.int_from_prime_division(self.last))
 
   # @return [Array] translated by value
   # @example

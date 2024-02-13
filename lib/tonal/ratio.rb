@@ -2,7 +2,7 @@ class Tonal::Ratio
   extend Forwardable
   include Comparable
 
-  def_delegators :@approximations, :neighborhood
+  def_delegators :@approximation, :neighborhood
 
   attr_reader :antecedent, :consequent, :equave, :reduced_antecedent, :reduced_consequent
 
@@ -27,29 +27,38 @@ class Tonal::Ratio
     @equave = equave
     @reduced_antecedent, @reduced_consequent = _equave_reduce(equave)
     @label = label
-    @approximations = Approximations.new(ratio: self)
+    @approximation = Approximation.new(ratio: self)
   end
 
   alias :numerator :antecedent
   alias :denominator :consequent
 
-  # @return [Tonal::Ratio] ratio who's numerator and denominator are 1 apart
+  # @return [Tonal::Ratio] ratio who's numerator and denominator are seperated by a difference of 1
   # @example
-  #   Tonal::Ratio.superparticular(100) = (100/99)
-  # @param n numerator of ratio
+  #   Tonal::Ratio.superparticular(100) = (101/100)
+  # @param n [Integer] number from which the superior part is calculated
+  # @param factor [Rational] multiplied into the resulting ratio, default 1/1
+  # @param superpart [Symbol] assigning the superior part to the antecedent or consequent
   #
-  def self.superparticular(n)
-    superpartient(n, 1)
+  def self.superparticular(n, factor: 1/1r, superpart: :upper)
+    superpartient(n, summand: 1, factor:, superpart:)
   end
 
-  # @return [Tonal::Ratio] ratio who's numerator and denominator are a partient apart
+  # @return [Tonal::Ratio] ratio who's numerator and denominator are separated by a summand difference
   # @example
-  #   Tonal::Ratio.superpartient(100, 5) => (100/95)
-  # @param n numerator of ratio
-  # @param part partient separating the numerator and denominator
+  #   Tonal::Ratio.superpartient(23, summand: 3) => (26/23)
+  # @param n [Integer] number from which the superior part is calculated
+  # @param summand [Integer] term added to the superior part
+  # @param factor [Rational] multiplied into the resulting ratio, default 1/1
+  # @param superpart [Symbol] assigning the superior part to the antecedent or consequent
   #
-  def self.superpartient(n, part)
-    self.new(n, n-part)
+  def self.superpartient(n, summand:, factor: 1/1r, superpart: :upper)
+    case superpart.to_sym.downcase
+    when :lower, :consequent, :denominator
+      self.new(n*factor.numerator, (n+summand)*factor.denominator)
+    else
+      self.new((n+summand)*factor.numerator, n*factor.denominator)
+    end
   end
 
   # @return [Tonal::Ratio] a randomly generated ratio
@@ -58,7 +67,7 @@ class Tonal::Ratio
   # @param number_of_factors
   # @param within
   #
-  def self.random_ratio(number_of_factors = 2, within: 100)
+  def self.random_ratio(number_of_factors = 2, within: 100, reduced: false)
     primes = Prime.each(within).to_a
     nums = []
     dens = []
@@ -66,7 +75,7 @@ class Tonal::Ratio
       nums << [primes[rand(10)], rand(3)]
       dens << [primes[rand(10)], rand(3)]
     end
-    [nums, dens].ratio_from_prime_divisions
+    [nums, dens].ratio_from_prime_divisions(reduced:)
   end
 
   # @return [Tonal::Ratio] the ratio of step in the modulo
@@ -98,10 +107,10 @@ class Tonal::Ratio
     self
   end
 
-  # @return [Tonal::Ratio::Approximations] self's approximation instance
+  # @return [Tonal::Ratio::Approximation] self's approximation instance
   #
-  def approx
-    @approximations
+  def approximate
+    @approximation
   end
 
   # ==================================
@@ -262,15 +271,6 @@ class Tonal::Ratio
   #
   def mirror(axis=1/1r)
     (self.class.new(axis) ** 2) / self
-  end
-
-  # @return [Tonal::Ratio]
-  # @example
-  #   Tonal::Ratio.new(4/3r).mirror2(4/2r) => (3/8)
-  # @param ratio
-  #
-  def mirror2(ratio)
-    self.class.new(invert.to_r / ratio)
   end
 
   # @return Tonal::ReducedRatio the Ernst Levy negative of self
@@ -434,7 +434,7 @@ class Tonal::Ratio
   # @param modulo
   #
   def efficiency(modulo)
-    (Tonal::Cents::CENT_SCALE * step(modulo).step / modulo.to_f) - to_cents
+    ((Tonal::Cents::CENT_SCALE * step(modulo).step / modulo.to_f) - to_cents).round(Tonal::Cents::PRECISION)
   end
 
   # @return [Array] the results of ratio dividing and multiplying self
@@ -473,7 +473,7 @@ class Tonal::Ratio
     # Return label, if defined; or,
     # Return the "antecedent/consequent", if antecedent is less than 7 digits long; or
     # Return the floating point representation rounded to 2 digits of precision
-    (@label || ((Math.log10(antecedent).to_i + 1) <= 6 ? "#{antecedent}/#{consequent}" : to_f.round(2))).to_s
+    (@label || ((Math.log10(antecedent).to_i + 1) <= 6 ? "#{antecedent}/#{consequent}" : to_f.round(Tonal::Cents::PRECISION))).to_s
   end
 
   # @return [String] the string representation of Tonal::Ratio
