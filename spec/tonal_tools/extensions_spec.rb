@@ -94,6 +94,10 @@ RSpec.describe "Extensions" do
       it "returns the prime divisions of the number" do
         expect((31/30r).prime_divisions).to eq [[[31, 1]], [[2, 1], [3, 1], [5, 1]]]
       end
+
+      context "with unreduced ratios" do
+        it("returns the prime divisions of the unreduced ratio") { expect((36/13r).prime_divisions).to eq [[[2, 2], [3, 2]], [[13, 1]]] }
+      end
     end
 
     describe "#max_prime" do

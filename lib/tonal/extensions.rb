@@ -149,7 +149,7 @@ class Numeric
   # @example
   #   (31/30r).prime_divisions => [[[31, 1]], [[2, 1], [3, 1], [5, 1]]]
   #
-  def prime_divisions = self.ratio.prime_divisions
+  def prime_divisions = [self.numerator.prime_division, self.denominator.prime_division]
 
   # @return [Integer] the maximum prime factor of self
   # @example
@@ -163,6 +163,13 @@ class Numeric
   #
   def min_prime = prime_divisions.flatten(1).map(&:first).min
 
+  # @return [Vector], self expressed as a Vector
+  # @example
+  #   (3/2r).to_vector => Vector[3, 2]
+  #
+  def to_vector = Vector[self.numerator, self.denominator]
+  alias :vector :to_vector
+
   # @return [Tonal::ReducedRatio], the Ernst Levy negative of self
   # @example
   #  (7/4r).negative => (12/7)
@@ -174,33 +181,6 @@ class Numeric
   #   (3/2r).mirror => (4/3)
   #
   def mirror(axis=1/1r) = self.ratio.mirror(axis)
-end
-
-class Rational
-  # @return [Vector], self expressed as a Vector
-  # @example
-  #   (3/2r).to_vector => Vector[3, 2]
-  #
-  def to_vector = Vector[self.numerator, self.denominator]
-  alias :vector :to_vector
-
-  # @return [Array], self decomposed into its prime factors
-  # @example
-  #   (31/30r).prime_divisions => [[[31, 1]], [[2, 1], [3, 1], [5, 1]]]
-  #
-  def prime_divisions = self.ratio.prime_divisions
-
-  # @return [Integer] the maximum prime factor of self
-  # @example
-  #   (31/30r).max_prime => 31
-  #
-  def max_prime = self.ratio.max_prime
-
-  # @return [Integer] the minimum prime factor of self
-  # @example
-  #   (31/30r).min_prime => 2
-  #
-  def min_prime = self.ratio.min_prime
 end
 
 class Integer
