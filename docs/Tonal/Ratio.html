@@ -2314,7 +2314,7 @@
         <span class='name'>factor</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../Rational.html" title="Rational (class)">Rational</a></span></tt>)</span>
+        <span class='type'>(<tt>Rational</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>1</tt>)</em>
@@ -2453,7 +2453,7 @@
         <span class='name'>factor</span>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../Rational.html" title="Rational (class)">Rational</a></span></tt>)</span>
+        <span class='type'>(<tt>Rational</tt>)</span>
       
       
         <em class="default">(defaults to: <tt>1</tt>)</em>
@@ -2821,8 +2821,8 @@
       <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 550</span>
 
 <span class='kw'>def</span> <span class='op'>&lt;=&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_left'>left</span> <span class='op'>=</span> <span class='id identifier rubyid_consequent'>consequent</span> <span class='op'>==</span> <span class='int'>0</span> <span class='op'>?</span> <span class='const'>Float</span><span class='op'>::</span><span class='const'>INFINITY</span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../Rational.html" title="Rational (class)">Rational</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='comma'>,</span> <span class='id identifier rubyid_consequent'>consequent</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_right'>right</span> <span class='op'>=</span> <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_denominator'>denominator</span> <span class='op'>==</span> <span class='int'>0</span> <span class='op'>?</span> <span class='const'>Float</span><span class='op'>::</span><span class='const'>INFINITY</span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="../Rational.html" title="Rational (class)">Rational</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_numerator'>numerator</span><span class='comma'>,</span> <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_denominator'>denominator</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_left'>left</span> <span class='op'>=</span> <span class='id identifier rubyid_consequent'>consequent</span> <span class='op'>==</span> <span class='int'>0</span> <span class='op'>?</span> <span class='const'>Float</span><span class='op'>::</span><span class='const'>INFINITY</span> <span class='op'>:</span> <span class='const'>Rational</span><span class='lparen'>(</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='comma'>,</span> <span class='id identifier rubyid_consequent'>consequent</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_right'>right</span> <span class='op'>=</span> <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_denominator'>denominator</span> <span class='op'>==</span> <span class='int'>0</span> <span class='op'>?</span> <span class='const'>Float</span><span class='op'>::</span><span class='const'>INFINITY</span> <span class='op'>:</span> <span class='const'>Rational</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_numerator'>numerator</span><span class='comma'>,</span> <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_denominator'>denominator</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_left'>left</span> <span class='op'>&lt;=&gt;</span> <span class='id identifier rubyid_right'>right</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -5758,7 +5758,7 @@
       <div class="method_details ">
   <h3 class="signature " id="to_r-instance_method">
   
-    #<strong>to_r</strong>  &#x21d2; <tt><span class='object_link'><a href="../Rational.html" title="Rational (class)">Rational</a></span></tt> 
+    #<strong>to_r</strong>  &#x21d2; <tt>Rational</tt> 
   
 
   
@@ -5788,7 +5788,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../Rational.html" title="Rational (class)">Rational</a></span></tt>)</span>
+        <span class='type'>(<tt>Rational</tt>)</span>
       
       
       
@@ -5817,7 +5817,7 @@
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_r'>to_r</span>
   <span class='kw'>return</span> <span class='const'>Float</span><span class='op'>::</span><span class='const'>INFINITY</span> <span class='kw'>if</span> <span class='id identifier rubyid_consequent'>consequent</span><span class='period'>.</span><span class='id identifier rubyid_zero?'>zero?</span> <span class='op'>||</span> <span class='op'>!</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='period'>.</span><span class='id identifier rubyid_finite?'>finite?</span>
-  <span class='const'><span class='object_link'><a href="../Rational.html" title="Rational (class)">Rational</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='comma'>,</span> <span class='id identifier rubyid_consequent'>consequent</span><span class='rparen'>)</span>
+  <span class='const'>Rational</span><span class='lparen'>(</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='comma'>,</span> <span class='id identifier rubyid_consequent'>consequent</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -6256,7 +6256,7 @@
 </div>
 
       <div id="footer">
-  Generated on Tue Feb 13 15:15:39 2024 by
+  Generated on Thu Feb 22 10:13:05 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.34 (ruby-3.2.2).
 </div>
