@@ -28,16 +28,60 @@ class Tonal::Step
   end
   alias :to_s :inspect
 
+  # @return [Tonal::Step] new step with the ratio mapped to the new modulo
+  # @example
+  #   Tonal::Step.new(ratio: 3/2r, modulo: 31).convert(12)
+  #   => 7\12
+  #
   def convert(new_modulo)
     self.class.new(log: log, modulo: new_modulo)
   end
 
-  def to_r
+  # @return [Rational] of the step
+  # @example
+  #   Tonal::Step.new(ratio: 3/2r, modulo: 31).step_to_r
+  #   => 6735213777669305/4503599627370496
+  #
+  def step_to_r
+    tempered.to_r
+  end
+  alias :to_r :step_to_r
+
+  # @return [Rational] of the ratio
+  # @example
+  #   Tonal::Step.new(ratio: 3/2r, modulo: 31).ratio_to_r
+  #   => 3/2
+  #
+  def ratio_to_r
     ratio.to_r
   end
 
-  def to_cents
+  # @return [Tonal::Cents] measure of step in cents
+  # @example
+  #   Tonal::Step.new(ratio: 3/2r, modulo: 31).step_to_cents
+  #   => 696.77
+  #
+  def step_to_cents
+    tempered.to_cents
+  end
+  alias :to_cents :step_to_cents
+
+  # @return [Tonal::Cents] measure of ratio in cents
+  # @example
+  #   Tonal::Step.new(ratio: 3/2r, modulo: 31).ratio_to_cents
+  #   => 701.96
+  #
+  def ratio_to_cents
     ratio.to_cents
+  end
+
+  # @return [Tonal::Cents] the difference between the step and the ratio
+  # @example
+  #   Tonal::Step.new(ratio: 3/2r, modulo: 31).efficiency
+  #   => 5.19
+  #
+  def efficiency
+    ratio_to_cents - step_to_cents
   end
 
   def +(rhs)

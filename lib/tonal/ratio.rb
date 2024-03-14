@@ -16,18 +16,7 @@ class Tonal::Ratio
     raise ArgumentError, "Antecedent must be Numeric" unless antecedent.kind_of?(Numeric)
     raise ArgumentError, "Consequent must be Numeric or nil" unless (consequent.kind_of?(Numeric) || consequent.nil?)
 
-    if consequent
-      @antecedent = antecedent.abs
-      @consequent = consequent.abs
-    else
-      antecedent = antecedent.abs
-      @antecedent = antecedent.numerator
-      @consequent = antecedent.denominator
-    end
-    @equave = equave
-    @reduced_antecedent, @reduced_consequent = _equave_reduce(equave)
-    @label = label
-    @approximation = Approximation.new(ratio: self)
+    _initialize(antecedent, consequent, label:, equave:)
   end
 
   alias :numerator :antecedent
@@ -183,7 +172,7 @@ class Tonal::Ratio
   #   Tonal::ReducedRatio.new(3,2).step(12) => 7
   #
   def step(modulo=12)
-    to_log2.step(modulo)
+    Tonal::Step.new(ratio: to_r, modulo: modulo)
   end
 
   # @return [Float] degrees
@@ -254,13 +243,12 @@ class Tonal::Ratio
   end
   alias :reflect :invert
 
-  # @return [self] with antecedent and precedent switched
+  # @return [Tonal::Ratio] with antecedent and precedent switched
   # @example
   #   Tonal::Ratio.new(3,2).invert! => (2/3)
   #
   def invert!
-    tmp = antecedent
-    @antecedent, @consequent = consequent, tmp
+    _initialize(consequent, antecedent, label: label, equave: equave)
     self
   end
 
@@ -273,7 +261,7 @@ class Tonal::Ratio
     (self.class.new(axis) ** 2) / self
   end
 
-  # @return Tonal::ReducedRatio the Ernst Levy negative of self
+  # @return [Tonal::ReducedRatio] the Ernst Levy negative of self
   # @example
   #   Tonal::ReducedRatio.new(7/4r).negative => (12/7)
   #
@@ -428,13 +416,15 @@ class Tonal::Ratio
     benedetti_height.prime_division.reject{|p| prime_rejects.include?(p.first) }.sum{|p| p.first * p.last }
   end
 
-  # @return [Float] the cents difference between self and its step in the given modulo
+  # @return [Tonal::Cents] the cents difference between self and its step in the given modulo
   # @example
   #   Tonal::ReducedRatio.new(3,2).efficiency(12) => -1.955000865387433
   # @param modulo
   #
   def efficiency(modulo)
-    ((Tonal::Cents::CENT_SCALE * step(modulo).step / modulo.to_f) - to_cents).round(Tonal::Cents::PRECISION)
+    # We want the efficiency from the ratio, instead of from the step.
+    # If step efficiency is X cents, then ratio efficiency is -X cents.
+    step(modulo).efficiency * -1.0
   end
 
   # @return [Array] the results of ratio dividing and multiplying self
@@ -458,7 +448,7 @@ class Tonal::Ratio
   end
   alias :min_plus :plus_minus
 
-  # @return [Cents] cent difference between self and other ratio
+  # @return [Tonal::Cents] cent difference between self and other ratio
   # @example
   #   Tonal::ReducedRatio.new(3,2).cent_diff(4/3r) => 203.92
   # @param other_ratio [Tonal::ReducedRatio, Numeric] from which self's cents is measured
@@ -554,6 +544,21 @@ class Tonal::Ratio
   end
 
   private
+  def _initialize(antecedent, consequent=nil, label: nil, equave: 2/1r)
+    if consequent
+      @antecedent = antecedent.abs
+      @consequent = consequent.abs
+    else
+      antecedent = antecedent.abs
+      @antecedent = antecedent.numerator
+      @consequent = antecedent.denominator
+    end
+    @equave = equave
+    @reduced_antecedent, @reduced_consequent = _equave_reduce(equave)
+    @label = label
+    @approximation = Approximation.new(ratio: self)
+  end
+
   def raise_if_negative(*args)
     raise ArgumentError, "Arguments must be greater than zero" if args.any?{|i| i < 0 }
   end

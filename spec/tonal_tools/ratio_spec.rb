@@ -232,7 +232,7 @@ RSpec.describe Tonal::Ratio do
     end
 
     describe "#invert" do
-      it "inverts the ratio" do
+      it "returns a new ratio inverted" do
         expect(subject.invert).to eq 2/3r
       end
     end

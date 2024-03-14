@@ -3,9 +3,9 @@ class Tonal::Hertz
 
   attr_reader :value
 
-  # @return [Hertz]
+  # @return [Tonal::Hertz]
   # @example
-  #   Hertz.new(1000.0) => 1000.0
+  #   Tonal::Hertz.new(1000.0) => 1000.0
   # @param arg [Numeric, Tonal::Hertz]
   #
   def initialize(arg)
@@ -13,7 +13,7 @@ class Tonal::Hertz
     @value = arg.kind_of?(self.class) ? arg.inspect : arg
   end
 
-  # @return [Hertz] 440 Hz
+  # @return [Tonal::Hertz] 440 Hz
   # @example
   #   Tonal::Hertz.a440 => 440.0
   #
@@ -38,9 +38,9 @@ class Tonal::Hertz
     value.to_f
   end
 
-  # @return [String] the string representation of Hertz
+  # @return [String] the string representation of Tonal::Hertz
   # @example
-  #   Hertz(1000.0).inspect => "1000.0"
+  #   Tonal::Hertz(1000.0).inspect => "1000.0"
   #
   def inspect
     "#{value}"

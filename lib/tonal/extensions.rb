@@ -86,7 +86,7 @@ class Numeric
   def hz = Tonal::Hertz.new(self)
   alias :to_hz :hz
 
-  # @return [Step] the step of self in the given modulo
+  # @return [Tonal::Step] the step of self in the given modulo
   # @example
   #   (5/4r).step(12) => 4\12
   # @param modulo
@@ -131,7 +131,7 @@ class Numeric
   #
   def efficiency(modulo) = (Tonal::Cents::CENT_SCALE * step(modulo).step / modulo.to_f) - to_cents
 
-  # @return [Interval] beween self (upper) and ratio (lower)
+  # @return [Tonal::Interval] beween self (upper) and ratio (lower)
   # @example
   #   (133).interval_with(3/2r) => 133/96 (133/128 / 3/2)
   # @param ratio
