@@ -25,7 +25,7 @@ class Tonal::ReducedRatio < Tonal::Ratio
     Tonal::Ratio.new(antecedent, consequent)
   end
 
-  # @return [Interval] between self (upper) and ratio (lower)
+  # @return [Tonal::Interval] between self (upper) and ratio (lower)
   # @example
   #   Tonal::ReducedRatio.new(133).interval_with(3/2r) => 133/96 (133/128 / 3/2)
   # @param ratio
@@ -33,5 +33,15 @@ class Tonal::ReducedRatio < Tonal::Ratio
   def interval_with(ratio)
     r = ratio.is_a?(self.class) ? ratio : self.class.new(ratio)
     Tonal::Interval.new(self, r)
+  end
+
+  # @return [Tonal::ReducedRatio] with antecedent and precedent switched
+  # @example
+  #   Tonal::ReducedRatio.new(3,2).invert! => (4/3)
+  #
+  def invert!
+    super
+    @antecedent, @consequent = @reduced_antecedent, @reduced_consequent
+    self
   end
 end

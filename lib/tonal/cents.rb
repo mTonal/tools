@@ -12,7 +12,7 @@ class Tonal::Cents
 
   attr_reader :log, :ratio
 
-  # @return [Cents]
+  # @return [Tonal::Cents]
   # @example
   #   Tonal::Cents.new(ratio: 2**(2.0/12)) => 200.0
   # @param cents [Numeric, Tonal::Log2]
@@ -40,7 +40,7 @@ class Tonal::Cents
     end
   end
 
-  # @return [Cents] the default cents tolerance
+  # @return [Tonal::Cents] the default cents tolerance
   # @example
   #   Tonal::Cents.default_tolerance => 5
   #
@@ -58,7 +58,7 @@ class Tonal::Cents
   alias :cents :value
 
   # @return
-  #   [Cents] nearest hundredth cent value
+  #   [Tonal::Cents] nearest hundredth cent value
   # @example
   #   Tonal::Cents.new(cents: 701.9550008653874).nearest_hundredth => 700.0
   #
@@ -85,7 +85,7 @@ class Tonal::Cents
   end
 
   # @return
-  #   [String] the string representation of Cents
+  #   [String] the string representation of Tonal::Cents
   # @example
   #   Tonal::Cents.new(100.0).inspect => "100.0"
   #

@@ -53,13 +53,13 @@ class Tonal::Log
   # @return [Tonal::Cents] the cents scale logarithm
   # @example
   #   Tonal::Log.new(logarithmand: 3/2r, base: 2).to_cents => 701.9550008653874
-  # @see Cents
+  # @see Tonal::Cents
   #
   def to_cents(precision: Tonal::Cents::PRECISION)
     Tonal::Cents.new(log: self, precision: precision)
   end
 
-  # @return [Step] the nearest step in the given modulo
+  # @return [Tonal::Step] the nearest step in the given modulo
   # @example
   #   Tonal::Log.new(3/2r, base: 2).step(12) => 7\12
   #

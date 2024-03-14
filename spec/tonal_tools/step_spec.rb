@@ -69,24 +69,44 @@ RSpec.describe Tonal::Step do
     let(:new_modulo) { 13 }
 
     it "creates a new Step with the number mapped on to the new modulo" do
-      expect(subject.convert(new_modulo).step).to eq 8
+      expect(subject.convert(new_modulo)).to eq Tonal::Step.new(ratio: 3/2r, modulo: 13)
     end
   end
 
-  describe "#ratio" do
+  describe "#step_to_r" do
     let(:ratio) { 3/2r }
 
-    it "returns the octave reduced ratio derived from 2^(step/modulo)" do
-      expect(subject.ratio).to eq 3/2r
-    end
+    it("returns the rational of the step") { expect(subject.step_to_r).to eq 6735213777669305/4503599627370496r }
+  end
+
+  describe "#to_r" do
+    let(:ratio) { 3/2r }
+
+    it("returns the rational of the step") { expect(subject.to_r).to eq 6735213777669305/4503599627370496r }
+  end
+
+  describe "#ratio_to_r" do
+    let(:ratio) { 3/2r }
+
+    it("returns the rational of the ratio") { expect(subject.ratio_to_r).to eq 3/2r }
+  end
+
+  describe "#step_to_cents" do
+    let(:ratio) { 3/2r }
+
+    it("returns the cents of the step") { expect(subject.step_to_cents).to eq 696.77 }
   end
 
   describe "#to_cents" do
     let(:ratio) { 3/2r }
 
-    it "returns self converted to cents within 100th accuracy" do
-      expect(subject.to_cents).to eq 701.96
-    end
+    it("returns the cents of the step") { expect(subject.to_cents).to eq 696.77 }
+  end
+
+  describe "#ratio_to_cents" do
+    let(:ratio) { 3/2r }
+
+    it("returns the cents of the ratio") { expect(subject.ratio_to_cents).to eq 701.96 }
   end
 
   describe "#+" do
