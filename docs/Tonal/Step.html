@@ -6,7 +6,7 @@
 <title>
   Class: Tonal::Step
   
-    &mdash; Documentation by YARD 0.9.34
+    &mdash; Documentation by YARD 0.9.36
   
 </title>
 
@@ -323,7 +323,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#convert-instance_method" title="#convert (instance method)">#<strong>convert</strong>(new_modulo)  &#x21d2; Object </a>
+      <a href="#convert-instance_method" title="#convert (instance method)">#<strong>convert</strong>(new_modulo)  &#x21d2; Tonal::Step </a>
     
 
     
@@ -337,7 +337,33 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>New step with the ratio mapped to the new modulo.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#efficiency-instance_method" title="#efficiency (instance method)">#<strong>efficiency</strong>  &#x21d2; Tonal::Cents </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The difference between the step and the ratio.</p>
+</div></span>
   
 </li>
 
@@ -395,7 +421,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#to_cents-instance_method" title="#to_cents (instance method)">#<strong>to_cents</strong>  &#x21d2; Object </a>
+      <a href="#ratio_to_cents-instance_method" title="#ratio_to_cents (instance method)">#<strong>ratio_to_cents</strong>  &#x21d2; Tonal::Cents </a>
     
 
     
@@ -409,7 +435,9 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Measure of ratio in cents.</p>
+</div></span>
   
 </li>
 
@@ -417,7 +445,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#to_r-instance_method" title="#to_r (instance method)">#<strong>to_r</strong>  &#x21d2; Object </a>
+      <a href="#ratio_to_r-instance_method" title="#ratio_to_r (instance method)">#<strong>ratio_to_r</strong>  &#x21d2; Rational </a>
     
 
     
@@ -431,7 +459,61 @@
   
 
   
-    <span class="summary_desc"><div class='inline'></div></span>
+    <span class="summary_desc"><div class='inline'>
+<p>Of the ratio.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#step_to_cents-instance_method" title="#step_to_cents (instance method)">#<strong>step_to_cents</strong>  &#x21d2; Tonal::Cents </a>
+    
+
+    
+      (also: #to_cents)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Measure of step in cents.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#step_to_r-instance_method" title="#step_to_r (instance method)">#<strong>step_to_r</strong>  &#x21d2; Rational </a>
+    
+
+    
+      (also: #to_r)
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>Of the step.</p>
+</div></span>
   
 </li>
 
@@ -770,12 +852,12 @@
       <pre class="lines">
 
 
-43
-44
-45</pre>
+87
+88
+89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 43</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='op'>+</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>step:</span> <span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span> <span class='op'>%</span> <span class='id identifier rubyid_modulo'>modulo</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>modulo:</span> <span class='id identifier rubyid_modulo'>modulo</span><span class='rparen'>)</span>
@@ -800,12 +882,12 @@
       <pre class="lines">
 
 
-48
-49
-50</pre>
+92
+93
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 48</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 92</span>
 
 <span class='kw'>def</span> <span class='op'>&lt;=&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_modulo'>modulo</span> <span class='op'>&lt;=&gt;</span> <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_modulo'>modulo</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_log'>log</span> <span class='op'>&lt;=&gt;</span> <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_log'>log</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_step'>step</span> <span class='op'>&lt;=&gt;</span> <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_step'>step</span>
@@ -818,27 +900,133 @@
       <div class="method_details ">
   <h3 class="signature " id="convert-instance_method">
   
-    #<strong>convert</strong>(new_modulo)  &#x21d2; <tt>Object</tt> 
+    #<strong>convert</strong>(new_modulo)  &#x21d2; <tt><span class='object_link'><a href="" title="Tonal::Step (class)">Tonal::Step</a></span></tt> 
   
 
   
 
   
-</h3><table class="source_code">
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns new step with the ratio mapped to the new modulo.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>Tonal::Step.new(ratio: 3/2r, modulo: 31).convert(12)
+=&gt; 7\12</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="" title="Tonal::Step (class)">Tonal::Step</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>new step with the ratio mapped to the new modulo</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-31
-32
-33</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 31</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_convert'>convert</span><span class='lparen'>(</span><span class='id identifier rubyid_new_modulo'>new_modulo</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>log:</span> <span class='id identifier rubyid_log'>log</span><span class='comma'>,</span> <span class='label'>modulo:</span> <span class='id identifier rubyid_new_modulo'>new_modulo</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="efficiency-instance_method">
+  
+    #<strong>efficiency</strong>  &#x21d2; <tt><span class='object_link'><a href="Cents.html" title="Tonal::Cents (class)">Tonal::Cents</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the difference between the step and the ratio.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>Tonal::Step.new(ratio: 3/2r, modulo: 31).efficiency
+=&gt; 5.19</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cents.html" title="Tonal::Cents (class)">Tonal::Cents</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the difference between the step and the ratio</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+83
+84
+85</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 83</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_efficiency'>efficiency</span>
+  <span class='id identifier rubyid_ratio_to_cents'>ratio_to_cents</span> <span class='op'>-</span> <span class='id identifier rubyid_step_to_cents'>step_to_cents</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -880,28 +1068,66 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="to_cents-instance_method">
+  <h3 class="signature " id="ratio_to_cents-instance_method">
   
-    #<strong>to_cents</strong>  &#x21d2; <tt>Object</tt> 
-  
-
+    #<strong>ratio_to_cents</strong>  &#x21d2; <tt><span class='object_link'><a href="Cents.html" title="Tonal::Cents (class)">Tonal::Cents</a></span></tt> 
   
 
   
-</h3><table class="source_code">
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns measure of ratio in cents.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>Tonal::Step.new(ratio: 3/2r, modulo: 31).ratio_to_cents
+=&gt; 701.96</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cents.html" title="Tonal::Cents (class)">Tonal::Cents</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>measure of ratio in cents</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-39
-40
-41</pre>
+74
+75
+76</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 39</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 74</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_to_cents'>to_cents</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_ratio_to_cents'>ratio_to_cents</span>
   <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_to_cents'>to_cents</span>
 <span class='kw'>end</span></pre>
     </td>
@@ -910,29 +1136,211 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="to_r-instance_method">
+  <h3 class="signature " id="ratio_to_r-instance_method">
   
-    #<strong>to_r</strong>  &#x21d2; <tt>Object</tt> 
-  
-
+    #<strong>ratio_to_r</strong>  &#x21d2; <tt>Rational</tt> 
   
 
   
-</h3><table class="source_code">
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns of the ratio.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>Tonal::Step.new(ratio: 3/2r, modulo: 31).ratio_to_r
+=&gt; 3/2</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Rational</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>of the ratio</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
   <tr>
     <td>
       <pre class="lines">
 
 
-35
-36
-37</pre>
+55
+56
+57</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 35</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 55</span>
 
-<span class='kw'>def</span> <span class='id identifier rubyid_to_r'>to_r</span>
+<span class='kw'>def</span> <span class='id identifier rubyid_ratio_to_r'>ratio_to_r</span>
   <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_to_r'>to_r</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="step_to_cents-instance_method">
+  
+    #<strong>step_to_cents</strong>  &#x21d2; <tt><span class='object_link'><a href="Cents.html" title="Tonal::Cents (class)">Tonal::Cents</a></span></tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='to_cents-instance_method'>to_cents</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns measure of step in cents.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>Tonal::Step.new(ratio: 3/2r, modulo: 31).step_to_cents
+=&gt; 696.77</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Cents.html" title="Tonal::Cents (class)">Tonal::Cents</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>measure of step in cents</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+64
+65
+66</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 64</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_step_to_cents'>step_to_cents</span>
+  <span class='id identifier rubyid_tempered'>tempered</span><span class='period'>.</span><span class='id identifier rubyid_to_cents'>to_cents</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="step_to_r-instance_method">
+  
+    #<strong>step_to_r</strong>  &#x21d2; <tt>Rational</tt> 
+  
+
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='to_r-instance_method'>to_r</span></span>
+    </span>
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns of the step.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code>Tonal::Step.new(ratio: 3/2r, modulo: 31).step_to_r
+=&gt; 6735213777669305/4503599627370496</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Rational</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>of the step</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+45
+46
+47</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 45</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_step_to_r'>step_to_r</span>
+  <span class='id identifier rubyid_tempered'>tempered</span><span class='period'>.</span><span class='id identifier rubyid_to_r'>to_r</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -944,9 +1352,9 @@
 </div>
 
       <div id="footer">
-  Generated on Thu Feb 22 10:13:05 2024 by
+  Generated on Wed Mar 13 21:08:44 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.34 (ruby-3.2.2).
+  0.9.36 (ruby-3.2.2).
 </div>
 
     </div>
