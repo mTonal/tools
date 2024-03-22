@@ -210,7 +210,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Between self (upper) and ratio (lower).</p>
+<p>Between ratio (upper) and self (lower).</p>
 </div></span>
   
 </li>
@@ -433,7 +433,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns between self (upper) and ratio (lower).</p>
+<p>Returns between ratio (upper) and self (lower).</p>
 
 
   </div>
@@ -444,7 +444,8 @@
     <p class="tag_title">Examples:</p>
     
       
-      <pre class="example code"><code>Tonal::ReducedRatio.new(133).interval_with(3/2r) =&gt; 133/96 (133/128 / 3/2)</code></pre>
+      <pre class="example code"><code>Tonal::ReducedRatio.new(133).interval_with(3/2r)
+=&gt; 192/133 (3/2 / 133/128)</code></pre>
     
   </div>
 <p class="tag_title">Parameters:</p>
@@ -475,7 +476,7 @@
       
         &mdash;
         <div class='inline'>
-<p>between self (upper) and ratio (lower)</p>
+<p>between ratio (upper) and self (lower)</p>
 </div>
       
     </li>
@@ -488,17 +489,17 @@
       <pre class="lines">
 
 
-33
 34
 35
-36</pre>
+36
+37</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/reduced_ratio.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/reduced_ratio.rb', line 34</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_interval_with'>interval_with</span><span class='lparen'>(</span><span class='id identifier rubyid_ratio'>ratio</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_r'>r</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_ratio'>ratio</span> <span class='op'>:</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_ratio'>ratio</span><span class='rparen'>)</span>
-  <span class='const'><span class='object_link'><a href="../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Interval.html" title="Tonal::Interval (class)">Interval</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Interval.html#initialize-instance_method" title="Tonal::Interval#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_r'>r</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Interval.html" title="Tonal::Interval (class)">Interval</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Interval.html#initialize-instance_method" title="Tonal::Interval#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_r'>r</span><span class='comma'>,</span> <span class='kw'>self</span><span class='rparen'>)</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -557,14 +558,14 @@
       <pre class="lines">
 
 
-42
 43
 44
 45
-46</pre>
+46
+47</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/reduced_ratio.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/reduced_ratio.rb', line 43</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_invert!'>invert!</span>
   <span class='kw'>super</span>
@@ -648,7 +649,7 @@
 </div>
 
       <div id="footer">
-  Generated on Wed Mar 13 21:08:45 2024 by
+  Generated on Thu Mar 21 18:00:51 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.2).
 </div>
