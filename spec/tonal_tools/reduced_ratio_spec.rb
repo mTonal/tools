@@ -8,8 +8,8 @@ RSpec.describe Tonal::ReducedRatio do
   end
 
   describe "#interval_with" do
-    it "returns the interval between self and the given ratio" do
-      expect(described_class.new(3/2r).interval_with(7/4r)).to eq Tonal::Interval.new(3/2r, 7/4r)
+    it "returns the interval between self (lower) and the given ratio (upper)" do
+      expect(described_class.new(3/2r).interval_with(7/4r)).to eq Tonal::Interval.new(7/4r, 3/2r)
     end
   end
 
