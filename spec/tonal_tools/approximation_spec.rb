@@ -55,7 +55,7 @@ RSpec.describe Tonal::Ratio::Approximation do
       let(:max_prime) { 89 }
 
       it "returns ratios with max prime" do
-        expect(ratio.approximate.by_quotient_walk(max_prime: max_prime).entries).to eq [(18/17r), (196/185r), (89/84r), (71/67r), (53/50r), (35/33r), (17/16r)]
+        expect(ratio.approximate.by_quotient_walk(max_prime: max_prime).entries).to eq [(17/16r), (18/17r), (35/33r), (53/50r), (71/67r), (89/84r), (196/185r)]
       end
     end
 
@@ -73,7 +73,7 @@ RSpec.describe Tonal::Ratio::Approximation do
       let(:depth) { 5 }
 
       it "returns approximations by descending superparticulars factored by ratio" do
-        expect(ratio.approximate.by_superparticular(depth: depth).entries).to eq [(351/350r), (350/349r), (349/348r), (348/347r), (347/346r)].map{|r| r * 3/2r}
+        expect(ratio.approximate.by_superparticular(depth: depth).entries).to eq [(1041/692r), (1044/694r), (1047/696r), (1050/698r), (1053/700r)]
       end
 
       context "when the superpart is the denomimator" do
@@ -105,5 +105,41 @@ RSpec.describe Tonal::Ratio::Approximation do
 end
 
 RSpec.describe Tonal::Ratio::Approximation::Set do
-  
+  describe "#sort_by" do
+    let(:ratio) { Tonal::ReducedRatio.new(2**(6.0/19)) }
+    let(:ratio_of_interest) { 61/49r }
+    # The approximation set is:
+    # (5605597082100993/4503599627370496): [(5/4), (56/45), (61/49), (117/94), (1114/895), (9029/7254), (28201/22657), (2406114/1933099), (2434315/1955756)]
+    let(:approximation_set) { ratio.approximate.by_continued_fraction(cents_tolerance: 10) }
+
+    context "with to_f" do
+      it "sorts by floating point value" do
+        expect(approximation_set.sort_by(&:to_f).find_index(ratio_of_interest)).to eq 7
+      end
+    end
+
+    context "with benedetti_height" do
+      it "sorts by the Benedetti height" do
+        expect(approximation_set.sort_by(&:benedetti_height).find_index(ratio_of_interest)).to eq 2
+      end
+    end
+
+    context "with max_prime" do
+      it "sorts by the maximum prime" do
+        expect(approximation_set.sort_by(&:max_prime).find_index(ratio_of_interest)).to eq 3
+      end
+    end
+
+    context "with min_prime" do
+      it "sorts by the minimum prime" do
+        expect(approximation_set.sort_by(&:min_prime).find_index(ratio_of_interest)).to eq 7
+      end
+    end
+
+    context "with wilson_height" do
+      it "sorts by the Wilson height" do
+        expect(approximation_set.sort_by(&:wilson_height).find_index(ratio_of_interest)).to eq 3
+      end
+    end
+  end
 end
