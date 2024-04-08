@@ -4,6 +4,9 @@ class Tonal::Ratio
     DEFAULT_MAX_GRID_SCALE = 100
     DEFAULT_MAX_GRID_BOUNDARY = 5
     DEFAULT_DEPTH = Float::INFINITY
+    DEFAULT_FRACTION_TREE_DEPTH = 10
+    DEFAULT_SUPERPART_DEPTH = 20
+    DEFAULT_NEIGHBORHOOD_DEPTH = 10
     DEFAULT_COMPLEXITY_AMOUNT = 50.0
     CONVERGENT_LIMIT = 10
 
@@ -47,7 +50,7 @@ class Tonal::Ratio
     # @param max_prime the maximum prime number to allow in the collection
     # @param conv_limit the number of convergents to limit the ContinuedFraction method
     #
-    def by_quotient_walk(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_DEPTH, max_prime: DEFAULT_MAX_PRIME, conv_limit: CONVERGENT_LIMIT)
+    def by_quotient_walk(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_FRACTION_TREE_DEPTH, max_prime: DEFAULT_MAX_PRIME, conv_limit: CONVERGENT_LIMIT)
       self_in_cents = to_cents
       within = cents_tolerance.kind_of?(Tonal::Cents) ? cents_tolerance : Tonal::Cents.new(cents: cents_tolerance)
 
@@ -68,7 +71,7 @@ class Tonal::Ratio
     # @param depth the maximum number of ratios in the collection
     # @param max_prime the maximum prime number to allow in the collection
     #
-    def by_tree_path(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_DEPTH, max_prime: DEFAULT_MAX_PRIME)
+    def by_tree_path(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_FRACTION_TREE_DEPTH, max_prime: DEFAULT_MAX_PRIME)
       self_in_cents = to_cents
       within = cents_tolerance.kind_of?(Tonal::Cents) ? cents_tolerance : Tonal::Cents.new(cents: cents_tolerance)
       Set.new(ratio: ratio) do |ratios|
@@ -89,7 +92,7 @@ class Tonal::Ratio
     # @param max_prime the maximum prime number to allow in the collection
     # @param superpart if the superior part is the numerator or denominator
     #
-    def by_superparticular(cents_tolerance: Tonal::Cents::TOLERANCE, depth: 20, max_prime: DEFAULT_MAX_PRIME, superpart: :upper)
+    def by_superparticular(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_SUPERPART_DEPTH, max_prime: DEFAULT_MAX_PRIME, superpart: :upper)
       self_in_cents = to_cents
       within = cents_tolerance.kind_of?(Tonal::Cents) ? cents_tolerance : Tonal::Cents.new(cents: cents_tolerance)
       Set.new(ratio: ratio) do |ratios|
@@ -113,7 +116,7 @@ class Tonal::Ratio
     # @param max_boundary the maximum distance grid ratios will be from the scaled ratio
     # @param max_scale the maximum self will be scaled
     #
-    def by_neighborhood(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_DEPTH, max_prime: DEFAULT_MAX_PRIME, max_boundary: DEFAULT_MAX_GRID_BOUNDARY, max_scale: DEFAULT_MAX_GRID_SCALE)
+    def by_neighborhood(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_NEIGHBORHOOD_DEPTH, max_prime: DEFAULT_MAX_PRIME, max_boundary: DEFAULT_MAX_GRID_BOUNDARY, max_scale: DEFAULT_MAX_GRID_SCALE)
       self_in_cents = to_cents
       within = cents_tolerance.kind_of?(Tonal::Cents) ? cents_tolerance : Tonal::Cents.new(cents: cents_tolerance)
       Set.new(ratio: ratio) do |ratios|
