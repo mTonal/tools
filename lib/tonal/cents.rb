@@ -56,6 +56,7 @@ class Tonal::Cents
     @value.round(precision)
   end
   alias :cents :value
+  alias :to_f :value
 
   # @return
   #   [Tonal::Cents] nearest hundredth cent value
