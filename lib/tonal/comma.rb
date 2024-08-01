@@ -2,9 +2,9 @@ class Tonal::Comma
   # @return [Hash] of comma key/value pairs
   # @example
   #   Tonal::Comma.commas
-  #   => {"ditonic"=>"531441/524288",
-  #       "syntonic"=>"81/80",
-  #       "schisma"=>"32805/32768",
+  #   => {"diaschisma"=>"2048/2025",
+  #       "dicot"=>"25/24",
+  #       "dieses1"=>"648/625",
   #       ...}
   #
   def self.commas
@@ -14,10 +14,7 @@ class Tonal::Comma
   # @return [Array] of comma values
   # @example
   #   Tonal::Comma.values
-  #   => [(531441/524288),
-  #       (81/80),
-  #       (32805/32768),
-  #       ...]
+  #   => [(2048/2025), (25/24), (648/625), ...]
   #
   def self.values
     @values ||= commas.values.map(&:to_r)
@@ -26,10 +23,7 @@ class Tonal::Comma
   # @return [Array] of comma keys
   # @example
   #   Tonal::Comma.keys
-  #   => ["ditonic",
-  #       "syntonic",
-  #       "schisma",
-  #       ...]
+  #   => ["diaschisma", "dicot", "dieses1", ...]
   #
   def self.keys
     @keys ||= commas.keys

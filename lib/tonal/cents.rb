@@ -93,6 +93,7 @@ class Tonal::Cents
   def inspect
     "#{value.round(@precision)}"
   end
+  alias :to_s :inspect
 
   #
   # Challenges to comparing floats

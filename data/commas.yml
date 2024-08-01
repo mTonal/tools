@@ -1,11 +1,13 @@
 commas:
-  # Interval between two enharmonically equivalent notes, as B# and C, in the Pythogorean tuning. ~23 cents
-  ditonic: 531441/524288
-  # The interval between a just major third (5:4) and a Pythogorean third (81:64). ~22 cents
-  syntonic: 81/80
-  # Difference between the syntonic and ditonic commas. ~2 cents
-  schisma: 32805/32768
   diaschisma: 2048/2025
+  # Interval between 16/15 and 10/9, 27/25 and 9/8, 6/5 and 5/4, 8/5 and 5/3, 16/9 and 50/27, 9/5 and 15/8. ~71¢
+  dicot: 25/24
   dieses1: 648/625
   dieses2: 128/125
+  # Interval between two enharmonically equivalent notes, as B# and C, in the Pythogorean tuning. ~23¢
+  ditonic: 531441/524288
+  # Difference between the syntonic and ditonic commas. ~2¢
+  schisma: 32805/32768
   septimal: 64/63
+  # The interval between a just major third (5:4) and a Pythogorean third (81:64). ~22¢
+  syntonic: 81/80

@@ -16,13 +16,13 @@ RSpec.describe Tonal::Comma do
 
     describe ".values" do
       it "returns values from the repo" do
-        expect(described_class.values).to start_with(531441/524288r)
+        expect(described_class.values).to start_with(2048/2025r)
       end
     end
 
     describe ".keys" do
       it "returns keys from the repo" do
-        expect(described_class.keys).to start_with("ditonic")
+        expect(described_class.keys).to start_with("diaschisma")
       end
     end
   end
