@@ -41,28 +41,6 @@ class Tonal::Ratio
       end
     end
 
-    # @return [Tonal::Ratio::Approximation::Set] of ratios within cent tolerance of self found using a quotient walk on the fraction tree
-    # @example
-    #   Tonal::Ratio.ed(12,1).approximate.by_quotient_walk(max_prime: 89)
-    #   => (4771397596969315/4503599627370496): [(17/16), (18/17), (35/33), (53/50), (71/67), (89/84), (196/185)]
-    # @param cents_tolerance the cents tolerance used to scope the collection
-    # @param depth the maximum number of ratios in the collection
-    # @param max_prime the maximum prime number to allow in the collection
-    # @param conv_limit the number of convergents to limit the ContinuedFraction method
-    #
-    def by_quotient_walk(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_FRACTION_TREE_DEPTH, max_prime: DEFAULT_MAX_PRIME, conv_limit: CONVERGENT_LIMIT)
-      self_in_cents = to_cents
-      within = cents_tolerance.kind_of?(Tonal::Cents) ? cents_tolerance : Tonal::Cents.new(cents: cents_tolerance)
-
-      Set.new(ratio: ratio) do |ratios|
-        FractionTree.quotient_walk(to_f, limit: conv_limit).each do |node|
-          ratio2 = ratio.class.new(node.weight)
-          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && ratio2.within_prime?(max_prime)
-          break if ratios.length >= depth
-        end
-      end
-    end
-
     # @return [Tonal::Ratio::Approximation::Set] of fraction tree ratios within cent tolerance of self
     # @example
     #   Tonal::Ratio.ed(12,1).approximate.by_tree_path(max_prime: 17)
@@ -75,8 +53,8 @@ class Tonal::Ratio
       self_in_cents = to_cents
       within = cents_tolerance.kind_of?(Tonal::Cents) ? cents_tolerance : Tonal::Cents.new(cents: cents_tolerance)
       Set.new(ratio: ratio) do |ratios|
-        FractionTree.path_to(to_f).each do |node|
-          ratio2 = ratio.class.new(node.weight)
+        FractionTree.node(to_f).path.each do |node|
+          ratio2 = ratio.class.new(node.number)
           ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && ratio2.within_prime?(max_prime)
           break if ratios.length >= depth
         end

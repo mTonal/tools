@@ -50,15 +50,6 @@ RSpec.describe Tonal::Ratio::Approximation do
       end
     end
 
-    describe "#by_quotient_walk" do
-      let(:ratio) { Tonal::Ratio.ed(12,1) }
-      let(:max_prime) { 89 }
-
-      it "returns ratios with max prime" do
-        expect(ratio.approximate.by_quotient_walk(max_prime: max_prime).entries).to eq [(17/16r), (18/17r), (35/33r), (53/50r), (71/67r), (89/84r), (196/185r)]
-      end
-    end
-
     describe "#by_tree_path" do
       let(:ratio) { Tonal::Ratio.ed(12,1) }
       let(:depth) { 10 }
