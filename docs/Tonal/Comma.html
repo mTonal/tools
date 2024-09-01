@@ -243,9 +243,9 @@
     
       
       <pre class="example code"><code>Tonal::Comma.commas
-=&gt; {&quot;ditonic&quot;=&gt;&quot;531441/524288&quot;,
-    &quot;syntonic&quot;=&gt;&quot;81/80&quot;,
-    &quot;schisma&quot;=&gt;&quot;32805/32768&quot;,
+=&gt; {&quot;diaschisma&quot;=&gt;&quot;2048/2025&quot;,
+    &quot;dicot&quot;=&gt;&quot;25/24&quot;,
+    &quot;dieses1&quot;=&gt;&quot;648/625&quot;,
     ...}</code></pre>
     
   </div>
@@ -314,10 +314,7 @@
     
       
       <pre class="example code"><code>Tonal::Comma.keys
-=&gt; [&quot;ditonic&quot;,
-    &quot;syntonic&quot;,
-    &quot;schisma&quot;,
-    ...]</code></pre>
+=&gt; [&quot;diaschisma&quot;, &quot;dicot&quot;, &quot;dieses1&quot;, ...]</code></pre>
     
   </div>
 
@@ -346,12 +343,12 @@
       <pre class="lines">
 
 
-34
-35
-36</pre>
+28
+29
+30</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/comma.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/comma.rb', line 28</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span>
   <span class='ivar'>@keys</span> <span class='op'>||=</span> <span class='id identifier rubyid_commas'>commas</span><span class='period'>.</span><span class='id identifier rubyid_keys'>keys</span>
@@ -413,12 +410,12 @@
       <pre class="lines">
 
 
-42
-43
-44</pre>
+36
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/comma.rb', line 42</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/comma.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_comma'>comma</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_commas'>commas</span><span class='lbracket'>[</span><span class='id identifier rubyid_comma'>comma</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_to_r'>to_r</span>
@@ -452,10 +449,7 @@
     
       
       <pre class="example code"><code>Tonal::Comma.values
-=&gt; [(531441/524288),
-    (81/80),
-    (32805/32768),
-    ...]</code></pre>
+=&gt; [(2048/2025), (25/24), (648/625), ...]</code></pre>
     
   </div>
 
@@ -484,12 +478,12 @@
       <pre class="lines">
 
 
-22
-23
-24</pre>
+19
+20
+21</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/comma.rb', line 22</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/comma.rb', line 19</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_values'>values</span>
   <span class='ivar'>@values</span> <span class='op'>||=</span> <span class='id identifier rubyid_commas'>commas</span><span class='period'>.</span><span class='id identifier rubyid_values'>values</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:to_r</span><span class='rparen'>)</span>
@@ -504,7 +498,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Apr  7 20:47:20 2024 by
+  Generated on Sat Aug 31 22:39:24 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.2).
 </div>

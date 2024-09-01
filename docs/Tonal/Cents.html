@@ -311,6 +311,8 @@
     
 
     
+      (also: #to_s)
+    
   </span>
   
   
@@ -622,7 +624,6 @@
       <pre class="lines">
 
 
-130
 131
 132
 133
@@ -634,10 +635,11 @@
 139
 140
 141
-142</pre>
+142
+143</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/cents.rb', line 130</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/cents.rb', line 131</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_method_missing'>method_missing</span><span class='lparen'>(</span><span class='id identifier rubyid_op'>op</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_blk'>blk</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_rhs'>rhs</span> <span class='op'>=</span> <span class='id identifier rubyid_args'>args</span><span class='period'>.</span><span class='id identifier rubyid_collect'>collect</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_arg'>arg</span><span class='op'>|</span>
@@ -854,12 +856,12 @@
       <pre class="lines">
 
 
-102
 103
-104</pre>
+104
+105</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/cents.rb', line 102</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/cents.rb', line 103</span>
 
 <span class='kw'>def</span> <span class='op'>&lt;=&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span> <span class='op'>?</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#PRECISION-constant" title="Tonal::Cents::PRECISION (constant)">PRECISION</a></span></span><span class='rparen'>)</span> <span class='op'>&lt;=&gt;</span> <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#PRECISION-constant" title="Tonal::Cents::PRECISION (constant)">PRECISION</a></span></span><span class='rparen'>)</span> <span class='op'>:</span> <span class='id identifier rubyid_value'>value</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#PRECISION-constant" title="Tonal::Cents::PRECISION (constant)">PRECISION</a></span></span><span class='rparen'>)</span> <span class='op'>&lt;=&gt;</span> <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span><span class='lparen'>(</span><span class='const'><span class='object_link'><a href="#PRECISION-constant" title="Tonal::Cents::PRECISION (constant)">PRECISION</a></span></span><span class='rparen'>)</span>
@@ -875,6 +877,10 @@
     #<strong>inspect</strong>  &#x21d2; <tt>Object</tt> 
   
 
+  
+    <span class="aliases">Also known as:
+    <span class="names"><span id='to_s-instance_method'>to_s</span></span>
+    </span>
   
 
   
@@ -1220,7 +1226,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sun Apr  7 20:47:20 2024 by
+  Generated on Sat Aug 31 22:39:24 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.36 (ruby-3.2.2).
 </div>

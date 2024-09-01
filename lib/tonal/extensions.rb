@@ -32,7 +32,7 @@ class Numeric
   # @return [Array] a tuple of self divided and multiplied by factor
   # @example
   #   Math::PI.div_times(3) => [1.0471975511965976, 9.42477796076938]
-  # @param [Numeric]
+  # @param factor [Numeric]
   #
   def div_times(factor) = [self / factor, self * factor]
 
@@ -329,7 +329,7 @@ class Array
   # @return [Tonal::ReducedRatio] ratio reconstructed from the result of a prime factor decomposition
   # @example
   #   [[[3, 1]], [[2, 1]]].ratio_from_prime_divisions => (3/2)
-  # @reduced [Boolean] if a reduced or unreduced ratio is returned
+  # @param reduced [Boolean] if a reduced or unreduced ratio is returned
   #
   def ratio_from_prime_divisions(reduced: false) = reduced ? Tonal::ReducedRatio.new(Prime.int_from_prime_division(self.first), Prime.int_from_prime_division(self.last)) : Tonal::Ratio.new(Prime.int_from_prime_division(self.first), Prime.int_from_prime_division(self.last))
 
