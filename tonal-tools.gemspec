@@ -24,7 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency "matrix", ["~> 0.4"]
   spec.add_runtime_dependency "sorted_set", ["~> 1.0"]
   spec.add_runtime_dependency "continued_fractions", ["~> 2.1"]
-  spec.add_runtime_dependency "fraction-tree", ["~> 2.0"]
+  spec.add_runtime_dependency "fraction-tree", ["~> 2.1"]
   spec.add_development_dependency "rspec", ["~> 3.2"]
   spec.add_development_dependency "byebug", ["~> 11.1"]
   spec.add_development_dependency "yard", ["~> 0.9"]

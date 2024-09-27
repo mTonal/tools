@@ -60,7 +60,7 @@ RSpec.describe Tonal::Ratio::Approximation do
     end
 
     describe "#by_superparticular" do
-      let(:ratio) { Tonal::Ratio.new(3/2r)}
+      let(:ratio) { Tonal::Ratio.new(3/2r) }
       let(:depth) { 5 }
 
       it "returns approximations by descending superparticulars factored by ratio" do
