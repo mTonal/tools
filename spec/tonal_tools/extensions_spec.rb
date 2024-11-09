@@ -187,6 +187,12 @@ RSpec.describe "Extensions" do
         expect((3/2r).mirror(9/8r)).to eq 27/16r
       end
     end
+
+    describe "#decimal_power" do
+      it "returns the decimal power of self" do
+        expect(22632.decimal_power).to eq 4
+      end
+    end
   end
 
   describe "Rational extensions" do
