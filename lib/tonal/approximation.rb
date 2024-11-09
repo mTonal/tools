@@ -152,7 +152,7 @@ class Tonal::Ratio
 
     class Set
       extend Forwardable
-      def_delegators :@ratios, :count, :length, :min, :max, :entries, :all?, :any?, :reject, :map, :find_index
+      def_delegators :@ratios, :count, :length, :min, :max, :entries, :all?, :any?, :reject, :map, :find_index, :to_a
 
       attr_reader :ratios, :ratio
 

@@ -181,6 +181,14 @@ class Numeric
   #   (3/2r).mirror => (4/3)
   #
   def mirror(axis=1/1r) = self.ratio.mirror(axis)
+
+  # @return [Integer] the decimal power of self
+  # @example
+  #   (3/2r).decimal_power => 0
+  #
+  def decimal_power
+    Math.log10(self).floor
+  end
 end
 
 class Integer
