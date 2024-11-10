@@ -188,9 +188,15 @@ RSpec.describe "Extensions" do
       end
     end
 
-    describe "#decimal_power" do
-      it "returns the decimal power of self" do
-        expect(22632.decimal_power).to eq 4
+    describe "#log_floor" do
+      it "returns the log floor to the base 10 of self" do
+        expect(22632.log_floor).to eq 4
+      end
+
+      context "with given base" do
+        it "returns the log floor to the given base of self" do
+          expect(22632.log_floor(2)).to eq 14
+        end
       end
     end
   end
