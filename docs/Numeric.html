@@ -167,30 +167,6 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#decimal_power-instance_method" title="#decimal_power (instance method)">#<strong>decimal_power</strong>  &#x21d2; Integer </a>
-    
-
-    
-  </span>
-  
-  
-  
-  
-  
-  
-  
-
-  
-    <span class="summary_desc"><div class='inline'>
-<p>The decimal power of self.</p>
-</div></span>
-  
-</li>
-
-      
-        <li class="public ">
-  <span class="summary_signature">
-    
       <a href="#div_times-instance_method" title="#div_times (instance method)">#<strong>div_times</strong>(factor)  &#x21d2; Array </a>
     
 
@@ -331,6 +307,30 @@
   
     <span class="summary_desc"><div class='inline'>
 <p>The log2 of self.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#log_floor-instance_method" title="#log_floor (instance method)">#<strong>log_floor</strong>(base = 10)  &#x21d2; Integer </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>The floor of the log (to the given base) of self.</p>
 </div></span>
   
 </li>
@@ -918,73 +918,6 @@
 </div>
     
       <div class="method_details ">
-  <h3 class="signature " id="decimal_power-instance_method">
-  
-    #<strong>decimal_power</strong>  &#x21d2; <tt><span class='object_link'><a href="Integer.html" title="Integer (class)">Integer</a></span></tt> 
-  
-
-  
-
-  
-</h3><div class="docstring">
-  <div class="discussion">
-    
-<p>Returns the decimal power of self.</p>
-
-
-  </div>
-</div>
-<div class="tags">
-  
-  <div class="examples">
-    <h4 class="tag_title">Examples:</h4>
-    
-      
-      <pre class="example code"><code><span class='lparen'>(</span><span class='int'>3</span><span class='op'>/</span><span class='rational'>2r</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_decimal_power'>decimal_power</span> <span class='op'>=&gt;</span> <span class='int'>0</span></code></pre>
-    
-  </div>
-
-<p class="tag_title">Returns:</p>
-<ul class="return">
-  
-    <li>
-      
-      
-        <span class='type'>(<tt><span class='object_link'><a href="Integer.html" title="Integer (class)">Integer</a></span></tt>)</span>
-      
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>the decimal power of self</p>
-</div>
-      
-    </li>
-  
-</ul>
-
-</div><table class="source_code">
-  <tr>
-    <td>
-      <pre class="lines">
-
-
-189
-190
-191</pre>
-    </td>
-    <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 189</span>
-
-<span class='kw'>def</span> <span class='id identifier rubyid_decimal_power'>decimal_power</span>
-  <span class='const'><span class='object_link'><a href="Math.html" title="Math (module)">Math</a></span></span><span class='period'>.</span><span class='id identifier rubyid_log10'>log10</span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_floor'>floor</span>
-<span class='kw'>end</span></pre>
-    </td>
-  </tr>
-</table>
-</div>
-    
-      <div class="method_details ">
   <h3 class="signature " id="div_times-instance_method">
   
     #<strong>div_times</strong>(factor)  &#x21d2; <tt><span class='object_link'><a href="Array.html" title="Array (class)">Array</a></span></tt> 
@@ -1408,6 +1341,91 @@
 </div>
     
       <div class="method_details ">
+  <h3 class="signature " id="log_floor-instance_method">
+  
+    #<strong>log_floor</strong>(base = 10)  &#x21d2; <tt><span class='object_link'><a href="Integer.html" title="Integer (class)">Integer</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns the floor of the log (to the given base) of self.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code><span class='const'><span class='object_link'><a href="Math.html" title="Math (module)">Math</a></span></span><span class='op'>::</span><span class='const'>PI</span><span class='period'>.</span><span class='id identifier rubyid_log_floor'>log_floor</span><span class='lparen'>(</span><span class='int'>2</span><span class='rparen'>)</span> <span class='op'>=&gt;</span> <span class='int'>1</span></code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>base</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>10</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>of the log</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Integer.html" title="Integer (class)">Integer</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>the floor of the log (to the given base) of self</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+191</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 191</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_log_floor'>log_floor</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='op'>=</span><span class='int'>10</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Math.html" title="Math (module)">Math</a></span></span><span class='period'>.</span><span class='id identifier rubyid_log'>log</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_base'>base</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_floor'>floor</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
   <h3 class="signature " id="log_weil_height-instance_method">
   
     #<strong>log_weil_height</strong>  &#x21d2; <tt><span class='object_link'><a href="Tonal/Log2.html" title="Tonal::Log2 (class)">Tonal::Log2</a></span></tt> 
@@ -1622,6 +1640,28 @@
       <pre class="example code"><code>(3/2r).mirror =&gt; (4/3)</code></pre>
     
   </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>axis</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>1</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>around which self is mirrored</p>
+</div>
+      
+    </li>
+  
+</ul>
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -1648,10 +1688,10 @@
       <pre class="lines">
 
 
-183</pre>
+184</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 184</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_mirror'>mirror</span><span class='lparen'>(</span><span class='id identifier rubyid_axis'>axis</span><span class='op'>=</span><span class='int'>1</span><span class='op'>/</span><span class='rational'>1r</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_mirror'>mirror</span><span class='lparen'>(</span><span class='id identifier rubyid_axis'>axis</span><span class='rparen'>)</span></pre>
     </td>
@@ -2652,7 +2692,7 @@
 </div>
 
       <div id="footer">
-  Generated on Fri Nov  8 19:54:24 2024 by
+  Generated on Sat Nov  9 16:11:23 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.2.2).
 </div>
