@@ -179,16 +179,16 @@ class Numeric
   # @return [Tonal::ReducedRatio], the ratio rotated on the given axis, default 1/1
   # @example
   #   (3/2r).mirror => (4/3)
+  # @param axis around which self is mirrored
   #
   def mirror(axis=1/1r) = self.ratio.mirror(axis)
 
-  # @return [Integer] the decimal power of self
+  # @return [Integer] the floor of the log (to the given base) of self
   # @example
-  #   (3/2r).decimal_power => 0
+  #   Math::PI.log_floor(2) => 1
+  # @param base of the log
   #
-  def decimal_power
-    Math.log10(self).floor
-  end
+  def log_floor(base=10) = Math.log(self, base).floor
 end
 
 class Integer
@@ -212,12 +212,13 @@ class Integer
   #
   def factorial = (2..self).reduce(1, :*)
 
-  # @return [Boolean] if self is coprime with i
+  # @return [Boolean] if self is coprime with other number
   # @example
   #   25.coprime?(7) => true
   #   25.coprime?(5) => false
+  # @param other number determining coprimeness
   #
-  def coprime?(i) = self.gcd(i) == 1
+  def coprime?(other) = self.gcd(other) == 1
 
   # @return [Array] list of integers that are coprime with self, up to the value of self
   # @example
