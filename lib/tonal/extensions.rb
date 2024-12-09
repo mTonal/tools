@@ -9,6 +9,9 @@ class Prime
 end
 
 class Numeric
+  alias :antecedent :numerator
+  alias :consequent :denominator
+
   # @return [Numeric] translated modularly
   # @example
   #   Math::PI.modulo_translate(-3, 3) => -2.858407346410207
@@ -102,7 +105,7 @@ class Numeric
 
   # @return [Integer] the product complexity of self
   # @example
-  #   (3/2r).tenney_height => 2.584962500721156
+  #   (3/2r).tenney_height => 2.58
   #
   def tenney_height = self.ratio.tenney_height
   alias :log_product_complexity :tenney_height
@@ -115,7 +118,7 @@ class Numeric
 
   # @return [Tonal::Log2] the log of Weil height
   # @example
-  #   (3/2r).log_weil_height => 1.5849625007211563
+  #   (3/2r).log_weil_height => 1.58
   #
   def log_weil_height = self.ratio.log_weil_height
 
@@ -126,10 +129,11 @@ class Numeric
 
   # @return [Float] the cents difference between self and its step in the given modulo
   # @example
-  #   (3/2r).efficiency(12) => -1.955000865387433
+  #   (3/2r).efficiency(12) => -1.96
   # @param modulo
   #
-  def efficiency(modulo) = (Tonal::Cents::CENT_SCALE * step(modulo).step / modulo.to_f) - to_cents
+  # We want the efficiency from the ratio (self)
+  def efficiency(modulo) = to_ratio.efficiency(modulo)
 
   # @return [Tonal::Interval] beween self (upper) and ratio (lower)
   # @example
@@ -240,11 +244,11 @@ class Integer
   alias :totient :phi
 
   # @return [Array] of integers that are n-smooth with self
-  #   Adapted from https://rosettacode.org/wiki/N-smooth_numbers#Ruby
   # @example
   #   5.nsmooth(25)
   #   => [1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30, 32, 36, 40, 45, 48, 50, 54]
   # @param limit
+  # @note Adapted from https://rosettacode.org/wiki/N-smooth_numbers#Ruby
   #
   def nsmooth(limit=2)
     ([0] * limit).tap do |ns|
@@ -267,6 +271,11 @@ class Integer
 end
 
 class Array
+  alias :numerator :first
+  alias :denominator :last
+  alias :antecedent :first
+  alias :consequent :last
+
   # @return [Array] self replaced by array padded to the right up to n, with value. value default is nil
   # @example
   #   [3,2].rpad!(3, 12) => [3, 2, 12]
@@ -379,6 +388,12 @@ class Array
       (value - lower) % range + lower
     end
   end
+
+  # @return [Rational] from first and last element of array. Ideally to be used with tuples.
+  # @example
+  #   [4,3].to_r => (4/3)
+  #
+  def to_r = Rational(numerator, denominator)
 end
 
 class Vector

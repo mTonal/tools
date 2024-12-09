@@ -3,7 +3,7 @@ require "spec_helper"
 RSpec.describe Tonal::Ratio do
   subject { described_class.new(arg1, arg2) }
 
-  describe "initialization" do
+  describe "Initialization" do
     let(:arg1) { [ 3/2r, 1.5, Math::PI ].sample }
     let(:arg2) { 2 }
 
@@ -55,50 +55,42 @@ RSpec.describe Tonal::Ratio do
     end
   end
 
-  describe ".superparticular" do
-    let(:n) { rand(100)+1 }
+  describe "Class methods" do
+    describe ".superparticular" do
+      let(:n) { rand(100)+1 }
 
-    it "returns a ratio who's numerator and denominator are one apart" do
-      expect(described_class.superparticular(n)).to eq described_class.new(n+1, n)
+      it "returns a ratio who's numerator and denominator are one apart" do
+        expect(described_class.superparticular(n)).to eq described_class.new(n+1, n)
+      end
+    end
+
+    describe ".superpartient" do
+      let(:n) { rand(100)+1 }
+      let(:partient) { rand(10) }
+
+      it "returns a ratio who's numerator and denominator are a partient apart" do
+        expect(described_class.superpartient(n, summand: partient)).to eq described_class.new(n+partient, n)
+      end
+    end
+
+    describe ".random_ratio" do
+      it { expect(described_class.random_ratio).to be_a_kind_of(Tonal::Ratio) }
+
+      context "when reduced is true" do
+        it { expect(described_class.random_ratio(reduced: true)).to be_a_kind_of(Tonal::ReducedRatio) }
+      end
+    end
+
+    describe ".ed" do
+      it { expect(described_class.ed(12, 7)).to eq 421735949569275/281474976710656r }
+    end
+
+    describe ".within_cents?" do
+      it { expect(described_class.within_cents?(100.cents, 200.cents, 5)).to be false }
     end
   end
 
-  describe ".superpartient" do
-    let(:n) { rand(100)+1 }
-    let(:partient) { rand(10) }
-
-    it "returns a ratio who's numerator and denominator are a partient apart" do
-      expect(described_class.superpartient(n, summand: partient)).to eq described_class.new(n+partient, n)
-    end
-  end
-
-  describe ".random_ratio" do
-    it { expect(described_class.random_ratio).to be_a_kind_of(Tonal::Ratio) }
-
-    context "when reduced is true" do
-      it { expect(described_class.random_ratio(reduced: true)).to be_a_kind_of(Tonal::ReducedRatio) }
-    end
-  end
-
-  describe ".ed" do
-    it { expect(described_class.ed(12, 7)).to eq 421735949569275/281474976710656r }
-  end
-
-  describe ".within_cents?" do
-    it { expect(described_class.within_cents?(100.cents, 200.cents, 5)).to be false }
-  end
-
-  describe "#within_prime?" do
-    it "returns true when the ratio's max prime is within the given prime" do
-      expect(described_class.new(3/2r).within_prime?(7)).to be true
-    end
-
-    it "returns false when the ratio's max prime is greater than the given prime" do
-      expect(described_class.new(13/8r).within_prime?(7)).to be false
-    end
-  end
-
-  describe "conversions" do
+  describe "Conversions" do
     let(:arg1) { 3/2r }
     let(:arg2) { nil }
 
@@ -298,7 +290,7 @@ RSpec.describe Tonal::Ratio do
     end
   end
 
-  describe "measurements" do
+  describe "Measurements" do
     let(:arg1) { 3/2r }
     let(:arg2) { nil }
 
@@ -382,79 +374,445 @@ RSpec.describe Tonal::Ratio do
   end
 
   describe "Comparison" do
-    context "with identical antecedent/consequent" do
-      let(:arg1) { 3/2r }
-      let(:arg2) { nil }
+    describe "#max_prime_within?" do
+      it "returns true when the ratio's max prime is within the given number" do
+        expect(described_class.new(3/2r).max_prime_within?(4)).to be true
+      end
 
-      it "works as expected" do
-        expect(subject == subject).to be true
-        expect(subject < subject).to be false
-        expect(subject > subject).to be false
-        expect(subject >= subject).to be true
-        expect(subject <= subject).to be true
+      it "returns false when the ratio's max prime is greater than the given number" do
+        expect(described_class.new(13/8r).max_prime_within?(12)).to be false
       end
     end
 
-    context "with different antecedent/consequent" do
-      context "and antecedent/consequent are congruent" do
-        let(:ratio) { described_class.new(3,2)}
-        let(:other_ratio) { described_class.new(6,4) }
+    describe "Comparators" do
+      context "with identical antecedent/consequent" do
+        let(:arg1) { 3/2r }
+        let(:arg2) { nil }
 
-        it "ratios are considered equivalent" do
-          expect(ratio == other_ratio).to be true
-          expect(ratio < other_ratio).to be false
-          expect(ratio > other_ratio).to be false
-          expect(ratio >= other_ratio).to be true
-          expect(ratio <= other_ratio).to be true
+        it "works as expected" do
+          expect(subject == subject).to be true
+          expect(subject < subject).to be false
+          expect(subject > subject).to be false
+          expect(subject >= subject).to be true
+          expect(subject <= subject).to be true
         end
       end
 
-      context "and antecedent/consequent are incongruent" do
-        let(:ratio) { described_class.new(3,2)}
-        let(:other_ratio) { described_class.new(7,4) }
+      context "with different antecedent/consequent" do
+        context "and antecedent/consequent are congruent" do
+          let(:ratio) { described_class.new(3,2)}
+          let(:other_ratio) { described_class.new(6,4) }
 
-        it "ratios are considered different" do
-          expect(ratio == other_ratio).to be false
-          expect(ratio < other_ratio).to be true
-          expect(ratio > other_ratio).to be false
-          expect(ratio >= other_ratio).to be false
-          expect(ratio <= other_ratio).to be true
+          it "ratios are considered equivalent" do
+            expect(ratio == other_ratio).to be true
+            expect(ratio < other_ratio).to be false
+            expect(ratio > other_ratio).to be false
+            expect(ratio >= other_ratio).to be true
+            expect(ratio <= other_ratio).to be true
+          end
+        end
+
+        context "and antecedent/consequent are incongruent" do
+          let(:ratio) { described_class.new(3,2)}
+          let(:other_ratio) { described_class.new(7,4) }
+
+          it "ratios are considered different" do
+            expect(ratio == other_ratio).to be false
+            expect(ratio < other_ratio).to be true
+            expect(ratio > other_ratio).to be false
+            expect(ratio >= other_ratio).to be false
+            expect(ratio <= other_ratio).to be true
+          end
         end
       end
     end
   end
 
-  describe "operators" do
+  describe "Operators" do
     let(:arg1) { 3/2r }
     let(:arg2) { nil }
 
     describe "#+" do
-      it "returns the ratio sum" do
-        expect(subject + subject).to eq described_class.new(12,4)
+      context "with two ratios" do
+        it "returns a ratio" do
+          expect(subject + subject).to be_a_kind_of(Tonal::Ratio)
+        end
+      end
+
+      context "with two reduced ratios" do
+        it "returns a reduced ratio" do
+          expect(Tonal::ReducedRatio.new(3/2r) + Tonal::ReducedRatio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with a reduced ratio and ratio on the right" do
+        it "returns a reduced ratio" do
+          expect(Tonal::ReducedRatio.new(3/2r) + Tonal::Ratio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with a reduced ratio and ratio on the left" do
+        it "returns a reduced ratio" do
+          expect(Tonal::Ratio.new(3/2r) + Tonal::ReducedRatio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with ratios having different consequents" do
+        let(:ratio1) { described_class.new(7,4) }
+        let(:ratio2) { described_class.new(15,6) }
+
+        it "adds them correctly" do
+          expect(ratio1 + ratio2).to eq described_class.new(51,12)
+        end
+      end
+
+      context "with ratios having the same consequents" do
+        let(:ratio1) { described_class.new(7,4) }
+        let(:ratio2) { described_class.new(15,4) }
+
+        it "adds them correctly" do
+          expect(ratio1 + ratio2).to eq described_class.new(22,4)
+        end
+      end
+
+      context "with array on the right hand side" do
+        let(:operand) { [3, 4] }
+
+        it "accepts them" do
+          # Note: We allow Array only on right hand side for now. Accepting an
+          # Array on the left hand side requires defining Ratio#to_ary. But the
+          # operation returns an Array, not a Ratio, which is not what we
+          # ideally want. Also, defining #to_ary breaks approximation_spec.rb:30
+          # Same applies for the other operators.
+          #
+          expect(subject + operand).to eq Tonal::Ratio.new(18,8)
+        end
+      end
+
+      context "between ratios and numerics" do
+        context "when numeric is on the right hand side" do
+          let(:numeric) { 3/2r }
+
+          it "coerces the numeric to a ratio and operates successfully" do
+            expect(described_class.new(numeric) + numeric).to be_a_kind_of(Tonal::Ratio)
+            expect(described_class.new(numeric) + numeric).to eq Tonal::Ratio.new(12,4)
+          end
+        end
+
+        context "when numeric is on the left hand side" do
+          let(:numeric) { 3/2r }
+
+          it "operates successfully" do
+            expect(numeric + described_class.new(numeric)).to be_a_kind_of(Tonal::Ratio)
+            expect(described_class.new(numeric) + numeric).to eq Tonal::Ratio.new(12,4)
+          end
+        end
+      end
+
+      context "between reduced ratios and numerics" do
+        let(:numeric) { 3/2r }
+
+        context "when numeric is on the right hand side" do
+          it "coerces the numeric to a reduced ratio and operates successfully" do
+            expect(Tonal::ReducedRatio.new(numeric) + numeric).to be_a_kind_of(Tonal::ReducedRatio)
+            expect(Tonal::ReducedRatio.new(numeric) + numeric).to eq Tonal::ReducedRatio.new(3,2)
+          end
+        end
+
+        context "when numeric is on the left hand side" do
+          it "coerces the numeric and operates successfully" do
+            expect(numeric + Tonal::ReducedRatio.new(numeric)).to be_a_kind_of(Tonal::ReducedRatio)
+            expect(numeric + Tonal::ReducedRatio.new(numeric)).to eq Tonal::ReducedRatio.new(3,2)
+          end
+        end
       end
     end
 
     describe "#-" do
-      it "returns the ratio difference" do
-        expect(subject - subject).to eq described_class.new(0,4)
+      context "with two ratios" do
+        it "returns a ratio" do
+          expect(subject - subject).to be_a_kind_of(Tonal::Ratio)
+        end
+      end
+
+      context "with two reduced ratios" do
+        it "returns a reduced ratio" do
+          expect(Tonal::ReducedRatio.new(3/2r) - Tonal::ReducedRatio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with a reduced ratio and ratio on the right" do
+        it "returns a reduced ratio" do
+          expect(Tonal::ReducedRatio.new(3/2r) - Tonal::Ratio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with a reduced ratio and ratio on the left" do
+        it "returns a reduced ratio" do
+          expect(Tonal::Ratio.new(3/2r) - Tonal::ReducedRatio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with array on the right hand side" do
+        let(:operand) { [3, 4] }
+
+        it "accepts them" do
+          expect(subject - operand).to eq Tonal::Ratio.new(6,8)
+        end
+      end
+
+      context "between ratios and numerics" do
+        context "when numeric is on the right hand side" do
+          let(:numeric) { 3/2r }
+
+          it "coerces the numeric to a ratio and operates successfully" do
+            expect(described_class.new(numeric) - numeric).to be_a_kind_of(Tonal::Ratio)
+            expect(described_class.new(numeric) - numeric).to eq Tonal::Ratio.new(0,4)
+          end
+        end
+
+        context "when numeric is on the left hand side" do
+          let(:numeric) { 3/2r }
+
+          it "operates successfully" do
+            expect(numeric - described_class.new(numeric)).to be_a_kind_of(Tonal::Ratio)
+            expect(described_class.new(numeric) - numeric).to eq Tonal::Ratio.new(0,4)
+          end
+        end
+      end
+
+      context "between reduced ratios and numerics" do
+        let(:numeric) { 3/2r }
+
+        context "when numeric is on the right hand side" do
+          it "coerces the numeric to a reduced ratio and operates successfully" do
+            expect(Tonal::ReducedRatio.new(numeric) - numeric).to be_a_kind_of(Tonal::ReducedRatio)
+            expect(Tonal::ReducedRatio.new(numeric) - numeric).to eq Tonal::ReducedRatio.new(0,4)
+          end
+        end
+
+        context "when numeric is on the left hand side" do
+          it "coerces the numeric and operates successfully" do
+            expect(numeric - Tonal::ReducedRatio.new(numeric)).to be_a_kind_of(Tonal::ReducedRatio)
+            expect(numeric - Tonal::ReducedRatio.new(numeric)).to eq Tonal::ReducedRatio.new(0,4)
+          end
+        end
       end
     end
 
     describe "#*" do
-      it "returns the ratio product" do
-        expect(subject * subject).to eq described_class.new(9,4)
+      context "with two ratios" do
+        it "returns a ratio" do
+          expect(subject * subject).to be_a_kind_of(Tonal::Ratio)
+        end
+      end
+
+      context "with two reduced ratios" do
+        it "returns a reduced ratio" do
+          expect(Tonal::ReducedRatio.new(3/2r) * Tonal::ReducedRatio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with a reduced ratio and ratio on the right" do
+        it "returns a reduced ratio" do
+          expect(Tonal::ReducedRatio.new(3/2r) * Tonal::Ratio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with a reduced ratio and ratio on the left" do
+        it "returns a reduced ratio" do
+          expect(Tonal::Ratio.new(3/2r) * Tonal::ReducedRatio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with array on the right hand side" do
+        let(:operand) { [3, 4] }
+
+        it "accepts them" do
+          expect(subject * operand).to eq Tonal::Ratio.new(9,8)
+        end
+      end
+
+      context "between ratios and numerics" do
+        context "when numeric is on the right hand side" do
+          let(:numeric) { 3/2r }
+
+          it "coerces the numeric to a ratio and operates successfully" do
+            expect(described_class.new(numeric) * numeric).to be_a_kind_of(Tonal::Ratio)
+            expect(described_class.new(numeric) * numeric).to eq Tonal::Ratio.new(9,4)
+          end
+        end
+
+        context "when numeric is on the left hand side" do
+          let(:numeric) { 3/2r }
+
+          it "operates successfully" do
+            expect(numeric * described_class.new(numeric)).to be_a_kind_of(Tonal::Ratio)
+            expect(described_class.new(numeric) * numeric).to eq Tonal::Ratio.new(9,4)
+          end
+        end
+      end
+
+      context "between reduced ratios and numerics" do
+        let(:numeric) { 3/2r }
+
+        context "when numeric is on the right hand side" do
+          it "coerces the numeric to a reduced ratio and operates successfully" do
+            expect(Tonal::ReducedRatio.new(numeric) * numeric).to be_a_kind_of(Tonal::ReducedRatio)
+            expect(Tonal::ReducedRatio.new(numeric) * numeric).to eq Tonal::ReducedRatio.new(9,8)
+          end
+        end
+
+        context "when numeric is on the left hand side" do
+          it "coerces the numeric and operates successfully" do
+            expect(numeric * Tonal::ReducedRatio.new(numeric)).to be_a_kind_of(Tonal::ReducedRatio)
+            expect(numeric * Tonal::ReducedRatio.new(numeric)).to eq Tonal::ReducedRatio.new(9,8)
+          end
+        end
       end
     end
 
     describe "#/" do
-      it "returns the ratio quotient" do
-        expect(subject / subject).to eq described_class.new(6,6)
+      context "with two ratios" do
+        it "returns a ratio" do
+          expect(subject / subject).to be_a_kind_of(Tonal::Ratio)
+        end
+      end
+
+      context "with two reduced ratios" do
+        it "returns a reduced ratio" do
+          expect(Tonal::ReducedRatio.new(3/2r) / Tonal::ReducedRatio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with a reduced ratio and ratio on the right" do
+        it "returns a reduced ratio" do
+          expect(Tonal::ReducedRatio.new(3/2r) / Tonal::Ratio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with a reduced ratio and ratio on the left" do
+        it "returns a reduced ratio" do
+          expect(Tonal::Ratio.new(3/2r) / Tonal::ReducedRatio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with array on the right hand side" do
+        let(:operand) { [3, 4] }
+
+        it "accepts them" do
+          expect(subject / operand).to eq Tonal::Ratio.new(12,6)
+        end
+      end
+
+      context "between ratios and numerics" do
+        context "when numeric is on the right hand side" do
+          let(:numeric) { 3/2r }
+
+          it "coerces the numeric to a ratio and operates successfully" do
+            expect(described_class.new(numeric) / numeric).to be_a_kind_of(Tonal::Ratio)
+            expect(described_class.new(numeric) / numeric).to eq Tonal::Ratio.new(6,6)
+          end
+        end
+
+        context "when numeric is on the left hand side" do
+          let(:numeric) { 3/2r }
+
+          it "operates successfully" do
+            expect(numeric / described_class.new(numeric)).to be_a_kind_of(Tonal::Ratio)
+            expect(described_class.new(numeric) / numeric).to eq Tonal::Ratio.new(6,6)
+          end
+        end
+      end
+
+      context "between reduced ratios and numerics" do
+        let(:numeric) { 3/2r }
+
+        context "when numeric is on the right hand side" do
+          it "coerces the numeric to a reduced ratio and operates successfully" do
+            expect(Tonal::ReducedRatio.new(numeric) / numeric).to be_a_kind_of(Tonal::ReducedRatio)
+            expect(Tonal::ReducedRatio.new(numeric) / numeric).to eq Tonal::ReducedRatio.new(1,1)
+          end
+        end
+
+        context "when numeric is on the left hand side" do
+          it "coerces the numeric and operates successfully" do
+            expect(numeric / Tonal::ReducedRatio.new(numeric)).to be_a_kind_of(Tonal::ReducedRatio)
+            expect(numeric / Tonal::ReducedRatio.new(numeric)).to eq Tonal::ReducedRatio.new(1,1)
+          end
+        end
       end
     end
 
     describe "#**" do
-      it "returns the ratio raised to the power" do
-        expect(subject ** 3).to eq described_class.new(27,8)
+      context "with two ratios" do
+        it "returns a ratio" do
+          expect(subject ** subject).to be_a_kind_of(Tonal::Ratio)
+        end
+      end
+
+      context "with two reduced ratios" do
+        it "returns a reduced ratio" do
+          expect(Tonal::ReducedRatio.new(3/2r) ** Tonal::ReducedRatio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with a reduced ratio and ratio on the right" do
+        it "returns a reduced ratio" do
+          expect(Tonal::ReducedRatio.new(3/2r) ** Tonal::Ratio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with a reduced ratio and ratio on the left" do
+        it "returns a reduced ratio" do
+          expect(Tonal::Ratio.new(3/2r) ** Tonal::ReducedRatio.new(3/2r)).to be_a_kind_of(Tonal::ReducedRatio)
+        end
+      end
+
+      context "with array on the right hand side" do
+        let(:operand) { [3, 4] }
+
+        it "accepts them" do
+          expect(subject ** operand).to eq Tonal::Ratio.new(1526048117530699,1125899906842624)
+        end
+      end
+
+      context "between ratios and numerics" do
+        context "when numeric is on the right hand side" do
+          let(:numeric) { 3/2r }
+
+          it "coerces the numeric to a ratio and operates successfully" do
+            expect(described_class.new(numeric) ** numeric).to be_a_kind_of(Tonal::Ratio)
+            expect(described_class.new(numeric) ** numeric).to eq 4136820409817315/2251799813685248r
+          end
+        end
+
+        context "when numeric is on the left hand side" do
+          let(:numeric) { 3/2r }
+
+          it "operates successfully" do
+            expect(numeric ** described_class.new(numeric)).to be_a_kind_of(Tonal::Ratio)
+            expect(described_class.new(numeric) ** numeric).to eq 4136820409817315/2251799813685248r
+          end
+        end
+      end
+
+      context "between reduced ratios and numerics" do
+        let(:numeric) { 3/2r }
+
+        context "when numeric is on the right hand side" do
+          it "coerces the numeric to a reduced ratio and operates successfully" do
+            expect(Tonal::ReducedRatio.new(numeric) ** numeric).to be_a_kind_of(Tonal::ReducedRatio)
+            expect(Tonal::ReducedRatio.new(numeric) ** numeric).to eq 4136820409817315/2251799813685248r
+          end
+        end
+
+        context "when numeric is on the left hand side" do
+          it "coerces the numeric and operates successfully" do
+            expect(numeric ** Tonal::ReducedRatio.new(numeric)).to be_a_kind_of(Tonal::ReducedRatio)
+            expect(numeric ** Tonal::ReducedRatio.new(numeric)).to eq 4136820409817315/2251799813685248r
+          end
+        end
       end
     end
 
@@ -509,6 +867,32 @@ RSpec.describe Tonal::Ratio do
       it "returns the provided label" do
         expect(described_class.new(arg1, arg2, label: label).label).to eq label
       end
+    end
+  end
+end
+
+RSpec.describe Tonal::ReducedRatio do
+  describe "#to_basic_ratio" do
+    it "returns a copy of self as an instance of unreduced ratio" do
+      expect(described_class.new(5,4).to_basic_ratio).to be_a_kind_of(Tonal::Ratio)
+    end
+  end
+
+  describe "#interval_with" do
+    it "returns the interval between self (lower) and the given ratio (upper)" do
+      expect(described_class.new(3/2r).interval_with(7/4r)).to eq Tonal::Interval.new(3/2r, 7/4r)
+    end
+  end
+
+  describe "#invert" do
+    it "returns the inverted reduced ratio" do
+      expect(described_class.new(3/2r).invert).to eq 4/3r
+    end
+  end
+
+  describe "#invert!" do
+    it "returns self inverted" do
+      expect(described_class.new(3/2r).invert!).to eq 4/3r
     end
   end
 end

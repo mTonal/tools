@@ -81,7 +81,7 @@ class Tonal::Ratio
 
   # @return [Boolean] if pair of ratios are within the given cents limit
   # @example
-  #   Tonal::Ratio.within_cents?(100, 105, 2) => true
+  #   Tonal::Ratio.within_cents?(100, 105, 2) => false
   # @param cents1
   # @param cents2
   # @param within
@@ -141,7 +141,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Log] Math.log of self in given base
   # @example
-  #   Tonal::Ratio.new(3,2).log(3) => 0.3690702464285425
+  #   Tonal::Ratio.new(3,2).log(3) => 0.37
   # @param base
   #
   def to_log(base=2)
@@ -151,7 +151,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Log2] Math.log2 of self
   # @example
-  #   Tonal::ReducedRatio.new(3,2).to_log2 => 0.5849625007211562
+  #   Tonal::ReducedRatio.new(3,2).to_log2 => 0.58
   #
   def to_log2
     Tonal::Log2.new(logarithmand: to_r)
@@ -169,7 +169,7 @@ class Tonal::Ratio
 
   # @return [Integer] the step of self in the given modulo
   # @example
-  #   Tonal::ReducedRatio.new(3,2).step(12) => 7
+  #   Tonal::ReducedRatio.new(3,2).step(12) => 7\12
   #
   def step(modulo=12)
     Tonal::Step.new(ratio: to_r, modulo: modulo)
@@ -254,7 +254,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio] the mirror of self along the axis (default 1/1)
   # @example
-  #   Tonal::Ratio.new(4,3).mirror => (3/2)
+  #   Tonal::ReducedRatio.new(4,3).mirror => (3/2)
   # @param axis
   #
   def mirror(axis=1/1r)
@@ -299,7 +299,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio] self sheared by given arguments
   # @example
-  #   Tonal::Ratio.new(3,2).shear(1, 3) => (9/11)
+  #   Tonal::Ratio.new(3,2).shear(1, 3) => (14/11)
   # @param a [Numeric]
   # @param b [Numeric]
   #
@@ -368,8 +368,13 @@ class Tonal::Ratio
     prime_divisions.flatten(1).map(&:first).min
   end
 
-  def within_prime?(prime)
-    max_prime <= prime
+  # @return [Boolean] whether self's max prime is within the given number
+  # @example
+  #   Tonal::Ratio.new(31/30r).max_prime_within?(7) => false
+  # @param number to compare max prime against
+  #
+  def max_prime_within?(number)
+    max_prime <= number
   end
 
   # @return [Integer] the product complexity of self
@@ -383,7 +388,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Log2] the log product complexity of self
   # @example
-  #   Tonal::ReducedRatio.new(3/2r).tenney_height => 2.584962500721156
+  #   Tonal::ReducedRatio.new(3/2r).tenney_height => 2.58
   #
   def tenney_height
     Tonal::Log2.new(logarithmand: benedetti_height)
@@ -402,7 +407,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Log2] the log of Weil height
   # @example
-  #   Tonal::ReducedRatio.new(3/2r).log_weil_height => 1.5849625007211563
+  #   Tonal::ReducedRatio.new(3/2r).log_weil_height => 1.58
   #
   def log_weil_height
     Tonal::Log2.new(logarithmand: weil_height)
@@ -418,33 +423,33 @@ class Tonal::Ratio
 
   # @return [Tonal::Cents] the cents difference between self and its step in the given modulo
   # @example
-  #   Tonal::ReducedRatio.new(3,2).efficiency(12) => -1.955000865387433
-  # @param modulo
+  #   Tonal::ReducedRatio.new(3,2).efficiency(12) => -1.96
+  # @param modulo against which the difference of self is compared
   #
   def efficiency(modulo)
-    # We want the efficiency from the ratio, instead of from the step.
-    # If step efficiency is X cents, then ratio efficiency is -X cents.
+    # We want the efficiency from the ratio (self).
+    # If the step efficiency is X cents, then the ratio efficiency is -X cents.
     step(modulo).efficiency * -1.0
   end
 
   # @return [Array] the results of ratio dividing and multiplying self
   # @example
   #   Tonal::ReducedRatio.new(3/2r).div_times(5/4r) => [(6/5), (15/8)]
-  # @param ratio
+  # @param other_ratio to divide and multiple on self
   #
-  def div_times(ratio)
-    ratio = ratio.ratio
-    [self / ratio, self * ratio]
+  def div_times(other_ratio)
+    other_ratio = self.class.new(other_ratio)
+    [self / other_ratio, self * other_ratio]
   end
 
   # @return [Array] the results of ratio subtracted and added to self
   # @example
   #   Tonal::ReducedRatio.new(3/2r).plus_minus(5/4r) => [(1/1), (11/8)]
-  # @param ratio
+  # @param other_ratio to add and subtract from self
   #
-  def plus_minus(ratio)
-    ratio = ratio.ratio
-    [self - ratio, self + ratio]
+  def plus_minus(other_ratio)
+    other_ratio = self.class.new(other_ratio)
+    [self - other_ratio, self + other_ratio]
   end
   alias :min_plus :plus_minus
 
@@ -484,11 +489,11 @@ class Tonal::Ratio
   end
 
   def *(rhs)
-    self.class.new(antecedent * rhs.antecedent, consequent * rhs.consequent)
+    operate(rhs, :*)
   end
 
   def /(rhs)
-    self.class.new(antecedent * rhs.consequent, consequent * rhs.antecedent)
+    operate(rhs, :/)
   end
 
   def **(rhs)
@@ -517,6 +522,18 @@ class Tonal::Ratio
   #
   def lcm(lhs)
     [self.denominator, lhs.denominator].lcm
+  end
+
+  # @return [Tonal::Interval] between ratio (upper) and self (lower)
+  # @example
+  #   Tonal::ReducedRatio.new(133).interval_with(3/2r)
+  #   => (192/133) ((3/2) / (133/128))
+  # @param antecedent
+  # @param consequent
+  #
+  def interval_with(antecedent, consequent=nil)
+    r = self.class.new(antecedent, consequent)
+    Tonal::Interval.new(self, r)
   end
 
   # @return [Integer] the difference between antecedent and consequent
@@ -579,32 +596,32 @@ class Tonal::Ratio
     end
   end
 
+  def coerce(other)
+    [self.class.new(other), self]
+  end
+
   def operate(rhs, op)
+    klass = (rhs.class == Tonal::ReducedRatio || self.class == Tonal::ReducedRatio) ? Tonal::ReducedRatio : Tonal::Ratio
+
     case op
-    when :+, :-
-      case rhs
-      when Tonal::Ratio
-        self.class.new((antecedent * rhs.consequent).send(op, rhs.antecedent * consequent).abs, consequent * rhs.consequent)
-      when Rational
-        self.class.new((antecedent * rhs.denominator).send(op, rhs.numerator * consequent).abs, consequent * rhs.denominator)
-      when Array
-        self.class.new((antecedent * rhs[1]).send(op, rhs[0] * consequent), consequent * rhs[1])
-      else
-        r = Rational(rhs)
-        self.class.new((antecedent * r.denominator).send(op, r.numerator * consequent), consequent * r.denominator)
-      end
     when :*
-      case rhs
-      when Rational
-        self.class.new(antecedent.send(op, rhs.numerator), consequent.send(op, rhs.denominator))
-      when Array
-        self.class.new(antecedent.send(op, rhs[0]), consequent.send(op, rhs[1]))
-      else
-        r = Rational(rhs)
-        self.class.new(antecedent.send(op, r.numerator), consequent.send(op, r.denominator))
-      end
+      klass.new(antecedent * rhs.antecedent, consequent * rhs.consequent)
+    when :/
+      klass.new(antecedent * rhs.consequent, consequent * rhs.antecedent)
+    when :+, :-
+      lcm = self.denominator.lcm(rhs.denominator)
+      left = (self.to_r * lcm).numerator
+      right = (rhs.to_r * lcm).numerator
+      klass.new((left).send(op, right).abs, lcm)
     when :**
-      self.class.new(antecedent.send(op, rhs), consequent.send(op, rhs))
+      klass.new(Rational(antecedent, consequent) ** rhs.to_r)
     end
   end
 end
+
+module Ratio
+  def self.[](u, l=nil)
+    Tonal::Ratio.new(u, l)
+  end
+end
+

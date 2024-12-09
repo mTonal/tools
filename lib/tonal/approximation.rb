@@ -35,7 +35,7 @@ class Tonal::Ratio
       Set.new(ratio: ratio) do |ratios|
         ContinuedFraction.new(antecedent.to_f/consequent, conv_limit).convergents.each do |convergent|
           ratio2 = ratio.class.new(convergent.numerator,convergent.denominator)
-          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && ratio2.within_prime?(max_prime)
+          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && ratio2.max_prime_within?(max_prime)
           break if ratios.length >= depth
         end
       end
@@ -55,7 +55,7 @@ class Tonal::Ratio
       Set.new(ratio: ratio) do |ratios|
         FractionTree.node(to_f).path.each do |node|
           ratio2 = ratio.class.new(node.number)
-          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && ratio2.within_prime?(max_prime)
+          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && ratio2.max_prime_within?(max_prime)
           break if ratios.length >= depth
         end
       end
@@ -77,7 +77,7 @@ class Tonal::Ratio
         n = 1
         while true do
           ratio2 = ratio.class.superparticular(n, factor: ratio.to_r, superpart:)
-          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && ratio2.within_prime?(max_prime) && ratio2 != ratio
+          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && ratio2.max_prime_within?(max_prime) && ratio2 != ratio
           break if ratios.length >= depth
           n += 1
         end
@@ -105,7 +105,7 @@ class Tonal::Ratio
           while boundary <= max_boundary
             vacinity = ratio.respond_to?(:to_basic_ratio) ? to_basic_ratio.scale(scale) : ratio.scale(scale)
             self.class.neighbors(away: boundary, vacinity: vacinity).each do |neighbor|
-              ratios << neighbor if ratio.class.within_cents?(self_in_cents, neighbor.to_cents, within) && neighbor.within_prime?(max_prime) && neighbor != ratio
+              ratios << neighbor if ratio.class.within_cents?(self_in_cents, neighbor.to_cents, within) && neighbor.max_prime_within?(max_prime) && neighbor != ratio
             end
             boundary += 1
           end
