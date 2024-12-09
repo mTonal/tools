@@ -70,7 +70,7 @@ class Tonal::Cents
   # @return
   #   [Tonal::Cents] nearest hundredth cent difference
   # @example
-  #   Tonal::Cents.new(701.9550008653874).nearest_hundredth_difference => 1.955000865387433
+  #   Tonal::Cents.new(cents: 701.9550008653874).nearest_hundredth_difference => 1.96
   #
   def nearest_hundredth_difference
     self.class.new(cents: (value - nearest_hundredth))
@@ -108,7 +108,7 @@ class Tonal::Cents
   def derive_log(cents: nil, ratio: nil, log: nil)
     return Tonal::Log2.new(logarithm: cents / CENT_SCALE) if cents
     return Tonal::Log2.new(logarithmand: ratio) if ratio
-    log.kind_of?(Tonal::Log2) ? log : Tonal::Log2.new(logarithm: log)
+    log.kind_of?(Tonal::Log) ? log : Tonal::Log2.new(logarithm: log)
   end
 
   def derive_ratio(log: nil, ratio: nil)

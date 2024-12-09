@@ -8,9 +8,21 @@ class Tonal::Interval
 
   INTERVAL_OF_EQUIVALENCE = 2/1r
 
-  def initialize(upper_ratio, lower_ratio)
-    @lower_ratio = lower_ratio.ratio
-    @upper_ratio = upper_ratio.ratio
+  # @return [Tonal::Interval] the interval of the given ratios
+  # @example
+  #   Tonal::Interval.new(2,3) => (3/2) ((3/2) / (1/1))
+  # @param args two arguments representing ratios or four arguments representing two pairs of numerator/denominator
+  # @param reduced boolean determining whether to use Tonal::ReducedRatio or Tonal::Ratio
+  #
+  def initialize(*args, reduced: true)
+    klass = reduced ? Tonal::ReducedRatio : Tonal::Ratio
+    raise(ArgumentError, "Two or four arguments required. Either two ratios, or two pairs of numerator, denominator", caller[0]) unless [2, 4].include?(args.size)
+    @lower_ratio, @upper_ratio = case args.size
+                                 when 2
+                                   [klass.new(args[0].antecedent, args[0].consequent), klass.new(args[1].antecedent, args[1].consequent)]
+                                 when 4
+                                   [klass.new(args[0],args[1]), klass.new(args[2], args[3])]
+                                 end
     @interval = @upper_ratio / @lower_ratio
   end
   alias :ratio :interval
@@ -30,10 +42,16 @@ class Tonal::Interval
   end
 
   def inspect
-    "#{self.to_r} (#{upper.to_r} / #{lower.to_r})"
+    "#{interval} (#{upper} / #{lower})"
   end
 
   def <=>(rhs)
     interval.to_r <=> rhs.interval.to_r
+  end
+end
+
+module Interval
+  def self.[](l, u, reduced=true)
+    Tonal::Interval.new(l, u, reduced:)
   end
 end

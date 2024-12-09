@@ -88,7 +88,7 @@ RSpec.describe Tonal::Ratio::Approximation do
         it "returns a set of ratios within 5¢ of ratio and with max prime of 23" do
           expect(ratios.entries).to eq [(175/117r), (176/117r)]
           expect(ratios.all?{|r| Tonal::Ratio.within_cents?(r.to_cents, ratio_in_cents, cents_tolerance)}).to be true
-          expect(ratios.all?{|r| r.within_prime?(max_prime) }).to be true
+          expect(ratios.all?{|r| r.max_prime_within?(max_prime) }).to be true
         end
       end
     end

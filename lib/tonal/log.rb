@@ -52,7 +52,7 @@ class Tonal::Log
 
   # @return [Tonal::Cents] the cents scale logarithm
   # @example
-  #   Tonal::Log.new(logarithmand: 3/2r, base: 2).to_cents => 701.9550008653874
+  #   Tonal::Log.new(logarithmand: 3/2r, base: 2).to_cents => 701.96
   # @see Tonal::Cents
   #
   def to_cents(precision: Tonal::Cents::PRECISION)
@@ -61,7 +61,7 @@ class Tonal::Log
 
   # @return [Tonal::Step] the nearest step in the given modulo
   # @example
-  #   Tonal::Log.new(3/2r, base: 2).step(12) => 7\12
+  #   Tonal::Log.new(logarithmand: 3/2r, base: 2).step(12) => 7\12
   #
   def step(modulo)
     Tonal::Step.new(modulo: modulo, log: self)
@@ -69,10 +69,10 @@ class Tonal::Log
 
   # @return [String] the string representation of Tonal::Log
   # @example
-  #   Tonal::Log.new(3/2r, base: 2).inspect => "0.5849625007211562"
+  #   Tonal::Log.new(logarithmand: 3/2r, base: 2).inspect => "0.58"
   #
   def inspect
-    "#{logarithm}"
+    "#{logarithm.round(2)}"
   end
 
   def <=>(rhs)

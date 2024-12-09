@@ -40,7 +40,7 @@ class Tonal::Step
   # @return [Rational] of the step
   # @example
   #   Tonal::Step.new(ratio: 3/2r, modulo: 31).step_to_r
-  #   => 6735213777669305/4503599627370496
+  #   => (6735213777669305/4503599627370496)
   #
   def step_to_r
     tempered.to_r
@@ -50,7 +50,7 @@ class Tonal::Step
   # @return [Rational] of the ratio
   # @example
   #   Tonal::Step.new(ratio: 3/2r, modulo: 31).ratio_to_r
-  #   => 3/2
+  #   => (3/2)
   #
   def ratio_to_r
     ratio.to_r
@@ -81,6 +81,7 @@ class Tonal::Step
   #   => 5.19
   #
   def efficiency
+    # We want the efficiency from the step (self).
     ratio_to_cents - step_to_cents
   end
 
@@ -98,7 +99,7 @@ class Tonal::Step
     if ratio
       [Tonal::ReducedRatio.new(ratio), Tonal::Log2.new(logarithmand: ratio)]
     elsif log
-      if log.kind_of?(Tonal::Log2)
+      if log.kind_of?(Tonal::Log)
         [log.logarithmand, log]
       else
         lg = Tonal::Log2.new(logarithm: log)

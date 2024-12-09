@@ -162,7 +162,7 @@ RSpec.describe "Extensions" do
 
     describe "#efficiency" do
       it "returns the difference between self and its step for a given modulo" do
-        expect((3/2r).efficiency(12)).to eq -1.9600000000000364
+        expect((3/2r).efficiency(12)).to eq -1.96
       end
     end
 
@@ -254,6 +254,12 @@ RSpec.describe "Extensions" do
   end
 
   describe "Array extensions" do
+    describe "#to_r" do
+      it "returns a Rational from the first and last elements of array" do
+        expect([4,3].to_r).to eq 4/3r
+      end
+    end
+
     describe "#rpad" do
       it "grows array to the right up to size n, with value v" do
         expect([2, 3].rpad(4, 12)).to eq [2, 3, 12, 12]

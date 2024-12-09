@@ -17,4 +17,10 @@ module Tonal
   require "tonal/interval"
   require "tonal/step"
   require "tonal/extensions"
+  require "tonal/irb_helpers"
+end
+
+if ENV["MTONAL_IRB_HELPERS"]
+  Tonal.include_irb_helpers
+  puts 'mTonal IRB helpers have been enabled.'
 end
