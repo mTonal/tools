@@ -31,12 +31,13 @@ module Tonal
     end
   end
 
-  # @example
-  #   Tonal.include_irb_helpers
   # @note
-  #   Invoking will include the IRB helper methods "r", "rr", "i".
-  #   These methods represent Tonal::Ratio, Tonal::ReducedRatio and Tonal::Interval respectively
-  #   To activate automatically, put the line: ENV["MTONAL_IRB_HELPERS"] = "1" in your ~/.irbrc file
+  #   Intended for activation from +~/.irbrc+, by placing: +ENV["MTONAL_IRB_HELPERS" ] = "1"+, in the file
+  #
+  #   Invoking this command from the IRB will add the helper methods: +r+, +rr+, +i+ in +main+.
+  #   These methods represent {Tonal::Ratio}, {Tonal::ReducedRatio} and {Tonal::Interval} respectively.
+  #
+  # @see Tonal::IRBHelpers
   #
   def self.include_irb_helpers
     Object.include(IRBHelpers)
