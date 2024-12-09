@@ -252,7 +252,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<p>Of integers that are n-smooth with self Adapted from <a href="https://rosettacode.org/wiki/N-smooth_numbers#Ruby">rosettacode.org/wiki/N-smooth_numbers#Ruby</a>.</p>
+<p>Of integers that are n-smooth with self.</p>
 </div></span>
   
 </li>
@@ -366,10 +366,10 @@
       <pre class="lines">
 
 
-221</pre>
+225</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 221</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 225</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_coprime?'>coprime?</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_gcd'>gcd</span><span class='lparen'>(</span><span class='id identifier rubyid_other'>other</span><span class='rparen'>)</span> <span class='op'>==</span> <span class='int'>1</span></pre>
     </td>
@@ -429,16 +429,16 @@
       <pre class="lines">
 
 
-227
-228
-229
-230
 231
 232
-233</pre>
+233
+234
+235
+236
+237</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 227</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 231</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_coprimes'>coprimes</span>
   <span class='lbracket'>[</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_coprime_set'>coprime_set</span><span class='op'>|</span>
@@ -504,10 +504,10 @@
       <pre class="lines">
 
 
-213</pre>
+217</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 213</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 217</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_factorial'>factorial</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='int'>2</span><span class='op'>..</span><span class='kw'>self</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_reduce'>reduce</span><span class='lparen'>(</span><span class='int'>1</span><span class='comma'>,</span> <span class='symbol'>:*</span><span class='rparen'>)</span></pre>
     </td>
@@ -567,10 +567,10 @@
       <pre class="lines">
 
 
-201</pre>
+205</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 201</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 205</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max_prime'>max_prime</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_prime_division'>prime_division</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:first</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span></pre>
     </td>
@@ -630,10 +630,10 @@
       <pre class="lines">
 
 
-207</pre>
+211</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 207</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 211</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_min_prime'>min_prime</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_prime_division'>prime_division</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:first</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span></pre>
     </td>
@@ -653,7 +653,15 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Returns of integers that are n-smooth with self Adapted from <a href="https://rosettacode.org/wiki/N-smooth_numbers#Ruby">rosettacode.org/wiki/N-smooth_numbers#Ruby</a>.</p>
+  <div class="note notetag">
+    <strong>Note:</strong>
+    <div class='inline'>
+<p>Adapted from <a href="https://rosettacode.org/wiki/N-smooth_numbers#Ruby">rosettacode.org/wiki/N-smooth_numbers#Ruby</a></p>
+</div>
+  </div>
+
+
+<p>Returns of integers that are n-smooth with self.</p>
 
 
   </div>
@@ -698,7 +706,7 @@
       
         &mdash;
         <div class='inline'>
-<p>of integers that are n-smooth with self Adapted from <a href="https://rosettacode.org/wiki/N-smooth_numbers#Ruby">rosettacode.org/wiki/N-smooth_numbers#Ruby</a></p>
+<p>of integers that are n-smooth with self</p>
 </div>
       
     </li>
@@ -711,10 +719,6 @@
       <pre class="lines">
 
 
-249
-250
-251
-252
 253
 254
 255
@@ -728,10 +732,14 @@
 263
 264
 265
-266</pre>
+266
+267
+268
+269
+270</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 249</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 253</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_nsmooth'>nsmooth</span><span class='lparen'>(</span><span class='id identifier rubyid_limit'>limit</span><span class='op'>=</span><span class='int'>2</span><span class='rparen'>)</span>
   <span class='lparen'>(</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span> <span class='op'>*</span> <span class='id identifier rubyid_limit'>limit</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_ns'>ns</span><span class='op'>|</span>
@@ -812,10 +820,10 @@
       <pre class="lines">
 
 
-239</pre>
+243</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 239</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 243</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_phi'>phi</span> <span class='op'>=</span> <span class='id identifier rubyid_coprimes'>coprimes</span><span class='period'>.</span><span class='id identifier rubyid_count'>count</span></pre>
     </td>
@@ -828,9 +836,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Nov  9 16:11:23 2024 by
+  Generated on Thu Dec 19 19:56:39 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.2).
+  0.9.37 (ruby-3.3.6).
 </div>
 
     </div>

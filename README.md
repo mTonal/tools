@@ -3,13 +3,20 @@
 
 A collection of methods, tools, utilities and conveniences for microtonal music making and analysis.
 
+
 ## Installing
 
     gem install tonal-tools
 
+## Usage
+
+See https://mtonal.github.io/tools/
+
+
 ## Authors
 
 [Jose Hales-Garcia](mailto:jose@halesgarcia.com)
+
 
 ## License
 

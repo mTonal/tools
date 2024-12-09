@@ -852,12 +852,12 @@
       <pre class="lines">
 
 
-87
 88
-89</pre>
+89
+90</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='op'>+</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='label'>step:</span> <span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span> <span class='op'>%</span> <span class='id identifier rubyid_modulo'>modulo</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='label'>modulo:</span> <span class='id identifier rubyid_modulo'>modulo</span><span class='rparen'>)</span>
@@ -882,12 +882,12 @@
       <pre class="lines">
 
 
-92
 93
-94</pre>
+94
+95</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='op'>&lt;=&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_kind_of?'>kind_of?</span><span class='lparen'>(</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='rparen'>)</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_modulo'>modulo</span> <span class='op'>&lt;=&gt;</span> <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_modulo'>modulo</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_log'>log</span> <span class='op'>&lt;=&gt;</span> <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_log'>log</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_step'>step</span> <span class='op'>&lt;=&gt;</span> <span class='id identifier rubyid_rhs'>rhs</span><span class='period'>.</span><span class='id identifier rubyid_step'>step</span>
@@ -1020,13 +1020,15 @@
 
 83
 84
-85</pre>
+85
+86</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/tonal/step.rb', line 83</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_efficiency'>efficiency</span>
-  <span class='id identifier rubyid_ratio_to_cents'>ratio_to_cents</span> <span class='op'>-</span> <span class='id identifier rubyid_step_to_cents'>step_to_cents</span>
+  <span class='comment'># We want the efficiency from the step (self).
+</span>  <span class='id identifier rubyid_ratio_to_cents'>ratio_to_cents</span> <span class='op'>-</span> <span class='id identifier rubyid_step_to_cents'>step_to_cents</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -1159,7 +1161,7 @@
     
       
       <pre class="example code"><code>Tonal::Step.new(ratio: 3/2r, modulo: 31).ratio_to_r
-=&gt; 3/2</code></pre>
+=&gt; (3/2)</code></pre>
     
   </div>
 
@@ -1303,7 +1305,7 @@
     
       
       <pre class="example code"><code>Tonal::Step.new(ratio: 3/2r, modulo: 31).step_to_r
-=&gt; 6735213777669305/4503599627370496</code></pre>
+=&gt; (6735213777669305/4503599627370496)</code></pre>
     
   </div>
 
@@ -1352,9 +1354,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Nov  9 16:11:22 2024 by
+  Generated on Thu Dec 19 19:56:39 2024 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.2.2).
+  0.9.37 (ruby-3.3.6).
 </div>
 
     </div>
