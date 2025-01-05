@@ -4,6 +4,8 @@ class Tonal::Ratio
 
   def_delegators :@approximation, :neighborhood
 
+  PRECISION = 2
+
   attr_reader :antecedent, :consequent, :equave, :reduced_antecedent, :reduced_consequent
 
   # @return [Tonal::Ratio]
@@ -180,7 +182,7 @@ class Tonal::Ratio
   #   Tonal::Ratio.new(3,2).period_degrees => 210.59
   # @param round
   #
-  def period_degrees(round: 2)
+  def period_degrees(round: PRECISION)
     (360.0 * Math.log(to_f, equave)).round(round)
   end
 
@@ -189,7 +191,7 @@ class Tonal::Ratio
   #   Tonal::Ratio.new(3,2).period_radians => 3.68
   # @param round
   #
-  def period_radians(round: 2)
+  def period_radians(round: PRECISION)
     (2 * Math::PI * Math.log(to_f, equave)).round(round)
   end
 
@@ -313,7 +315,7 @@ class Tonal::Ratio
   #    Tonal::Ratio.new(3,2).planar_degrees => 33.69
   # @param round
   #
-  def planar_degrees(round: 2)
+  def planar_degrees(round: PRECISION)
     (Math.atan2(consequent, antecedent) * 180/Math::PI).round(round)
   end
 
@@ -322,7 +324,7 @@ class Tonal::Ratio
   #   Tonal::Ratio.new(3,2).planar_radians => 0.59
   # @param round
   #
-  def planar_radians(round: 2)
+  def planar_radians(round: PRECISION)
     Math.atan2(consequent, antecedent).round(round)
   end
 
@@ -468,7 +470,7 @@ class Tonal::Ratio
     # Return label, if defined; or,
     # Return the "antecedent/consequent", if antecedent is less than 7 digits long; or
     # Return the floating point representation rounded to 2 digits of precision
-    (@label || ((Math.log10(antecedent).to_i + 1) <= 6 ? "#{antecedent}/#{consequent}" : to_f.round(Tonal::Cents::PRECISION))).to_s
+    (@label || ((Math.log10(antecedent).to_i + 1) <= 6 ? "#{antecedent}/#{consequent}" : to_f.round(PRECISION))).to_s
   end
 
   # @return [String] the string representation of Tonal::Ratio
