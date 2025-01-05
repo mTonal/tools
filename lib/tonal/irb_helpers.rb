@@ -12,7 +12,7 @@ module Tonal
 
     # @return [Tonal::ReducedRatio] a reduced ratio
     # @example
-    #   r(3,3) => (1/1)
+    #   rr(3,3) => (1/1)
     # @param arg1 the ratio if only argument provided, or the numerator if two argments are provided
     # @param arg2 the denominator when two arguments are provided
     #

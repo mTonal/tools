@@ -4,6 +4,8 @@ class Tonal::Log
 
   def_delegators :@logarithmand, :ratio, :to_ratio
 
+  PRECISION = 2
+
   attr_reader :logarithmand, :logarithm, :base
 
   # @return [Tonal::Log]
@@ -72,7 +74,7 @@ class Tonal::Log
   #   Tonal::Log.new(logarithmand: 3/2r, base: 2).inspect => "0.58"
   #
   def inspect
-    "#{logarithm.round(2)}"
+    "#{logarithm.round(PRECISION)}"
   end
 
   def <=>(rhs)
