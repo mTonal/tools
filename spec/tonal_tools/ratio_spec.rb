@@ -869,6 +869,17 @@ RSpec.describe Tonal::Ratio do
       end
     end
   end
+
+  describe "#label=" do
+    let(:arg2) { nil }
+    let(:arg1) { 2**(1.0/12) }
+    let(:label) { "2^(1/12)" }
+
+    it "allows changing the label" do
+      subject.label = label
+      expect(subject.label).to eq label
+    end
+  end
 end
 
 RSpec.describe Tonal::ReducedRatio do

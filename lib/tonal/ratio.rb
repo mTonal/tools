@@ -8,6 +8,8 @@ class Tonal::Ratio
 
   attr_reader :antecedent, :consequent, :equave, :reduced_antecedent, :reduced_consequent
 
+  attr_accessor :label
+
   # @return [Tonal::Ratio]
   # @example
   #   Tonal::Ratio.new(3,2) => (3/2)
