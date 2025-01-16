@@ -99,6 +99,7 @@ class Tonal::Ratio
   def ratio
     self
   end
+  alias :to_ratio :ratio
 
   # @return [Tonal::Ratio::Approximation] self's approximation instance
   #
