@@ -246,6 +246,12 @@ RSpec.describe "Extensions" do
       end
     end
 
+    describe "#edo" do
+      it "returns the numeric 2**(self/modulo)" do
+        expect(1.edo(12)).to eq 1.0594630943592953
+      end
+    end
+
     describe "#factorial" do
       it "return the factorial of self" do
         expect(5.factorial).to eq 120

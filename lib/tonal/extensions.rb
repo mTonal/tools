@@ -232,6 +232,13 @@ end
 class Integer
   alias :prime_factors :prime_division
 
+  # @return [Tonal::ReducedRatio] the ratio 2**(self/modulo)
+  # @example
+  #   1.edo(12) => 1.06
+  # @param modulo
+  #
+  def edo(modulo) = (2**(Rational(self,modulo))).to_reduced_ratio
+
   # @return [Integer] the maximum prime factor of self
   # @example
   #  72.max_prime => 3

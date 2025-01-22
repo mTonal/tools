@@ -281,6 +281,7 @@ class Tonal::Ratio
   # denominator mapped on y-axis
   # ==================================
   #
+
   # @return [Tonal::Ratio] with the antecedent and consequent translated by x and y
   # @example
   #   Tonal::Ratio.new(3,2).translate(3,3) => (6/5)
