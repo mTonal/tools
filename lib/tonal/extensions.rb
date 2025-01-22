@@ -198,6 +198,12 @@ end
 class Integer
   alias :prime_factors :prime_division
 
+  # @return [Float] the ratio 2**(self/modulo)
+  # @example
+  #   1.edo(12) => 1.0594630943592953
+  #
+  def edo(modulo) = 2**(Rational(self,modulo))
+
   # @return [Integer] the maximum prime factor of self
   # @example
   #  72.max_prime => 3
