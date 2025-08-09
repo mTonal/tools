@@ -43,14 +43,14 @@ class Numeric
   # @example
   #   (2**(1.0/12)).ratio => (4771397596969315/4503599627370496)
   #
-  def to_ratio(reduced: true, equave: 2/1r) = reduced ? Tonal::ReducedRatio.new(self, equave: equave) : Tonal::Ratio.new(self, equave: equave)
+  def to_ratio(reduced: false, equave: 2/1r) = reduced ? Tonal::ReducedRatio.new(self, equave: equave) : Tonal::Ratio.new(self, equave: equave)
   alias :ratio :to_ratio
 
   # @return [Float], the degrees on a circle of self
   # @example
   #   (2**(6.0/12)).period_degrees => 180.0
   #
-  def period_degrees = self.ratio.period_degrees
+  def period_degrees = ratio.period_degrees
 
   # @return [Tonal::Log] the log of self to the given base
   # @example
@@ -82,7 +82,7 @@ class Numeric
   # @example
   #   (3/2r).to_cents => 701.96
   #
-  def to_cents = self.log2.to_cents
+  def to_cents = Tonal::Cents.new(ratio: self)
 
   # @return [Tonal::Hertz] of self
   #
@@ -94,38 +94,38 @@ class Numeric
   #   (5/4r).step(12) => 4\12
   # @param modulo
   #
-  def step(modulo=12) = to_log2.step(modulo)
+  def step(modulo=12) = Tonal::Step.new(ratio: self, modulo: modulo)
 
   # @return [Float] the log product complexity of self
   # @example
   #   (3/2r).benedetti_height => 6
   #
-  def benedetti_height = self.ratio.benedetti_height
+  def benedetti_height = ratio.benedetti_height
   alias :product_complexity :benedetti_height
 
   # @return [Integer] the product complexity of self
   # @example
   #   (3/2r).tenney_height => 2.58
   #
-  def tenney_height = self.ratio.tenney_height
+  def tenney_height = ratio.tenney_height
   alias :log_product_complexity :tenney_height
 
   # @return [Integer] the Weil height
   # @example
   #   (3/2r).weil_height => 3
   #
-  def weil_height = self.ratio.weil_height
+  def weil_height = ratio.weil_height
 
   # @return [Tonal::Log2] the log of Weil height
   # @example
   #   (3/2r).log_weil_height => 1.58
   #
-  def log_weil_height = self.ratio.log_weil_height
+  def log_weil_height = ratio.log_weil_height
 
   # @return [Integer] the Wilson height
   # @example (14/9r).wilson_height => 13
   #
-  def wilson_height(reduced: true, equave: 2/1r, prime_rejects: [2]) = self.ratio(reduced: reduced, equave: equave).wilson_height(prime_rejects: prime_rejects)
+  def wilson_height(reduced: false, equave: 2/1r, prime_rejects: [2]) = ratio(reduced: reduced, equave: equave).wilson_height(prime_rejects: prime_rejects)
 
   # @return [Float] the cents difference between self and its step in the given modulo
   # @example
@@ -133,21 +133,30 @@ class Numeric
   # @param modulo
   #
   # We want the efficiency from the ratio (self)
-  def efficiency(modulo) = to_ratio.efficiency(modulo)
+  def efficiency(modulo, reduced: false) = ratio(reduced: reduced).efficiency(modulo)
 
   # @return [Tonal::Interval] beween self (upper) and ratio (lower)
   # @example
   #   (133).interval_with(3/2r) => 133/96 (133/128 / 3/2)
-  # @param ratio
+  # @param other_ratio
   #
-  def interval_with(ratio) = Tonal::Interval.new(self.ratio, ratio)
+  def interval_with(other_ratio) = Tonal::Interval.new(ratio, other_ratio)
+
+  # @return [Tonal::Cents] difference between ratio (upper) and self (lower)
+  # @example
+  #   (133).cents_difference_with(3/2r)
+  #   => 635.62
+  # @param other_ratio
+  #
+  def cents_difference_with(other_ratio) = interval_with(other_ratio).to_cents
 
   # @return [Vector], self represented as a prime vector
   # @example
   #   (3/2r).prime_vector => Vector[-1, 1]
   #
-  def prime_vector = self.ratio.prime_vector
+  def prime_vector(reduced: false) = ratio(reduced: reduced).prime_vector
   alias :monzo :prime_vector
+  alias :prime_exponent_vector :prime_vector
 
   # @return [Array], self decomposed into its prime factors
   # @example
@@ -178,14 +187,14 @@ class Numeric
   # @example
   #  (7/4r).negative => (12/7)
   #
-  def negative = self.ratio.negative
+  def negative = ratio.negative
 
   # @return [Tonal::ReducedRatio], the ratio rotated on the given axis, default 1/1
   # @example
   #   (3/2r).mirror => (4/3)
   # @param axis around which self is mirrored
   #
-  def mirror(axis=1/1r) = self.ratio.mirror(axis)
+  def mirror(axis=1/1r) = ratio.mirror(axis)
 
   # @return [Integer] the floor of the log (to the given base) of self
   # @example
@@ -267,6 +276,30 @@ class Integer
         end
       end
     end
+  end
+
+  # @return [Array] of signature of self
+  # @example
+  #   5.signature
+  #   => [1]
+  #
+  def prime_signature
+    raise ArgumentError, "applicable only to positive integers" if self <= 0
+
+    n = self
+    exponents = []
+    i = 2
+    while i * i <= n
+      count = 0
+      while n % i == 0
+        n /= i
+        count += 1
+      end
+      exponents << count if count > 0
+      i += 1
+    end
+    exponents << 1 if n > 1  # n is prime at this point
+    exponents.sort
   end
 end
 
@@ -351,6 +384,26 @@ class Array
   #
   def ratio_from_prime_divisions(reduced: false) = reduced ? Tonal::ReducedRatio.new(Prime.int_from_prime_division(self.first), Prime.int_from_prime_division(self.last)) : Tonal::Ratio.new(Prime.int_from_prime_division(self.first), Prime.int_from_prime_division(self.last))
 
+  # @return [Array] with the EDO and its error best fitting the given ratios contained in self
+  # @example
+  #   [3/2r].best_fitting_edo) => [53, 0.07]
+  #   [7/4r, 3/2r].best_fitting_edo => [41, 3.46]
+  # @param min_edo [Integer] the mininum edo to search
+  # @param max_edo [Integer] the maximum edo to search
+  #
+  def best_fitting_edo(min_edo: 5, max_edo: 72)
+    (min_edo..max_edo).map do |edo|
+      step_size = 1200.0 / edo
+
+      total_error_for_edo = to_cents.map do |r_cents|
+        quantized = (r_cents / step_size).round * step_size
+        (r_cents - quantized).abs
+      end.sum
+
+      [edo, total_error_for_edo.round(2)]
+    end.min_by{|_, error| error}
+  end
+
   # @return [Array] translated by value
   # @example
   #   [0.24184760813024642, 0.49344034900361244, 0.07231824070126536].translate(-0.07231824070126536) = [0.16952936742898106, 0.4211221083023471, 0.0]
@@ -403,7 +456,7 @@ class Vector
   # @param reduced
   # @param equave
   #
-  def to_ratio(reduced: true, equave: 2/1r) = reduced ? Tonal::ReducedRatio.new(*self, equave: equave) : Tonal::Ratio.new(*self, equave: equave)
+  def to_ratio(reduced: false, equave: 2/1r) = reduced ? Tonal::ReducedRatio.new(*self, equave: equave) : Tonal::Ratio.new(*self, equave: equave)
   alias :ratio :to_ratio
 end
 

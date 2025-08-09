@@ -195,7 +195,7 @@ RSpec.describe Tonal::Ratio do
     end
 
     describe "#fraction_reduce" do
-      subject { described_class.new(6,9) }
+      subject { described_class.new(6, 9) }
 
       it "reduces to simplest rational form" do
         expect(subject).to eq described_class.new(6,9)
@@ -204,7 +204,7 @@ RSpec.describe Tonal::Ratio do
     end
 
     describe "#equave_reduce" do
-      subject { described_class.new(6,9) }
+      subject { described_class.new(6, 9) }
 
       it "octave reduces by default" do
         expect(subject.equave_reduce).to eq described_class.new(4,3)
@@ -298,6 +298,24 @@ RSpec.describe Tonal::Ratio do
       it "returns the prime divisions of antecedent and consequent" do
         expect(subject.prime_divisions).to eq [[[3, 1]], [[2, 1]]]
       end
+
+      context "with integers" do
+        let(:arg1) { 60 }
+        let(:arg2) { nil }
+
+        it "returns the prime divisions of the integer, with an empty denominator array" do
+          expect(subject.prime_divisions).to eq [[[2, 2], [3, 1], [5, 1]], []]
+        end
+      end
+
+      context "with 1" do
+        let(:arg1) { 1 }
+        let(:arg2) { nil }
+
+        it "returns an array of empty arrays" do
+          expect(subject.prime_divisions).to eq [[], []]
+        end
+      end
     end
 
     describe "#max_prime" do
@@ -315,6 +333,33 @@ RSpec.describe Tonal::Ratio do
     describe "#prime_vector" do
       it "returns the prime vector of the ratio" do
         expect(subject.prime_vector).to eq Vector[-1, 1]
+      end
+
+      context "with integers" do
+        let(:arg1) { 60 }
+        let(:arg2) { nil }
+
+        it "returns the prime vector" do
+          expect(subject.prime_vector).to eq Vector[2, 1, 1]
+        end
+      end
+
+      context "with one in the numerator" do
+        let(:arg1) { 1 }
+        let(:arg2) { 60 }
+
+        it "returns the prime vector" do
+          expect(subject.prime_vector).to eq Vector[-2, -1, -1]
+        end
+      end
+
+      context "with 1" do
+        let(:arg1) { 1 }
+        let(:arg2) { nil }
+
+        it "returns nil" do
+          expect(subject.prime_vector).to eq nil
+        end
       end
     end
 
