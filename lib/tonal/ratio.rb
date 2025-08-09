@@ -336,7 +336,6 @@ class Tonal::Ratio
   #   Tonal::Ratio.new(31/30r).prime_divisions => [[[31, 1]], [[2, 1], [3, 1], [5, 1]]]
   #
   def prime_divisions
-    return [[[2, 1]], [[2, 1]]] if antecedent == 1
     [antecedent.prime_division, consequent.prime_division]
   end
 
@@ -346,7 +345,9 @@ class Tonal::Ratio
   #
   def prime_vector
     pds = prime_divisions
-    max = [pds.first.max{|p| p.first}, pds.last.max{|p| p.first}].max.first
+    return nil if pds.all?(&:empty?)
+
+    max = [pds.first.max{|p| p.first}, pds.last.max{|p| p.first}].compact.max.first
 
     pds.last.collect!{|i| [i.first, -i.last]}
 
@@ -356,6 +357,7 @@ class Tonal::Ratio
     end.to_vector
   end
   alias :monzo :prime_vector
+  alias :prime_exponent_vector :prime_vector
 
   # @return [Integer] the maximum prime factor of self
   # @example
@@ -533,12 +535,23 @@ class Tonal::Ratio
   # @example
   #   Tonal::ReducedRatio.new(133).interval_with(3/2r)
   #   => (192/133) ((3/2) / (133/128))
-  # @param antecedent
-  # @param consequent
+  # @param upper ratio
+  # @param lower ratio
   #
-  def interval_with(antecedent, consequent=nil)
-    r = self.class.new(antecedent, consequent)
+  def interval_with(upper, lower=nil)
+    r = self.class.new(upper, lower)
     Tonal::Interval.new(self, r)
+  end
+
+  # @return [Tonal::Cents] difference between ratio (upper) and self (lower)
+  # @example
+  #   Tonal::ReducedRatio.new(133).cents_difference_with(3/2r)
+  #   => 635.62
+  # @param upper ratio
+  # @param lower ratio
+  #
+  def cents_difference_with(upper, lower=nil)
+    interval_with(upper, lower).to_cents
   end
 
   # @return [Integer] the difference between antecedent and consequent

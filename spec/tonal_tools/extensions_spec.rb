@@ -172,19 +172,25 @@ RSpec.describe "Extensions" do
       end
     end
 
+    describe "#cents_difference_with" do
+      it "returns the cents difference between self and the given ratio" do
+        expect((1/1r).cents_difference_with(3/2r)).to eq 701.96
+      end
+    end
+
     describe "#negative" do
       it "returns the Ernst Levy negative of self" do
-        expect(1.75.negative).to eq 12/7r
+        expect(1.75.negative).to eq 12/14r
       end
     end
 
     describe "#mirror" do
       it "returns self rotated on 1/1 by default" do
-        expect((3/2r).mirror).to eq 4/3r
+        expect((3/2r).mirror).to eq 2/3r
       end
 
       it "rotates self around given axis" do
-        expect((3/2r).mirror(9/8r)).to eq 27/16r
+        expect((3/2r).mirror(9/8r)).to eq 162/192r
       end
     end
 
@@ -251,6 +257,12 @@ RSpec.describe "Extensions" do
         expect(5.nsmooth(25)).to eq [1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 25, 27, 30, 32, 36, 40, 45, 48, 50, 54]
       end
     end
+
+    describe "#prime_signature" do
+      it "returns the prime signature of self" do
+        expect(24.prime_signature).to eq [1, 3]
+      end
+    end
   end
 
   describe "Array extensions" do
@@ -305,6 +317,12 @@ RSpec.describe "Extensions" do
     describe "#ratio_from_prime_divisions" do
       it "returns the ratio constructed from prime division arrays" do
         expect([[[3, 1]], [[2, 1]]].ratio_from_prime_divisions).to eq 3/2r
+      end
+    end
+
+    describe "#best_fitting_edo" do
+      it "returns a tuple with the first number the EDO that best fits the given ratios and the second number the error of the fit" do
+        expect([3/2r].best_fitting_edo).to eq [53, 0.07]
       end
     end
 
