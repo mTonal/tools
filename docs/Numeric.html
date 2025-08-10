@@ -435,7 +435,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#mirror-instance_method" title="#mirror (instance method)">#<strong>mirror</strong>(axis = 1)  &#x21d2; Tonal::ReducedRatio </a>
+      <a href="#mirror-instance_method" title="#mirror (instance method)">#<strong>mirror</strong>(axis = 1)  &#x21d2; Tonal::Ratio </a>
     
 
     
@@ -483,7 +483,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#negative-instance_method" title="#negative (instance method)">#<strong>negative</strong>  &#x21d2; Tonal::ReducedRatio </a>
+      <a href="#negative-instance_method" title="#negative (instance method)">#<strong>negative</strong>  &#x21d2; Tonal::Ratio </a>
     
 
     
@@ -681,7 +681,7 @@
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#to_ratio-instance_method" title="#to_ratio (instance method)">#<strong>to_ratio</strong>(reduced: false, equave: 2)  &#x21d2; Tonal::ReducedRatio </a>
+      <a href="#to_ratio-instance_method" title="#to_ratio (instance method)">#<strong>to_ratio</strong>(reduced: false, equave: 2)  &#x21d2; Tonal::Ratio </a>
     
 
     
@@ -700,6 +700,28 @@
     <span class="summary_desc"><div class='inline'>
 <p>The octave reduced ratio of self.</p>
 </div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#to_reduced_ratio-instance_method" title="#to_reduced_ratio (instance method)">#<strong>to_reduced_ratio</strong>(equave: 2)  &#x21d2; Tonal::ReducedRatio </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'></div></span>
   
 </li>
 
@@ -867,10 +889,10 @@
       <pre class="lines">
 
 
-103</pre>
+112</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 112</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_benedetti_height'>benedetti_height</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_benedetti_height'>benedetti_height</span></pre>
     </td>
@@ -930,10 +952,10 @@
       <pre class="lines">
 
 
-73</pre>
+82</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 73</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 82</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cents'>cents</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Tonal/Cents.html" title="Tonal::Cents (class)">Cents</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Tonal/Cents.html#initialize-instance_method" title="Tonal::Cents#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>cents:</span> <span class='kw'>self</span><span class='rparen'>)</span></pre>
     </td>
@@ -1009,10 +1031,10 @@
       <pre class="lines">
 
 
-151</pre>
+163</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 151</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 163</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cents_difference_with'>cents_difference_with</span><span class='lparen'>(</span><span class='id identifier rubyid_other_ratio'>other_ratio</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='id identifier rubyid_interval_with'>interval_with</span><span class='lparen'>(</span><span class='id identifier rubyid_other_ratio'>other_ratio</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_cents'>to_cents</span></pre>
     </td>
@@ -1165,10 +1187,10 @@
       <pre class="lines">
 
 
-136</pre>
+148</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 136</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 148</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_efficiency'>efficiency</span><span class='lparen'>(</span><span class='id identifier rubyid_modulo'>modulo</span><span class='comma'>,</span> <span class='label'>reduced:</span> <span class='kw'>false</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='lparen'>(</span><span class='label'>reduced:</span> <span class='id identifier rubyid_reduced'>reduced</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_efficiency'>efficiency</span><span class='lparen'>(</span><span class='id identifier rubyid_modulo'>modulo</span><span class='rparen'>)</span></pre>
     </td>
@@ -1224,10 +1246,10 @@
       <pre class="lines">
 
 
-89</pre>
+98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 89</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 98</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_hz'>hz</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Tonal/Hertz.html" title="Tonal::Hertz (class)">Hertz</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Tonal/Hertz.html#initialize-instance_method" title="Tonal::Hertz#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='rparen'>)</span></pre>
     </td>
@@ -1302,10 +1324,10 @@
       <pre class="lines">
 
 
-143</pre>
+155</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 143</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 155</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_interval_with'>interval_with</span><span class='lparen'>(</span><span class='id identifier rubyid_other_ratio'>other_ratio</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Tonal/Interval.html" title="Tonal::Interval (class)">Interval</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Tonal/Interval.html#initialize-instance_method" title="Tonal::Interval#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='id identifier rubyid_ratio'>ratio</span><span class='comma'>,</span> <span class='id identifier rubyid_other_ratio'>other_ratio</span><span class='rparen'>)</span></pre>
     </td>
@@ -1365,10 +1387,10 @@
       <pre class="lines">
 
 
-59</pre>
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 59</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_log'>log</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Tonal/Log.html" title="Tonal::Log (class)">Log</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Tonal/Log.html#initialize-instance_method" title="Tonal::Log#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>logarithmand:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>base:</span> <span class='id identifier rubyid_base'>base</span><span class='rparen'>)</span></pre>
     </td>
@@ -1432,10 +1454,10 @@
       <pre class="lines">
 
 
-65</pre>
+74</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 65</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 74</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_log2'>log2</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Tonal/Log2.html" title="Tonal::Log2 (class)">Log2</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Tonal/Log.html#initialize-instance_method" title="Tonal::Log#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>logarithmand:</span> <span class='kw'>self</span><span class='rparen'>)</span></pre>
     </td>
@@ -1517,10 +1539,10 @@
       <pre class="lines">
 
 
-204</pre>
+217</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 204</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 217</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_log_floor'>log_floor</span><span class='lparen'>(</span><span class='id identifier rubyid_base'>base</span><span class='op'>=</span><span class='int'>10</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Math.html" title="Math (module)">Math</a></span></span><span class='period'>.</span><span class='id identifier rubyid_log'>log</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='id identifier rubyid_base'>base</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_floor'>floor</span></pre>
     </td>
@@ -1580,10 +1602,10 @@
       <pre class="lines">
 
 
-123</pre>
+132</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 123</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 132</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_log_weil_height'>log_weil_height</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_log_weil_height'>log_weil_height</span></pre>
     </td>
@@ -1643,10 +1665,10 @@
       <pre class="lines">
 
 
-171</pre>
+184</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 171</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 184</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max_prime'>max_prime</span> <span class='op'>=</span> <span class='id identifier rubyid_prime_divisions'>prime_divisions</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:first</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span></pre>
     </td>
@@ -1706,10 +1728,10 @@
       <pre class="lines">
 
 
-177</pre>
+190</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 177</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 190</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_min_prime'>min_prime</span> <span class='op'>=</span> <span class='id identifier rubyid_prime_divisions'>prime_divisions</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:first</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span></pre>
     </td>
@@ -1720,7 +1742,7 @@
       <div class="method_details ">
   <h3 class="signature " id="mirror-instance_method">
   
-    #<strong>mirror</strong>(axis = 1)  &#x21d2; <tt><span class='object_link'><a href="Tonal/ReducedRatio.html" title="Tonal::ReducedRatio (class)">Tonal::ReducedRatio</a></span></tt> 
+    #<strong>mirror</strong>(axis = 1)  &#x21d2; <tt><span class='object_link'><a href="Tonal/Ratio.html" title="Tonal::Ratio (class)">Tonal::Ratio</a></span></tt> 
   
 
   
@@ -1772,7 +1794,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Tonal/ReducedRatio.html" title="Tonal::ReducedRatio (class)">Tonal::ReducedRatio</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Tonal/Ratio.html" title="Tonal::Ratio (class)">Tonal::Ratio</a></span></tt>)</span>
       
       
       
@@ -1791,10 +1813,10 @@
       <pre class="lines">
 
 
-197</pre>
+210</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 197</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 210</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_mirror'>mirror</span><span class='lparen'>(</span><span class='id identifier rubyid_axis'>axis</span><span class='op'>=</span><span class='int'>1</span><span class='op'>/</span><span class='rational'>1r</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_mirror'>mirror</span><span class='lparen'>(</span><span class='id identifier rubyid_axis'>axis</span><span class='rparen'>)</span></pre>
     </td>
@@ -1912,7 +1934,7 @@
       <div class="method_details ">
   <h3 class="signature " id="negative-instance_method">
   
-    #<strong>negative</strong>  &#x21d2; <tt><span class='object_link'><a href="Tonal/ReducedRatio.html" title="Tonal::ReducedRatio (class)">Tonal::ReducedRatio</a></span></tt> 
+    #<strong>negative</strong>  &#x21d2; <tt><span class='object_link'><a href="Tonal/Ratio.html" title="Tonal::Ratio (class)">Tonal::Ratio</a></span></tt> 
   
 
   
@@ -1942,7 +1964,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Tonal/ReducedRatio.html" title="Tonal::ReducedRatio (class)">Tonal::ReducedRatio</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Tonal/Ratio.html" title="Tonal::Ratio (class)">Tonal::Ratio</a></span></tt>)</span>
       
       
       
@@ -1961,10 +1983,10 @@
       <pre class="lines">
 
 
-190</pre>
+203</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 190</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 203</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_negative'>negative</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_negative'>negative</span></pre>
     </td>
@@ -2024,10 +2046,10 @@
       <pre class="lines">
 
 
-53</pre>
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 53</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 62</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_period_degrees'>period_degrees</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_period_degrees'>period_degrees</span></pre>
     </td>
@@ -2175,10 +2197,10 @@
       <pre class="lines">
 
 
-165</pre>
+178</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 165</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 178</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_prime_divisions'>prime_divisions</span> <span class='op'>=</span> <span class='lbracket'>[</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_numerator'>numerator</span><span class='period'>.</span><span class='id identifier rubyid_prime_division'>prime_division</span><span class='comma'>,</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_denominator'>denominator</span><span class='period'>.</span><span class='id identifier rubyid_prime_division'>prime_division</span><span class='rbracket'>]</span></pre>
     </td>
@@ -2216,6 +2238,23 @@
       <pre class="example code"><code><span class='lparen'>(</span><span class='int'>3</span><span class='op'>/</span><span class='rational'>2r</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_prime_vector'>prime_vector</span> <span class='op'>=&gt;</span> <span class='const'><span class='object_link'><a href="Vector.html" title="Vector (class)">Vector</a></span></span><span class='lbracket'>[</span><span class='op'>-</span><span class='int'>1</span><span class='comma'>,</span> <span class='int'>1</span><span class='rbracket'>]</span></code></pre>
     
   </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>reduced</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -2242,10 +2281,10 @@
       <pre class="lines">
 
 
-157</pre>
+170</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 157</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 170</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_prime_vector'>prime_vector</span><span class='lparen'>(</span><span class='label'>reduced:</span> <span class='kw'>false</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='lparen'>(</span><span class='label'>reduced:</span> <span class='id identifier rubyid_reduced'>reduced</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_prime_vector'>prime_vector</span></pre>
     </td>
@@ -2322,10 +2361,10 @@
       <pre class="lines">
 
 
-97</pre>
+106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 97</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 106</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_step'>step</span><span class='lparen'>(</span><span class='id identifier rubyid_modulo'>modulo</span><span class='op'>=</span><span class='int'>12</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Tonal/Step.html" title="Tonal::Step (class)">Step</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Tonal/Step.html#initialize-instance_method" title="Tonal::Step#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>ratio:</span> <span class='kw'>self</span><span class='comma'>,</span> <span class='label'>modulo:</span> <span class='id identifier rubyid_modulo'>modulo</span><span class='rparen'>)</span></pre>
     </td>
@@ -2389,10 +2428,10 @@
       <pre class="lines">
 
 
-110</pre>
+119</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 110</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 119</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tenney_height'>tenney_height</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_tenney_height'>tenney_height</span></pre>
     </td>
@@ -2452,10 +2491,10 @@
       <pre class="lines">
 
 
-85</pre>
+94</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 94</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_cents'>to_cents</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Tonal/Cents.html" title="Tonal::Cents (class)">Cents</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Tonal/Cents.html#initialize-instance_method" title="Tonal::Cents#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>ratio:</span> <span class='kw'>self</span><span class='rparen'>)</span></pre>
     </td>
@@ -2466,7 +2505,7 @@
       <div class="method_details ">
   <h3 class="signature " id="to_ratio-instance_method">
   
-    #<strong>to_ratio</strong>(reduced: false, equave: 2)  &#x21d2; <tt><span class='object_link'><a href="Tonal/ReducedRatio.html" title="Tonal::ReducedRatio (class)">Tonal::ReducedRatio</a></span></tt> 
+    #<strong>to_ratio</strong>(reduced: false, equave: 2)  &#x21d2; <tt><span class='object_link'><a href="Tonal/Ratio.html" title="Tonal::Ratio (class)">Tonal::Ratio</a></span></tt> 
   
 
   
@@ -2490,9 +2529,39 @@
     <h4 class="tag_title">Examples:</h4>
     
       
-      <pre class="example code"><code>(2**(1.0/12)).ratio =&gt; (4771397596969315/4503599627370496)</code></pre>
+      <pre class="example code"><code>(4/5r).to_ratio =&gt; 4/5</code></pre>
     
   </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>reduced</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>equave</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>2</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -2500,7 +2569,7 @@
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="Tonal/ReducedRatio.html" title="Tonal::ReducedRatio (class)">Tonal::ReducedRatio</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="Tonal/Ratio.html" title="Tonal::Ratio (class)">Tonal::Ratio</a></span></tt>)</span>
       
       
       
@@ -2519,12 +2588,85 @@
       <pre class="lines">
 
 
-46</pre>
+48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 48</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_ratio'>to_ratio</span><span class='lparen'>(</span><span class='label'>reduced:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>equave:</span> <span class='int'>2</span><span class='op'>/</span><span class='rational'>1r</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='id identifier rubyid_reduced'>reduced</span> <span class='op'>?</span> <span class='const'><span class='object_link'><a href="Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Tonal/ReducedRatio.html" title="Tonal::ReducedRatio (class)">ReducedRatio</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Tonal/ReducedRatio.html#initialize-instance_method" title="Tonal::ReducedRatio#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='label'>equave:</span> <span class='id identifier rubyid_equave'>equave</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='const'><span class='object_link'><a href="Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Tonal/Ratio.html" title="Tonal::Ratio (class)">Ratio</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Tonal/Ratio.html#initialize-instance_method" title="Tonal::Ratio#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='label'>equave:</span> <span class='id identifier rubyid_equave'>equave</span><span class='rparen'>)</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="to_reduced_ratio-instance_method">
+  
+    #<strong>to_reduced_ratio</strong>(equave: 2)  &#x21d2; <tt><span class='object_link'><a href="Tonal/ReducedRatio.html" title="Tonal::ReducedRatio (class)">Tonal::ReducedRatio</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code>{4/5r}.to_reduced_ratio =&gt; 8/5</code></pre>
+    
+  </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>equave</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>2</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="Tonal/ReducedRatio.html" title="Tonal::ReducedRatio (class)">Tonal::ReducedRatio</a></span></tt>)</span>
+      
+      
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+56</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 56</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_to_reduced_ratio'>to_reduced_ratio</span><span class='lparen'>(</span><span class='label'>equave:</span> <span class='int'>2</span><span class='op'>/</span><span class='rational'>1r</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='id identifier rubyid_to_ratio'>to_ratio</span><span class='lparen'>(</span><span class='label'>reduced:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>equave:</span> <span class='id identifier rubyid_equave'>equave</span><span class='rparen'>)</span></pre>
     </td>
   </tr>
 </table>
@@ -2586,10 +2728,10 @@
       <pre class="lines">
 
 
-183</pre>
+196</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 183</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 196</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_to_vector'>to_vector</span> <span class='op'>=</span> <span class='const'><span class='object_link'><a href="Vector.html" title="Vector (class)">Vector</a></span></span><span class='lbracket'>[</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_numerator'>numerator</span><span class='comma'>,</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_denominator'>denominator</span><span class='rbracket'>]</span></pre>
     </td>
@@ -2649,10 +2791,10 @@
       <pre class="lines">
 
 
-117</pre>
+126</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 126</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_weil_height'>weil_height</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_weil_height'>weil_height</span></pre>
     </td>
@@ -2690,6 +2832,49 @@
       <pre class="example code"><code></code></pre>
     
   </div>
+<p class="tag_title">Parameters:</p>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>reduced</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>equave</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>2</tt>)</em>
+      
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>prime_rejects</span>
+      
+      
+        <span class='type'></span>
+      
+      
+        <em class="default">(defaults to: <tt>[2]</tt>)</em>
+      
+      
+    </li>
+  
+</ul>
 
 <p class="tag_title">Returns:</p>
 <ul class="return">
@@ -2716,10 +2901,10 @@
       <pre class="lines">
 
 
-128</pre>
+140</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 140</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wilson_height'>wilson_height</span><span class='lparen'>(</span><span class='label'>reduced:</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='label'>equave:</span> <span class='int'>2</span><span class='op'>/</span><span class='rational'>1r</span><span class='comma'>,</span> <span class='label'>prime_rejects:</span> <span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='op'>=</span> <span class='id identifier rubyid_ratio'>ratio</span><span class='lparen'>(</span><span class='label'>reduced:</span> <span class='id identifier rubyid_reduced'>reduced</span><span class='comma'>,</span> <span class='label'>equave:</span> <span class='id identifier rubyid_equave'>equave</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_wilson_height'>wilson_height</span><span class='lparen'>(</span><span class='label'>prime_rejects:</span> <span class='id identifier rubyid_prime_rejects'>prime_rejects</span><span class='rparen'>)</span></pre>
     </td>
@@ -2779,10 +2964,10 @@
       <pre class="lines">
 
 
-79</pre>
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 79</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/extensions.rb', line 88</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_¢'>¢</span> <span class='op'>=</span> <span class='id identifier rubyid_cents'>cents</span></pre>
     </td>
@@ -2795,7 +2980,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Aug  9 11:25:58 2025 by
+  Generated on Sat Aug  9 17:55:25 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.37 (ruby-3.3.6).
 </div>
