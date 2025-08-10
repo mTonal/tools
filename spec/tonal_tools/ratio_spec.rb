@@ -206,8 +206,9 @@ RSpec.describe Tonal::Ratio do
     describe "#equave_reduce" do
       subject { described_class.new(6, 9) }
 
-      it "octave reduces by default" do
+      it "octave reduces by default although the returned class is unreduced" do
         expect(subject.equave_reduce).to eq described_class.new(4,3)
+        expect(subject.equave_reduce).to be_a_kind_of(Tonal::Ratio)
       end
 
       context "with an equave other than the octave" do

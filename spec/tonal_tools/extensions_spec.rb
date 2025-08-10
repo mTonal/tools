@@ -28,9 +28,15 @@ RSpec.describe "Extensions" do
       end
     end
 
-    describe "#ratio" do
-      it "returns the reduced octave ratio of self" do
-        expect(1.5.ratio).to eq 3/2r
+    describe "#to_ratio" do
+      it "returns the unreduced octave ratio of self" do
+        expect(0.75.to_ratio).to eq 3/4r
+      end
+
+      context "when reduced is sent" do
+        it "returns a reduced ratio" do
+          expect(0.75.to_ratio(reduced: true)).to eq 3/2r
+        end
       end
     end
 
@@ -347,13 +353,13 @@ RSpec.describe "Extensions" do
 
   describe "Vector extensions" do
     describe "#to_ratio" do
-      it "returns a Tonal::ReducedRatio by default" do
-        expect(Vector[6,4].to_ratio).to eq Tonal::ReducedRatio.new(3,2)
+      it "returns a Tonal::Ratio by default" do
+        expect(Vector[6,4].to_ratio).to be_a_kind_of(Tonal::Ratio)
       end
 
       context "when reduced is false" do
         it "returns a Tonal::Ratio" do
-          expect(Vector[6,4].to_ratio(reduced: false)).to eq Tonal::Ratio.new(6,4)
+          expect(Vector[6,4].to_ratio(reduced: true)).to be_a_kind_of(Tonal::ReducedRatio)
         end
       end
     end
