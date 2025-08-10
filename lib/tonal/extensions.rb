@@ -39,12 +39,21 @@ class Numeric
   #
   def div_times(factor) = [self / factor, self * factor]
 
-  # @return [Tonal::ReducedRatio] the octave reduced ratio of self
+  # @return [Tonal::Ratio] the octave reduced ratio of self
   # @example
-  #   (2**(1.0/12)).ratio => (4771397596969315/4503599627370496)
+  #   (4/5r).to_ratio => 4/5
+  # @param reduced
+  # @param equave
   #
   def to_ratio(reduced: false, equave: 2/1r) = reduced ? Tonal::ReducedRatio.new(self, equave: equave) : Tonal::Ratio.new(self, equave: equave)
   alias :ratio :to_ratio
+
+  # @return [Tonal::ReducedRatio]
+  # @example
+  #   {4/5r}.to_reduced_ratio => 8/5
+  # @param equave
+  #
+  def to_reduced_ratio(equave: 2/1r) = to_ratio(reduced: true, equave: equave)
 
   # @return [Float], the degrees on a circle of self
   # @example
@@ -124,6 +133,9 @@ class Numeric
 
   # @return [Integer] the Wilson height
   # @example (14/9r).wilson_height => 13
+  # @param reduced
+  # @param equave
+  # @param prime_rejects
   #
   def wilson_height(reduced: false, equave: 2/1r, prime_rejects: [2]) = ratio(reduced: reduced, equave: equave).wilson_height(prime_rejects: prime_rejects)
 
@@ -153,6 +165,7 @@ class Numeric
   # @return [Vector], self represented as a prime vector
   # @example
   #   (3/2r).prime_vector => Vector[-1, 1]
+  # @param reduced
   #
   def prime_vector(reduced: false) = ratio(reduced: reduced).prime_vector
   alias :monzo :prime_vector
@@ -183,13 +196,13 @@ class Numeric
   def to_vector = Vector[self.numerator, self.denominator]
   alias :vector :to_vector
 
-  # @return [Tonal::ReducedRatio], the Ernst Levy negative of self
+  # @return [Tonal::Ratio], the Ernst Levy negative of self
   # @example
   #  (7/4r).negative => (12/7)
   #
   def negative = ratio.negative
 
-  # @return [Tonal::ReducedRatio], the ratio rotated on the given axis, default 1/1
+  # @return [Tonal::Ratio], the ratio rotated on the given axis, default 1/1
   # @example
   #   (3/2r).mirror => (4/3)
   # @param axis around which self is mirrored
@@ -377,7 +390,7 @@ class Array
   #
   def mean = self.sum / self.count.to_f
 
-  # @return [Tonal::ReducedRatio] ratio reconstructed from the result of a prime factor decomposition
+  # @return [Tonal::Ratio] ratio reconstructed from the result of a prime factor decomposition
   # @example
   #   [[[3, 1]], [[2, 1]]].ratio_from_prime_divisions => (3/2)
   # @param reduced [Boolean] if a reduced or unreduced ratio is returned
