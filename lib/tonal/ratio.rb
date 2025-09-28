@@ -381,7 +381,7 @@ class Tonal::Ratio
   # @param number to compare max prime against
   #
   def max_prime_within?(number)
-    max_prime <= number
+    max_prime.nil? ? false : max_prime <= number
   end
 
   # @return [Integer] the product complexity of self

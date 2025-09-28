@@ -428,6 +428,12 @@ RSpec.describe Tonal::Ratio do
       it "returns false when the ratio's max prime is greater than the given number" do
         expect(described_class.new(13/8r).max_prime_within?(12)).to be false
       end
+
+      context "when ratio is 1/1" do
+        it "returns false, since 1/1 has no prime, let alone a max prime" do
+          expect(described_class.new(1/1r).max_prime_within?(4)).to be false
+        end
+      end
     end
 
     describe "Comparators" do
