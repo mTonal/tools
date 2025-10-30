@@ -252,6 +252,18 @@ RSpec.describe "Extensions" do
       end
     end
 
+    describe "#superparticular" do
+      it "returns the superparticular ratio base on self as the numerator" do
+        expect(4.superparticular).to eq (4/3r)
+      end
+
+      context "when the integer is less than 2" do
+        it "returns nil" do
+          expect([-1,0,1].sample.superparticular).to eq nil
+        end
+      end
+    end
+
     describe "#phi" do
       it "returns the count of coprimes less than self" do
         expect(10.phi).to eq 4

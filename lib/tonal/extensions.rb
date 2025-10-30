@@ -258,6 +258,14 @@ class Integer
     end
   end
 
+  # @return [Rational] the superparticular ratio based on the given integer as the numerator
+  # @example
+  #   4.superparticular => 4/3
+  def superparticular
+    return nil if self < 2
+    Rational(self, self-1)
+  end
+
   # @return [Integer] the count of coprimes less than self
   # @example
   #   10.phi => 4
