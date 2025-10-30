@@ -4467,7 +4467,7 @@
       <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 383</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max_prime_within?'>max_prime_within?</span><span class='lparen'>(</span><span class='id identifier rubyid_number'>number</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_max_prime'>max_prime</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_number'>number</span>
+  <span class='id identifier rubyid_max_prime'>max_prime</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='kw'>false</span> <span class='op'>:</span> <span class='id identifier rubyid_max_prime'>max_prime</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_number'>number</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -6573,9 +6573,9 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Aug  9 17:55:25 2025 by
+  Generated on Wed Oct 29 22:26:48 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.9.37 (ruby-3.3.6).
+  0.9.37 (ruby-3.4.5).
 </div>
 
     </div>
