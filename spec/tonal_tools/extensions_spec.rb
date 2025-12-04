@@ -178,6 +178,12 @@ RSpec.describe "Extensions" do
       end
     end
 
+    describe "#to_interval" do
+      it "returns the interval between 1/1 and self" do
+        expect((3/2r).to_interval).to eq Tonal::Interval.new(1/1r, 3/2r)
+      end
+    end
+
     describe "#cents_difference_with" do
       it "returns the cents difference between self and the given ratio" do
         expect((1/1r).cents_difference_with(3/2r)).to eq 701.96
