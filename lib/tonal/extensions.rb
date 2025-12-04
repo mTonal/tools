@@ -154,6 +154,12 @@ class Numeric
   #
   def interval_with(other_ratio) = Tonal::Interval.new(ratio, other_ratio)
 
+  # @return [Tonal::Interval] between 1/1 (lower) and self (upper)
+  # @example
+  #   (3/2r).to_interval => 3/2 (3/2 / 1/1)
+  #
+  def to_interval = Tonal::Interval.new(1/1r, self)
+
   # @return [Tonal::Cents] difference between ratio (upper) and self (lower)
   # @example
   #   (133).cents_difference_with(3/2r)
@@ -491,4 +497,3 @@ module Math
 
   PHI = (1 + 5**(1.0/2))/2
 end
-
