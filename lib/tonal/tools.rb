@@ -14,6 +14,7 @@ module Tonal
   require "tonal/approximation"
   require "tonal/ratio"
   require "tonal/reduced_ratio"
+  require "tonal/extended_ratio"
   require "tonal/interval"
   require "tonal/step"
   require "tonal/extensions"

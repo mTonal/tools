@@ -95,7 +95,7 @@ RSpec.describe Tonal::Ratio do
     let(:arg2) { nil }
 
     describe "#to_s" do
-      it { expect(subject.to_s).to eq "(3/2)" }
+      it { expect(subject.to_s).to eq "3/2" }
     end
 
     describe "#to_a" do

@@ -41,6 +41,14 @@ RSpec.describe Tonal::Interval do
       end
     end
 
+    context "with one arg" do
+      let(:arg1) { 3 }
+      it "takes arg1 as the upper ratio and 1/1 as the lower ratio" do
+        expect(described_class.new(arg1).lower).to eq 1/1r
+        expect(described_class.new(arg1).upper).to eq 3/2r
+      end
+    end
+
     context "with four args" do
       let(:arg1) { 2 }
       let(:arg2) { 3 }
@@ -50,6 +58,14 @@ RSpec.describe Tonal::Interval do
       it "takes arg1 and arg2 as the numerator and denominator of the lower ratio and arg3 and arg4 as the numerator and denominator of the upper ratio" do
         expect(described_class.new(arg1, arg2, arg3, arg4).lower).to eq 4/3r
         expect(described_class.new(arg1, arg2, arg3, arg4).upper).to eq 10/7r
+      end
+    end
+
+    context "with irrational numbers" do
+      let(:arg1) { Math.sqrt(2) }
+      let(:arg2) { Math.sqrt(3) }
+      it "displays in compact format" do
+        expect(described_class.new(arg1, arg2).inspect).to eq "#{(Math.sqrt(3)/Math.sqrt(2)).round(2)} (#{Math.sqrt(3).round(2)} / #{Math.sqrt(2).round(2)})"
       end
     end
 

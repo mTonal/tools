@@ -12,7 +12,7 @@ RSpec.describe "Extensions" do
   describe "Numeric extensions" do
     describe "#modulo_translate" do
       it "translates the number within the give modulo range" do
-        expect(Math::PI.modulo_translate(-3, 3)).to eq -2.858407346410207
+        expect(Math::PI.modulo_translate(-3, 3)).to eq(-2.858407346410207)
       end
     end
 
@@ -168,7 +168,7 @@ RSpec.describe "Extensions" do
 
     describe "#efficiency" do
       it "returns the difference between self and its step for a given modulo" do
-        expect((3/2r).efficiency(12)).to eq -1.96
+        expect((3/2r).efficiency(12)).to eq(-1.96)
       end
     end
 
@@ -215,6 +215,12 @@ RSpec.describe "Extensions" do
         it "returns the log floor to the given base of self" do
           expect(22632.log_floor(2)).to eq 14
         end
+      end
+    end
+
+    describe "#reciprocal" do
+      it "returns the reciprocal of self" do
+        expect((3/2r).reciprocal).to eq (2/3r)
       end
     end
   end
@@ -332,6 +338,26 @@ RSpec.describe "Extensions" do
       end
     end
 
+    describe "#to_interval" do
+      context "with two elements" do
+        it "returns the interval between the first and second elements of the array" do
+          expect([3/2r, 7/4r].to_interval).to eq Tonal::Interval.new(3/2r, 7/4r)
+        end
+      end
+
+      context "with four elements" do
+        it "returns the interval between the first pair and the second pair of elements of the array" do
+          expect([2,3,3,4].to_interval).to eq Tonal::Interval.new(2,3,3,4)
+        end
+      end
+
+      context "with one element" do
+        it "takes the first element as the upper ratio and 1/1 as the lower ratio" do
+          expect([3].to_interval).to eq Tonal::Interval.new(1/1r, 3/2r)
+        end
+      end
+    end
+
     describe "#mean" do
       it "returns the mean of elements of the array" do
         expect([1, 2].mean).to eq 1.5
@@ -365,6 +391,48 @@ RSpec.describe "Extensions" do
     describe "#modulo_translate" do
       it "translates the array's elements within the modulo range" do
         expect([-6.617469071022061, 4.755369851099594, 7.588140911919945, -6.49706614430203].modulo_translate(-3, 5)).to eq [1.382530928977939, 4.755369851099594, -0.411859088080055, 1.50293385569797]
+      end
+    end
+
+    describe "#to_efr" do
+      it "returns an ExtendedRatio constructed from the array elements" do
+        efr = [1/1r, 5/4r, 3/2r].to_efr
+        expect(efr).to be_a_kind_of(Tonal::ExtendedRatio)
+        expect(efr.inspect).to eq "4:5:6"
+      end
+
+      context "when as is :partials" do
+        it "returns an ExtendedRatio constructed from the array elements as partials" do
+          efr = [4, 5, 6].to_efr(as: :partials)
+          expect(efr).to be_a_kind_of(Tonal::ExtendedRatio)
+          expect(efr.inspect).to eq "4:5:6"
+        end
+      end
+    end
+
+    describe "#to_sefr" do
+      it "returns a SubharmonicExtendedRatio constructed from the array elements" do
+        sefr = [1/1r, 5/4r, 3/2r].to_sefr
+        expect(sefr).to be_a_kind_of(Tonal::SubharmonicExtendedRatio)
+        expect(sefr.inspect).to eq "15:12:10"
+      end
+
+      context "when as is :partials" do
+        it "returns a SubharmonicExtendedRatio constructed from the array elements as partials" do
+          sefr = [4, 5, 6].to_sefr(as: :partials)
+          expect(sefr).to be_a_kind_of(Tonal::SubharmonicExtendedRatio)
+          expect(sefr.inspect).to eq "6:5:4"
+        end
+      end
+    end
+  end
+
+  describe "Range extensions" do
+    describe "#to_efr" do
+      it "returns an ExtendedRatio constructed from the range elements" do
+        er = (4..7).to_efr
+        expect(er).to be_a_kind_of(Tonal::ExtendedRatio)
+        expect(er.inspect).to eq "4:5:6:7"
       end
     end
   end

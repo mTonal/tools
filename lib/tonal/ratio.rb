@@ -233,7 +233,7 @@ class Tonal::Ratio
   # @return [Tonal::ReducedRatio] of self
   # @example
   #   Tonal::Ratio.new(1,9).to_reduced_ratio => (16/9)
-  # 
+  #
   def to_reduced_ratio
     Tonal::ReducedRatio.new(reduced_antecedent, reduced_consequent, equave: equave)
   end
@@ -247,6 +247,7 @@ class Tonal::Ratio
     self.class.new(consequent, antecedent)
   end
   alias :reflect :invert
+  alias :reciprocal :invert
 
   # @return [Tonal::Ratio] with antecedent and precedent switched
   # @example
@@ -472,10 +473,8 @@ class Tonal::Ratio
   # @return [String] symbolic representation of Tonal::Ratio
   #
   def label
-    # Return label, if defined; or,
-    # Return the "antecedent/consequent", if antecedent is less than 7 digits long; or
-    # Return the floating point representation rounded to 2 digits of precision
-    (@label || ((Math.log10(antecedent).to_i + 1) <= 6 ? "#{antecedent}/#{consequent}" : to_f.round(PRECISION))).to_s
+    # Return label, if defined; or see inspect
+    @label || inspect
   end
 
   # @return [String] the string representation of Tonal::Ratio
@@ -483,7 +482,9 @@ class Tonal::Ratio
   #   Tonal::Ratio.new(3, 2).inspect => "(3/2)"
   #
   def inspect
-    "(#{antecedent}/#{consequent})"
+    # Return the "antecedent/consequent", if antecedent is less than 7 digits long; or
+    # Return the floating point representation rounded to PRECISION digits
+    ((Math.log10(antecedent).to_i + 1) <= 6 ? "#{antecedent}/#{consequent}" : "#{to_f.round(PRECISION)}")
   end
   alias :to_s :inspect
 
@@ -642,4 +643,3 @@ module Ratio
     Tonal::Ratio.new(u, l)
   end
 end
-
