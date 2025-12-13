@@ -23,6 +23,10 @@ module Tonal
     # @return [Tonal::Interval] the interval between the given args
     # @example
     #   i(2,3) => (3/2) ((3/2) / (1/1))
+    # @example
+    #  i(2,3,3,4) => (9/8) ((3/2) / (4/3))
+    # @example
+    #   i(3) => (3/1) ((3/1) / (1/1))
     # @param args two arguments representing ratios or four arguments representing two pairs of numerator/denominator
     # @param reduced boolean determining whether to use Tonal::ReducedRatio or Tonal::Ratio
     #

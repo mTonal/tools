@@ -158,7 +158,7 @@ class Numeric
   # @example
   #   (3/2r).to_interval => 3/2 (3/2 / 1/1)
   #
-  def to_interval = Tonal::Interval.new(1/1r, self)
+  def to_interval = Tonal::Interval.new(self)
 
   # @return [Tonal::Cents] difference between ratio (upper) and self (lower)
   # @example
@@ -221,6 +221,12 @@ class Numeric
   # @param base of the log
   #
   def log_floor(base=10) = Math.log(self, base).floor
+
+  # @return [Rational] the reciprocal of self
+  # @example
+  #   (3/2r).reciprocal => (2/3)
+  #
+  def reciprocal = Rational(1,self)
 end
 
 class Integer
@@ -398,6 +404,16 @@ class Array
   def to_cents = self.map{|r| r.to_cents}
   alias :cents :to_cents
 
+  # @return [Tonal::Interval]
+  # @example
+  #   [3/2r, 4/3r].to_interval => 16/9 (4/3 / 3/2)
+  # @example
+  #   [5].to_interval => 5/4 (5/4 / 1/1)
+  # @example
+  #   [2,3,3,4].to_interval => 9/8 (3/2 / 4/3)
+  #
+  def to_interval = Tonal::Interval.new(*self)
+
   # @return [Float] the mean of the elements of self
   # @example
   #   [1, 2].mean => 1.5
@@ -474,6 +490,34 @@ class Array
   #   [4,3].to_r => (4/3)
   #
   def to_r = Rational(numerator, denominator)
+
+  # @return [Tonal::ExtendedRatio]
+  # @example
+  #   [4/1r, 5/1r, 6/1r].to_efr => ExtendedRatio "4:5:6"
+  # @param as :ratios or :partials
+  #
+  def to_efr(as: :ratios) = as == :ratios ? Tonal::ExtendedRatio.new(ratios: self) : Tonal::ExtendedRatio.new(partials: self)
+
+  # @return [Tonal::SubharmonicExtendedRatio]
+  # @example
+  #   [4,5,6].to_sefr => SubharmonicExtendedRatio "4:5:6"
+  # @param as :ratios or :partials
+  #
+  def to_sefr(as: :ratios) = as == :ratios ? Tonal::SubharmonicExtendedRatio.new(ratios: self) : Tonal::SubharmonicExtendedRatio.new(partials: self)
+end
+
+class Range
+  # @return [Tonal::ExtendedRatio]
+  # @example
+  #   (4..7).to_efr => 4:5:6:7
+  #
+  def to_efr = Tonal::ExtendedRatio.new(partials: self)
+
+  # @return [Tonal::SubharmonicExtendedRatio]
+  # @example
+  #   (4..7).to_sefr => 7:6:5:4
+  #
+  def to_sefr = Tonal::SubharmonicExtendedRatio.new(partials: self)
 end
 
 class Vector

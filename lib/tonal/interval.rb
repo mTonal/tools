@@ -11,10 +11,15 @@ class Tonal::Interval
   # @return [Tonal::Interval] the interval of the given ratios
   # @example
   #   Tonal::Interval.new(2,3) => (3/2) ((3/2) / (1/1))
+  # @example
+  #   Tonal::Interval.new(2,3,3,4) => (9/8) ((3/2) / (4/3))
+  # @example
+  #   Tonal::Interval.new(3) => (3/1) ((3/1) / (1/1))
   # @param args two arguments representing ratios or four arguments representing two pairs of numerator/denominator
   # @param reduced boolean determining whether to use Tonal::ReducedRatio or Tonal::Ratio
   #
   def initialize(*args, reduced: true)
+    args = [1/1r, args[0]] if args.length == 1
     klass = reduced ? Tonal::ReducedRatio : Tonal::Ratio
     raise(ArgumentError, "Two or four arguments required. Either two ratios, or two pairs of numerator, denominator", caller[0]) unless [2, 4].include?(args.size)
     @lower_ratio, @upper_ratio = case args.size
@@ -42,7 +47,7 @@ class Tonal::Interval
   end
 
   def inspect
-    "#{interval} (#{upper} / #{lower})"
+    "#{interval.label} (#{upper.label} / #{lower.label})"
   end
 
   def <=>(rhs)
