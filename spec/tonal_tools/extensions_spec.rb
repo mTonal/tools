@@ -84,14 +84,14 @@ RSpec.describe "Extensions" do
       end
     end
 
-    describe "#step" do
+    describe "#scale_step" do
       it "returns the step for the given modulo" do
-        expect((3/2r).step(31)).to eq Tonal::Step.new(modulo: 31, ratio: 3/2r)
+        expect((3/2r).scale_step(31)).to eq Tonal::Step.new(modulo: 31, ratio: 3/2r)
       end
 
       context "without an argument" do
         it "returns the step for modulo 12" do
-          expect((3/2r).step).to eq Tonal::Step.new(modulo: 12, ratio: 3/2r)
+          expect((3/2r).scale_step).to eq Tonal::Step.new(modulo: 12, ratio: 3/2r)
         end
       end
     end
