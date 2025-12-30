@@ -1704,7 +1704,7 @@
 
   
     <span class="summary_desc"><div class='inline'>
-<h6 id="label-Ratio+grid+transformations+numerator+mapped+on+x-axis-2C+denominator+mapped+on+y-axis+-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D-3D.">Ratio grid transformations numerator mapped on x-axis, denominator mapped on y-axis ==================================.</h6>
+<p>With the antecedent and consequent translated by x and y.</p>
 </div></span>
   
 </li>
@@ -2048,12 +2048,12 @@
       <pre class="lines">
 
 
-475
 476
-477</pre>
+477
+478</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 475</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 476</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_label'>label</span>
   <span class='ivar'>@label</span>
@@ -2771,12 +2771,12 @@
       <pre class="lines">
 
 
-499
 500
-501</pre>
+501
+502</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 499</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 500</span>
 
 <span class='kw'>def</span> <span class='op'>*</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_operate'>operate</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='comma'>,</span> <span class='symbol'>:*</span><span class='rparen'>)</span>
@@ -2801,12 +2801,12 @@
       <pre class="lines">
 
 
-507
 508
-509</pre>
+509
+510</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 507</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 508</span>
 
 <span class='kw'>def</span> <span class='op'>**</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_operate'>operate</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='comma'>,</span> <span class='symbol'>:**</span><span class='rparen'>)</span>
@@ -2831,12 +2831,12 @@
       <pre class="lines">
 
 
-491
 492
-493</pre>
+493
+494</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 491</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 492</span>
 
 <span class='kw'>def</span> <span class='op'>+</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_operate'>operate</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='comma'>,</span> <span class='symbol'>:+</span><span class='rparen'>)</span>
@@ -2861,12 +2861,12 @@
       <pre class="lines">
 
 
-495
 496
-497</pre>
+497
+498</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 495</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 496</span>
 
 <span class='kw'>def</span> <span class='op'>-</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_operate'>operate</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='comma'>,</span> <span class='symbol'>:-</span><span class='rparen'>)</span>
@@ -2891,12 +2891,12 @@
       <pre class="lines">
 
 
-503
 504
-505</pre>
+505
+506</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 503</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 504</span>
 
 <span class='kw'>def</span> <span class='op'>/</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_operate'>operate</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='comma'>,</span> <span class='symbol'>:/</span><span class='rparen'>)</span>
@@ -2921,14 +2921,14 @@
       <pre class="lines">
 
 
-576
 577
 578
 579
-580</pre>
+580
+581</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 576</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 577</span>
 
 <span class='kw'>def</span> <span class='op'>&lt;=&gt;</span><span class='lparen'>(</span><span class='id identifier rubyid_rhs'>rhs</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_left'>left</span> <span class='op'>=</span> <span class='id identifier rubyid_consequent'>consequent</span> <span class='op'>==</span> <span class='int'>0</span> <span class='op'>?</span> <span class='const'>Float</span><span class='op'>::</span><span class='const'>INFINITY</span> <span class='op'>:</span> <span class='const'>Rational</span><span class='lparen'>(</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='comma'>,</span> <span class='id identifier rubyid_consequent'>consequent</span><span class='rparen'>)</span>
@@ -3055,12 +3055,12 @@
       <pre class="lines">
 
 
-392
 393
-394</pre>
+394
+395</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 392</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 393</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_benedetti_height'>benedetti_height</span>
   <span class='id identifier rubyid_reduced_antecedent'>reduced_antecedent</span> <span class='op'>*</span> <span class='id identifier rubyid_reduced_consequent'>reduced_consequent</span>
@@ -3142,12 +3142,12 @@
       <pre class="lines">
 
 
-469
 470
-471</pre>
+471
+472</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 469</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 470</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cent_diff'>cent_diff</span><span class='lparen'>(</span><span class='id identifier rubyid_other_ratio'>other_ratio</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_cents'>cents</span> <span class='op'>-</span> <span class='id identifier rubyid_other_ratio'>other_ratio</span><span class='period'>.</span><span class='id identifier rubyid_ratio'>ratio</span><span class='period'>.</span><span class='id identifier rubyid_cents'>cents</span>
@@ -3248,12 +3248,12 @@
       <pre class="lines">
 
 
-554
 555
-556</pre>
+556
+557</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 554</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 555</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_cents_difference_with'>cents_difference_with</span><span class='lparen'>(</span><span class='id identifier rubyid_upper'>upper</span><span class='comma'>,</span> <span class='id identifier rubyid_lower'>lower</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_interval_with'>interval_with</span><span class='lparen'>(</span><span class='id identifier rubyid_upper'>upper</span><span class='comma'>,</span> <span class='id identifier rubyid_lower'>lower</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_to_cents'>to_cents</span>
@@ -3319,12 +3319,12 @@
       <pre class="lines">
 
 
-571
 572
-573</pre>
+573
+574</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 571</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 572</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_combination'>combination</span>
   <span class='id identifier rubyid_antecedent'>antecedent</span> <span class='op'>+</span> <span class='id identifier rubyid_consequent'>consequent</span>
@@ -3390,12 +3390,12 @@
       <pre class="lines">
 
 
-562
 563
-564</pre>
+564
+565</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 562</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 563</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_difference'>difference</span>
   <span class='id identifier rubyid_antecedent'>antecedent</span> <span class='op'>-</span> <span class='id identifier rubyid_consequent'>consequent</span>
@@ -3477,13 +3477,13 @@
       <pre class="lines">
 
 
-448
 449
 450
-451</pre>
+451
+452</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 448</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 449</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_div_times'>div_times</span><span class='lparen'>(</span><span class='id identifier rubyid_other_ratio'>other_ratio</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_other_ratio'>other_ratio</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_other_ratio'>other_ratio</span><span class='rparen'>)</span>
@@ -3566,14 +3566,14 @@
       <pre class="lines">
 
 
-437
 438
 439
 440
-441</pre>
+441
+442</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 437</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 438</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_efficiency'>efficiency</span><span class='lparen'>(</span><span class='id identifier rubyid_modulo'>modulo</span><span class='rparen'>)</span>
   <span class='comment'># We want the efficiency from the ratio (self).
@@ -3903,14 +3903,14 @@
       <pre class="lines">
 
 
-484
 485
 486
 487
-488</pre>
+488
+489</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 484</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 485</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_inspect'>inspect</span>
   <span class='comment'># Return the &quot;antecedent/consequent&quot;, if antecedent is less than 7 digits long; or
@@ -4013,13 +4013,13 @@
       <pre class="lines">
 
 
-542
 543
 544
-545</pre>
+545
+546</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 542</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 543</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_interval_with'>interval_with</span><span class='lparen'>(</span><span class='id identifier rubyid_upper'>upper</span><span class='comma'>,</span> <span class='id identifier rubyid_lower'>lower</span><span class='op'>=</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_r'>r</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_upper'>upper</span><span class='comma'>,</span> <span class='id identifier rubyid_lower'>lower</span><span class='rparen'>)</span>
@@ -4242,12 +4242,12 @@
       <pre class="lines">
 
 
-531
 532
-533</pre>
+533
+534</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 531</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 532</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_lcm'>lcm</span><span class='lparen'>(</span><span class='id identifier rubyid_lhs'>lhs</span><span class='rparen'>)</span>
   <span class='lbracket'>[</span><span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_denominator'>denominator</span><span class='comma'>,</span> <span class='id identifier rubyid_lhs'>lhs</span><span class='period'>.</span><span class='id identifier rubyid_denominator'>denominator</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_lcm'>lcm</span>
@@ -4309,12 +4309,12 @@
       <pre class="lines">
 
 
-420
 421
-422</pre>
+422
+423</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 420</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 421</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_log_weil_height'>log_weil_height</span>
   <span class='const'><span class='object_link'><a href="../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Log2.html" title="Tonal::Log2 (class)">Log2</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Log.html#initialize-instance_method" title="Tonal::Log#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>logarithmand:</span> <span class='id identifier rubyid_weil_height'>weil_height</span><span class='rparen'>)</span>
@@ -4376,12 +4376,12 @@
       <pre class="lines">
 
 
-367
 368
-369</pre>
+369
+370</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 367</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 368</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max_prime'>max_prime</span>
   <span class='id identifier rubyid_prime_divisions'>prime_divisions</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:first</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span>
@@ -4463,12 +4463,12 @@
       <pre class="lines">
 
 
-384
 385
-386</pre>
+386
+387</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 384</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 385</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_max_prime_within?'>max_prime_within?</span><span class='lparen'>(</span><span class='id identifier rubyid_number'>number</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_max_prime'>max_prime</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>?</span> <span class='kw'>false</span> <span class='op'>:</span> <span class='id identifier rubyid_max_prime'>max_prime</span> <span class='op'>&lt;=</span> <span class='id identifier rubyid_number'>number</span>
@@ -4549,12 +4549,12 @@
       <pre class="lines">
 
 
-516
 517
-518</pre>
+518
+519</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 516</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 517</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_mediant_sum'>mediant_sum</span><span class='lparen'>(</span><span class='id identifier rubyid_number'>number</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_antecedent'>antecedent</span> <span class='op'>+</span> <span class='id identifier rubyid_number'>number</span><span class='period'>.</span><span class='id identifier rubyid_numerator'>numerator</span><span class='comma'>,</span> <span class='id identifier rubyid_consequent'>consequent</span> <span class='op'>+</span> <span class='id identifier rubyid_number'>number</span><span class='period'>.</span><span class='id identifier rubyid_denominator'>denominator</span><span class='rparen'>)</span>
@@ -4616,12 +4616,12 @@
       <pre class="lines">
 
 
-375
 376
-377</pre>
+377
+378</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 375</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 376</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_min_prime'>min_prime</span>
   <span class='id identifier rubyid_prime_divisions'>prime_divisions</span><span class='period'>.</span><span class='id identifier rubyid_flatten'>flatten</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='symbol'>:first</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_min'>min</span>
@@ -5019,12 +5019,12 @@
       <pre class="lines">
 
 
-322
 323
-324</pre>
+324
+325</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 322</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 323</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_planar_degrees'>planar_degrees</span><span class='lparen'>(</span><span class='label'>round:</span> <span class='const'><span class='object_link'><a href="#PRECISION-constant" title="Tonal::Ratio::PRECISION (constant)">PRECISION</a></span></span><span class='rparen'>)</span>
   <span class='lparen'>(</span><span class='const'><span class='object_link'><a href="../Math.html" title="Math (module)">Math</a></span></span><span class='period'>.</span><span class='id identifier rubyid_atan2'>atan2</span><span class='lparen'>(</span><span class='id identifier rubyid_consequent'>consequent</span><span class='comma'>,</span> <span class='id identifier rubyid_antecedent'>antecedent</span><span class='rparen'>)</span> <span class='op'>*</span> <span class='int'>180</span><span class='op'>/</span><span class='const'><span class='object_link'><a href="../Math.html" title="Math (module)">Math</a></span></span><span class='op'>::</span><span class='const'>PI</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span><span class='lparen'>(</span><span class='id identifier rubyid_round'>round</span><span class='rparen'>)</span>
@@ -5103,12 +5103,12 @@
       <pre class="lines">
 
 
-331
 332
-333</pre>
+333
+334</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 332</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_planar_radians'>planar_radians</span><span class='lparen'>(</span><span class='label'>round:</span> <span class='const'><span class='object_link'><a href="#PRECISION-constant" title="Tonal::Ratio::PRECISION (constant)">PRECISION</a></span></span><span class='rparen'>)</span>
   <span class='const'><span class='object_link'><a href="../Math.html" title="Math (module)">Math</a></span></span><span class='period'>.</span><span class='id identifier rubyid_atan2'>atan2</span><span class='lparen'>(</span><span class='id identifier rubyid_consequent'>consequent</span><span class='comma'>,</span> <span class='id identifier rubyid_antecedent'>antecedent</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_round'>round</span><span class='lparen'>(</span><span class='id identifier rubyid_round'>round</span><span class='rparen'>)</span>
@@ -5194,13 +5194,13 @@
       <pre class="lines">
 
 
-458
 459
 460
-461</pre>
+461
+462</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 458</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 459</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_plus_minus'>plus_minus</span><span class='lparen'>(</span><span class='id identifier rubyid_other_ratio'>other_ratio</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_other_ratio'>other_ratio</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_other_ratio'>other_ratio</span><span class='rparen'>)</span>
@@ -5263,12 +5263,12 @@
       <pre class="lines">
 
 
-339
 340
-341</pre>
+341
+342</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 339</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 340</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_prime_divisions'>prime_divisions</span>
   <span class='lbracket'>[</span><span class='id identifier rubyid_antecedent'>antecedent</span><span class='period'>.</span><span class='id identifier rubyid_prime_division'>prime_division</span><span class='comma'>,</span> <span class='id identifier rubyid_consequent'>consequent</span><span class='period'>.</span><span class='id identifier rubyid_prime_division'>prime_division</span><span class='rbracket'>]</span>
@@ -5334,7 +5334,6 @@
       <pre class="lines">
 
 
-347
 348
 349
 350
@@ -5346,10 +5345,11 @@
 356
 357
 358
-359</pre>
+359
+360</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 347</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 348</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_prime_vector'>prime_vector</span>
   <span class='id identifier rubyid_pds'>pds</span> <span class='op'>=</span> <span class='id identifier rubyid_prime_divisions'>prime_divisions</span>
@@ -5512,13 +5512,13 @@
       <pre class="lines">
 
 
-301
 302
 303
-304</pre>
+304
+305</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 301</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 302</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_scale'>scale</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='op'>=</span><span class='id identifier rubyid_a'>a</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise_if_negative'>raise_if_negative</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span><span class='id identifier rubyid_b'>b</span><span class='rparen'>)</span>
@@ -5609,13 +5609,13 @@
       <pre class="lines">
 
 
-312
 313
 314
-315</pre>
+315
+316</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 312</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 313</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_shear'>shear</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span> <span class='id identifier rubyid_b'>b</span><span class='op'>=</span><span class='id identifier rubyid_a'>a</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise_if_negative'>raise_if_negative</span><span class='lparen'>(</span><span class='id identifier rubyid_a'>a</span><span class='comma'>,</span><span class='id identifier rubyid_b'>b</span><span class='rparen'>)</span>
@@ -5749,12 +5749,12 @@
       <pre class="lines">
 
 
-401
 402
-403</pre>
+403
+404</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 401</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 402</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_tenney_height'>tenney_height</span>
   <span class='const'><span class='object_link'><a href="../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="Log2.html" title="Tonal::Log2 (class)">Log2</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="Log.html#initialize-instance_method" title="Tonal::Log#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='label'>logarithmand:</span> <span class='id identifier rubyid_benedetti_height'>benedetti_height</span><span class='rparen'>)</span>
@@ -6347,11 +6347,7 @@
 </h3><div class="docstring">
   <div class="discussion">
     
-<h6 id="label-"></h6>
-
-<p>Ratio grid transformations numerator mapped on x-axis, denominator mapped on y-axis</p>
-
-<h6 id="label-"></h6>
+<p>Returns with the antecedent and consequent translated by x and y.</p>
 
 
   </div>
@@ -6421,13 +6417,13 @@
       <pre class="lines">
 
 
-290
 291
 292
-293</pre>
+293
+294</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 290</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 291</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_translate'>translate</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='op'>=</span><span class='int'>1</span><span class='comma'>,</span> <span class='id identifier rubyid_y'>y</span><span class='op'>=</span><span class='int'>0</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise_if_negative'>raise_if_negative</span><span class='lparen'>(</span><span class='id identifier rubyid_x'>x</span><span class='comma'>,</span><span class='id identifier rubyid_y'>y</span><span class='rparen'>)</span>
@@ -6490,12 +6486,12 @@
       <pre class="lines">
 
 
-411
 412
-413</pre>
+413
+414</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 411</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 412</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_weil_height'>weil_height</span>
   <span class='lbracket'>[</span><span class='id identifier rubyid_reduced_antecedent'>reduced_antecedent</span><span class='comma'>,</span> <span class='id identifier rubyid_reduced_consequent'>reduced_consequent</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_max'>max</span>
@@ -6557,12 +6553,12 @@
       <pre class="lines">
 
 
-428
 429
-430</pre>
+430
+431</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 428</span>
+      <pre class="code"><span class="info file"># File 'lib/tonal/ratio.rb', line 429</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wilson_height'>wilson_height</span><span class='lparen'>(</span><span class='label'>prime_rejects:</span> <span class='lbracket'>[</span><span class='int'>2</span><span class='rbracket'>]</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_benedetti_height'>benedetti_height</span><span class='period'>.</span><span class='id identifier rubyid_prime_division'>prime_division</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_p'>p</span><span class='op'>|</span> <span class='id identifier rubyid_prime_rejects'>prime_rejects</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span><span class='lparen'>(</span><span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span><span class='rparen'>)</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_sum'>sum</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_p'>p</span><span class='op'>|</span> <span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_first'>first</span> <span class='op'>*</span> <span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_last'>last</span> <span class='rbrace'>}</span>
@@ -6577,7 +6573,7 @@
 </div>
 
       <div id="footer">
-  Generated on Sat Dec 27 20:16:28 2025 by
+  Generated on Mon Dec 29 22:00:00 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.5).
 </div>
