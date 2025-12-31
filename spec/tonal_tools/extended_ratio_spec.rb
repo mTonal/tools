@@ -63,7 +63,7 @@ RSpec.describe Tonal::ExtendedRatio do
       expect(er.interval_between(0,2).ratio).to eq(3/2r)
     end
 
-    it "returns nil if the index is within the number of partials" do
+    it "returns nil if the index is not within the number of partials" do
       er = described_class.new(partials: [4, 5])
       expect(er.interval_between(0,2)).to be_nil
     end
