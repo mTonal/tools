@@ -101,6 +101,30 @@
         <li class="public ">
   <span class="summary_signature">
     
+      <a href="#er-instance_method" title="#er (instance method)">#<strong>er</strong>(**kwargs)  &#x21d2; Tonal::ExtendedRatio </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>An extended ratio.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
       <a href="#i-instance_method" title="#i (instance method)">#<strong>i</strong>(*args, reduced: true)  &#x21d2; Tonal::Interval </a>
     
 
@@ -170,6 +194,30 @@
 </li>
 
       
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#ser-instance_method" title="#ser (instance method)">#<strong>ser</strong>(**kwargs)  &#x21d2; Tonal::SubharmonicExtendedRatio </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'>
+<p>A subharmonic extended ratio.</p>
+</div></span>
+  
+</li>
+
+      
     </ul>
   
 
@@ -180,7 +228,74 @@
 
     
       <div class="method_details first">
-  <h3 class="signature first" id="i-instance_method">
+  <h3 class="signature first" id="er-instance_method">
+  
+    #<strong>er</strong>(**kwargs)  &#x21d2; <tt><span class='object_link'><a href="ExtendedRatio.html" title="Tonal::ExtendedRatio (class)">Tonal::ExtendedRatio</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns an extended ratio.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code>er(partials: [4,5,6]) =&gt; Tonal::ExtendedRatio with partials 4,5,6</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="ExtendedRatio.html" title="Tonal::ExtendedRatio (class)">Tonal::ExtendedRatio</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>an extended ratio</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+41
+42
+43</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/irb_helpers.rb', line 41</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_er'>er</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="ExtendedRatio.html" title="Tonal::ExtendedRatio (class)">ExtendedRatio</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ExtendableRatio.html#initialize-instance_method" title="Tonal::ExtendableRatio#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="i-instance_method">
   
     #<strong>i</strong>(*args, reduced: true)  &#x21d2; <tt><span class='object_link'><a href="Interval.html" title="Tonal::Interval (class)">Tonal::Interval</a></span></tt> 
   
@@ -500,12 +615,79 @@
 </table>
 </div>
     
+      <div class="method_details ">
+  <h3 class="signature " id="ser-instance_method">
+  
+    #<strong>ser</strong>(**kwargs)  &#x21d2; <tt><span class='object_link'><a href="SubharmonicExtendedRatio.html" title="Tonal::SubharmonicExtendedRatio (class)">Tonal::SubharmonicExtendedRatio</a></span></tt> 
+  
+
+  
+
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    
+<p>Returns a subharmonic extended ratio.</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+  <div class="examples">
+    <h4 class="tag_title">Examples:</h4>
+    
+      
+      <pre class="example code"><code>ser(partials: [4,5,6]) =&gt; Tonal::SubharmonicExtendedRatio with partials 4,5,6</code></pre>
+    
+  </div>
+
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt><span class='object_link'><a href="SubharmonicExtendedRatio.html" title="Tonal::SubharmonicExtendedRatio (class)">Tonal::SubharmonicExtendedRatio</a></span></tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>a subharmonic extended ratio</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+49
+50
+51</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/tonal/irb_helpers.rb', line 49</span>
+
+<span class='kw'>def</span> <span class='id identifier rubyid_ser'>ser</span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+  <span class='const'><span class='object_link'><a href="../Tonal.html" title="Tonal (module)">Tonal</a></span></span><span class='op'>::</span><span class='const'><span class='object_link'><a href="SubharmonicExtendedRatio.html" title="Tonal::SubharmonicExtendedRatio (class)">SubharmonicExtendedRatio</a></span></span><span class='period'>.</span><span class='id identifier rubyid_new'><span class='object_link'><a href="ExtendableRatio.html#initialize-instance_method" title="Tonal::ExtendableRatio#initialize (method)">new</a></span></span><span class='lparen'>(</span><span class='op'>**</span><span class='id identifier rubyid_kwargs'>kwargs</span><span class='rparen'>)</span>
+<span class='kw'>end</span></pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
   </div>
 
 </div>
 
       <div id="footer">
-  Generated on Mon Dec 29 22:00:00 2025 by
+  Generated on Tue Dec 30 23:45:13 2025 by
   <a href="https://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.38 (ruby-3.4.5).
 </div>
