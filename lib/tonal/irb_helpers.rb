@@ -33,13 +33,24 @@ module Tonal
     def i(*args, reduced: true)
       Tonal::Interval.new(*args, reduced:)
     end
+
+    # @return [Tonal::ExtendedRatio] an extended ratio
+    # @example
+    #   er(partials: [4,5,6]) => Tonal::ExtendedRatio with partials 4,5,6
+    #
+    def er(**kwargs)
+      Tonal::ExtendedRatio.new(**kwargs)
+    end
+
+    # @return [Tonal::SubharmonicExtendedRatio] a subharmonic extended ratio
+    # @example
+    #   ser(partials: [4,5,6]) => Tonal::SubharmonicExtendedRatio with partials 4,5,6
+    #
+    def ser(**kwargs)
+      Tonal::SubharmonicExtendedRatio.new(**kwargs)
+    end
   end
 
-  # @note
-  #   Intended for activation from +~/.irbrc+, by placing: +ENV["MTONAL_IRB_HELPERS" ] = "1"+, in the file
-  #
-  #   Invoking this command from the IRB will add the helper methods: +r+, +rr+, +i+ in +main+.
-  #   These methods represent {Tonal::Ratio}, {Tonal::ReducedRatio} and {Tonal::Interval} respectively.
   #
   # @see Tonal::IRBHelpers
   #
