@@ -227,6 +227,20 @@ class Numeric
   #   (3/2r).reciprocal => (2/3)
   #
   def reciprocal = Rational(1,self)
+
+  # @return [Numeric] self raised to the given power/root
+  # @example
+  #   (3/2r).pr(3,2) => 1.8371173070873836
+  # @param power
+  # @param root
+  #
+  def pr(power, root=nil)
+    if root
+      self**(Rational(power, root))
+    else
+      self**power
+    end
+  end
 end
 
 class Integer

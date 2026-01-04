@@ -223,6 +223,12 @@ RSpec.describe "Extensions" do
         expect((3/2r).reciprocal).to eq (2/3r)
       end
     end
+
+    describe "#pr" do
+      it "returns self raised to the given power/root" do
+        expect((3/2r).pr(3,2)).to eq 1.8371173070873836
+      end
+    end
   end
 
   describe "Rational extensions" do
