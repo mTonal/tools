@@ -152,7 +152,7 @@ class Numeric
   #   (133).interval_with(3/2r) => 133/96 (133/128 / 3/2)
   # @param other_ratio
   #
-  def interval_with(other_ratio) = Tonal::Interval.new(ratio, other_ratio)
+  def interval_with(other_ratio) = Tonal::Interval.new(self, other_ratio)
 
   # @return [Tonal::Interval] between 1/1 (lower) and self (upper)
   # @example
@@ -162,8 +162,7 @@ class Numeric
 
   # @return [Tonal::Cents] difference between ratio (upper) and self (lower)
   # @example
-  #   (133).cents_difference_with(3/2r)
-  #   => 635.62
+  #   (133).cents_difference_with(3/2r) => 635.62
   # @param other_ratio
   #
   def cents_difference_with(other_ratio) = interval_with(other_ratio).to_cents
@@ -230,16 +229,25 @@ class Numeric
 
   # @return [Numeric] self raised to the given power/root
   # @example
-  #   (3/2r).pr(3,2) => 1.8371173070873836
-  # @param power
-  # @param root
+  #   (3/2r).power(3,2) => 1.8371173070873832
+  # @param p the power
+  # @param r the root
   #
-  def pr(power, root=nil)
-    if root
-      self**(Rational(power, root))
+  def power(p, r=nil)
+    if r
+      (self.root(r))**p
     else
-      self**power
+      self**p
     end
+  end
+
+  # @return [Numeric] self raised to the given root
+  # @example
+  #   (3/2r).root(2) => 1.224744871391589
+  # @param r the root
+  #
+  def root(r)
+    self**Rational(1, r)
   end
 end
 

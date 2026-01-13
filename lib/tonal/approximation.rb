@@ -23,7 +23,7 @@ class Tonal::Ratio
     # @return [Tonal::Ratio::Approximation::Set] of ratios within cent tolerance of self found using continued fraction approximation
     # @example
     #   Tonal::Ratio.ed(12,1).approximate.by_continued_fraction
-    #   => (4771397596969315/4503599627370496): [(17/16), (18/17), (89/84), (196/185), (1461/1379), (1657/1564), (3118/2943), (7893/7450), (18904/17843)]
+    #   => 1.06: [17/16, 18/17, 89/84, 196/185, 1461/1379, 1657/1564, 3118/2943, 7893/7450, 18904/17843]
     # @param cents_tolerance the cents tolerance used to scope the collection
     # @param depth the maximum number of ratios in the collection
     # @param max_prime the maximum prime number to allow in the collection
@@ -43,8 +43,8 @@ class Tonal::Ratio
 
     # @return [Tonal::Ratio::Approximation::Set] of fraction tree ratios within cent tolerance of self
     # @example
-    #   Tonal::Ratio.ed(12,1).approximate.by_tree_path(max_prime: 17)
-    #   => (4771397596969315/4503599627370496): [(17/16), (18/17), (35/33)]
+    #   Tonal::Ratio.ed(12,1).approximate.by_tree_path
+    #   => 1.06: [17/16, 18/17, 35/33, 53/50, 71/67, 89/84, 107/101, 196/185, 285/269, 481/454]
     # @param cents_tolerance the cents tolerance used to scope the collection
     # @param depth the maximum number of ratios in the collection
     # @param max_prime the maximum prime number to allow in the collection
@@ -64,7 +64,7 @@ class Tonal::Ratio
     # @return [Tonal::Ratio::Approximation::Set] of superparticular approximations within cent tolerance of self
     # @example
     #   Tonal::Ratio.new(3/2r).approximate.by_superparticular
-    #   => (3/2): [(1041/692), (1044/694), (1047/696), (1050/698), (1053/700), (1056/702), (1059/704), (1062/706), (1065/708), (1068/710), (1071/712), (1074/714), (1077/716), (1080/718), (1083/720), (1086/722), (1089/724), (1092/726), (1095/728), (1098/730)]
+    #   => 3/2: [1041/692, 1044/694, 1047/696, 1050/698, 1053/700, 1056/702, 1059/704, 1062/706, 1065/708, 1068/710, 1071/712, 1074/714, 1077/716, 1080/718, 1083/720, 1086/722, 1089/724, 1092/726, 1095/728, 1098/730]
     # @param cents_tolerance the cents tolerance used to scope the collection
     # @param depth the maximum number of ratios in the collection
     # @param max_prime the maximum prime number to allow in the collection
@@ -86,8 +86,8 @@ class Tonal::Ratio
 
     # @return [Array] of ratios within cent tolerance of self found on the ratio grid
     # @example
-    #   Tonal::Ratio.new(3,2).approximate.by_neighborhood(max_prime: 23, cents_tolerance: 5, max_boundary: 10, max_scale: 60)
-    #   => (3/2): [(175/117), (176/117)]
+    #   Tonal::Ratio.new(3,2).approximate.by_neighborhood
+    #   => 3/2: [175/117, 178/119, 176/117, 181/121, 179/119, 184/123, 182/121, 187/125, 185/123, 190/127, 188/125]
     # @param cents_tolerance the cents tolerance used to scope the collection
     # @param depth the maximum number of ratios in the collection
     # @param max_prime the maximum prime number to allow in the collection
@@ -118,7 +118,7 @@ class Tonal::Ratio
     # @return [Array] of bounding ratios in the ratio grid vacinity of antecedent/consequent scaled by scale
     # @example
     #   Tonal::ReducedRatio.new(3,2).neighborhood(scale: 256, boundary: 2)
-    #     => [(768/514), (766/512), (768/513), (767/512), (768/512), (769/512), (768/511), (770/512), (768/510)]
+    #     => [766/514, 768/514, 767/513, 766/512, 768/513, 767/512, 770/514, 769/513, 768/512, 767/511, 769/512, 766/510, 768/511, 770/512, 769/511, 768/510, 770/510]
     # @param scale [Integer] used to scale antecedent/consequent on coordinate system
     # @param boundary [Integer] limit within which to calculate neighboring ratios
     #
@@ -135,7 +135,7 @@ class Tonal::Ratio
     # @return [Array] an array of Tonal::Ratio neighbors in the scaled ratio's grid neighborhood
     # @example
     #   Tonal::Ratio::Approximation.neighbors(vacinity: (3/2r).ratio(reduced:false).scale(256), away: 1)
-    #     => [(768/513), (767/512), (768/512), (769/512), (768/511)]
+    #     => [768/512, 769/512, 767/512, 768/513, 768/511, 769/513, 769/511, 767/513, 767/511]
     # @param away [Integer] the neighbors distance away from self's antecedent and consequent
     #
     def self.neighbors(vacinity:, away: 1)
@@ -165,6 +165,10 @@ class Tonal::Ratio
 
       def inspect
         "#{ratio}: #{entries}"
+      end
+
+      def [](index)
+        entries[index]
       end
 
       def sort_by(&)
