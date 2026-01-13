@@ -880,7 +880,15 @@ RSpec.describe Tonal::Ratio do
     let(:arg2) { nil }
 
     it "returns itself" do
-      expect(self).to eq self
+      expect(subject.ratio).to eq subject
+    end
+  end
+
+  describe "#approximate" do
+   let(:arg1) { 3/2r }
+    let(:arg2) { nil }
+    it "returns a Tonal::Ratio::Approximation" do
+      expect(subject.approximate).to be_a_kind_of(Tonal::Ratio::Approximation)
     end
   end
 
@@ -944,6 +952,36 @@ RSpec.describe Tonal::ReducedRatio do
   describe "#interval_with" do
     it "returns the interval between self (lower) and the given ratio (upper)" do
       expect(described_class.new(3/2r).interval_with(7/4r)).to eq Tonal::Interval.new(3/2r, 7/4r)
+    end
+  end
+
+  describe "#to_interval" do
+    it "returns the interval between self (lower) and the given ratio (upper)" do
+      expect(described_class.new(3/2r).to_interval).to eq Tonal::Interval.new(3/2r)
+    end
+  end
+
+  describe "#cents_difference_with" do
+    it "returns the cent difference between self and the given ratio" do
+      expect(described_class.new(3/2r).cents_difference_with(5/4r)).to eq 315.64
+    end
+  end
+
+  describe "#difference" do
+    it "returns the difference between numerator and denominator" do
+      expect(described_class.new(3/2r).difference).to eq 1
+    end
+  end
+
+  describe "#combination" do
+    it "returns the sum of numerator and denominator" do
+      expect(described_class.new(3/2r).combination).to eq 5
+    end
+  end
+
+  describe "#power" do
+    it "returns the ratio raised to the power of the given power and root" do
+      expect(described_class.new(3/2r).power(2, 1, approximant: 0)).to eq 9/8r
     end
   end
 

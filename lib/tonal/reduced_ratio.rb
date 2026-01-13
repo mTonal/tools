@@ -3,7 +3,7 @@ class Tonal::ReducedRatio < Tonal::Ratio
 
   # @return [Tonal::ReducedRatio]
   # @example
-  #   Tonal::ReducedRatio.new(12,2) => (3/2)
+  #   Tonal::ReducedRatio.new(12,2) => 3/2
   # @param antecedent [Numeric, Tonal::Ratio]
   # @param consequent [Numeric, Tonal::Ratio]
   # @param equave the interval of equivalence, default 2/1
@@ -33,11 +33,5 @@ class Tonal::ReducedRatio < Tonal::Ratio
     super
     @antecedent, @consequent = @reduced_antecedent, @reduced_consequent
     self
-  end
-end
-
-module ReducedRatio
-  def self.[](u, l=nil)
-    Tonal::ReducedRatio.new(u, l)
   end
 end

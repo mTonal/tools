@@ -12,7 +12,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio]
   # @example
-  #   Tonal::Ratio.new(3,2) => (3/2)
+  #   Tonal::Ratio.new(3,2) => 3/2
   # @param antecedent [Numeric, Tonal::Ratio]
   # @param consequent [Numeric, Tonal::Ratio]
   #
@@ -28,7 +28,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio] ratio who's numerator and denominator are seperated by a difference of 1
   # @example
-  #   Tonal::Ratio.superparticular(100) = (101/100)
+  #   Tonal::Ratio.superparticular(100) = 101/100
   # @param n [Integer] number from which the superior part is calculated
   # @param factor [Rational] multiplied into the resulting ratio, default 1/1
   # @param superpart [Symbol] assigning the superior part to the antecedent or consequent
@@ -39,7 +39,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio] ratio who's numerator and denominator are separated by a summand difference
   # @example
-  #   Tonal::Ratio.superpartient(23, summand: 3) => (26/23)
+  #   Tonal::Ratio.superpartient(23, summand: 3) => 26/23
   # @param n [Integer] number from which the superior part is calculated
   # @param summand [Integer] term added to the superior part
   # @param factor [Rational] multiplied into the resulting ratio, default 1/1
@@ -56,11 +56,12 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio] a randomly generated ratio
   # @example
-  #   Tonal::Ratio.random_ratio => (169/1)
-  # @param number_of_factors
-  # @param within
+  #   Tonal::Ratio.random_ratio => 169/1
+  # @param number_of_factors  the number of prime factors to include in the ratio
+  # @param within the upper limit for prime factors
+  # @param reduced boolean determining whether to use Tonal::ReducedRatio or Tonal::Ratio
   #
-  def self.random_ratio(number_of_factors = 2, within: 100, reduced: false)
+  def self.random_ratio(number_of_factors = 2, within: 100, reduced: (self == Tonal::ReducedRatio) ? true : false)
     primes = Prime.each(within).to_a
     nums = []
     dens = []
@@ -73,11 +74,10 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio] the ratio of step in the modulo
   # @example
-  #   Tonal::Ratio.ed(12, 7)
-  #     => (4771397596969315/4503599627370496)
-  # @param modulo
-  # @param step
-  # @param equave
+  #   Tonal::Ratio.ed(12, 7) => 1.5
+  # @param modulo the number of steps in the equal division
+  # @param step the step number in the equal division of the equave
+  # @param equave the interval of equivalence, default 2/1
   #
   def self.ed(modulo, step, equave: 2/1r)
     self.new(2**(step.to_f/modulo), equave: equave)
@@ -108,7 +108,7 @@ class Tonal::Ratio
   end
 
   # ==================================
-  # Conversions
+  # Conversions, mappings and measurements
   # ==================================
 
   # @return [Array] antecedent and consequent as elements of Array
@@ -143,6 +143,7 @@ class Tonal::Ratio
   def to_f
     antecedent.to_f / consequent.to_f
   end
+  alias :number :to_f
 
   # @return [Tonal::Log] Math.log of self in given base
   # @example
@@ -200,7 +201,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio] copy of self rationally reduced
   # @example
-  #   Tonal::Ratio.new(16,14).fraction_reduce => (8/7)
+  #   Tonal::Ratio.new(16,14).fraction_reduce => 8/7
   # @see to_r
   #
   def fraction_reduce
@@ -209,7 +210,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio] copy of self reduced to the given equave
   # @example
-  #   Tonal::Ratio.new(48,14).equave_reduce(3) => (8/7)
+  #   Tonal::Ratio.new(48,14).equave_reduce(3) => 8/7
   # @param equave Numeric
   #
   def equave_reduce(equave=2/1r)
@@ -220,7 +221,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio] self reduced to the given equave
   # @example
-  #   Tonal::Ratio.new(48,14).equave_reduce!(3) => (8/7)
+  #   Tonal::Ratio.new(48,14).equave_reduce!(3) => 8/7
   # @param equave Numeric
   #
   def equave_reduce!(equave=2/1r)
@@ -232,7 +233,7 @@ class Tonal::Ratio
 
   # @return [Tonal::ReducedRatio] of self
   # @example
-  #   Tonal::Ratio.new(1,9).to_reduced_ratio => (16/9)
+  #   Tonal::Ratio.new(1,9).to_reduced_ratio => 16/9
   #
   def to_reduced_ratio
     Tonal::ReducedRatio.new(reduced_antecedent, reduced_consequent, equave: equave)
@@ -241,7 +242,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio] copy of self with the antecedent and precedent switched
   # @example
-  #   Tonal::Ratio.new(3,2).invert => (2/3)
+  #   Tonal::Ratio.new(3,2).invert => 2/3
   #
   def invert
     self.class.new(consequent, antecedent)
@@ -251,7 +252,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio] with antecedent and precedent switched
   # @example
-  #   Tonal::Ratio.new(3,2).invert! => (2/3)
+  #   Tonal::Ratio.new(3,2).invert! => 2/3
   #
   def invert!
     _initialize(consequent, antecedent, label: label, equave: equave)
@@ -260,7 +261,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio] the mirror of self along the axis (default 1/1)
   # @example
-  #   Tonal::ReducedRatio.new(4,3).mirror => (3/2)
+  #   Tonal::ReducedRatio.new(4,3).mirror => 3/2
   # @param axis
   #
   def mirror(axis=1/1r)
@@ -269,7 +270,7 @@ class Tonal::Ratio
 
   # @return [Tonal::ReducedRatio] the Ernst Levy negative of self
   # @example
-  #   Tonal::ReducedRatio.new(7/4r).negative => (12/7)
+  #   Tonal::ReducedRatio.new(7/4r).negative => 12/7
   #
   def negative
     self.class.new(3/2r) / self
@@ -281,10 +282,9 @@ class Tonal::Ratio
   # denominator mapped on y-axis
   # ==================================
   #
-
   # @return [Tonal::Ratio] with the antecedent and consequent translated by x and y
   # @example
-  #   Tonal::Ratio.new(3,2).translate(3,3) => (6/5)
+  #   Tonal::Ratio.new(3,2).translate(3,3) => 6/5
   # @param x [Numeric]
   # @param y [Numeric]
   #
@@ -295,7 +295,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio] self scaled by given arguments
   # @example
-  #   Tonal::Ratio.new(3,2).scale(2**5) => (96/64)
+  #   Tonal::Ratio.new(3,2).scale(2**5) => 96/64
   # @param a [Numeric]
   # @param b [Numeric]
   #
@@ -306,7 +306,7 @@ class Tonal::Ratio
 
   # @return [Tonal::Ratio] self sheared by given arguments
   # @example
-  #   Tonal::Ratio.new(3,2).shear(1, 3) => (14/11)
+  #   Tonal::Ratio.new(3,2).shear(1, 3) => 14/11
   # @param a [Numeric]
   # @param b [Numeric]
   #
@@ -471,59 +471,6 @@ class Tonal::Ratio
     cents - other_ratio.ratio.cents
   end
 
-  # @return [String] symbolic representation of Tonal::Ratio
-  #
-  def label
-    # Return label, if defined; or see inspect
-    @label || inspect
-  end
-
-  # @return [String] the string representation of Tonal::Ratio
-  # @example
-  #   Tonal::Ratio.new(3, 2).inspect => "(3/2)"
-  #
-  def inspect
-    # Return the "antecedent/consequent", if antecedent is less than 7 digits long; or
-    # Return the floating point representation rounded to PRECISION digits
-    ((Math.log10(antecedent).to_i + 1) <= 6 ? "#{antecedent}/#{consequent}" : "#{to_f.round(PRECISION)}")
-  end
-  alias :to_s :inspect
-
-  def +(rhs)
-    operate(rhs, :+)
-  end
-
-  def -(rhs)
-    operate(rhs, :-)
-  end
-
-  def *(rhs)
-    operate(rhs, :*)
-  end
-
-  def /(rhs)
-    operate(rhs, :/)
-  end
-
-  def **(rhs)
-    operate(rhs, :**)
-  end
-
-  # @return [Tonal::Ratio] the mediant (Farey) sum of self and another number
-  # @example
-  #   Tonal::Ratio.new(3,2).mediant_sum(4/3r) => (7/5)
-  # @param number [Numeric, Tonal::Ratio]
-  #
-  def mediant_sum(number)
-    self.class.new(antecedent + number.numerator, consequent + number.denominator)
-  end
-  alias :mediant :mediant_sum
-  alias :farey_sum :mediant_sum
-
-  # ==================================
-  # Measurements
-  # ==================================
-
   # @return [Integer] the least common multiple with self's denominator and the given number's denominator
   # @example
   #   Tonal::Ratio.new(3/2r).lcm(5/4r) => 4
@@ -543,6 +490,15 @@ class Tonal::Ratio
   def interval_with(upper, lower=nil)
     r = self.class.new(upper, lower)
     Tonal::Interval.new(self, r)
+  end
+
+  # @return [Tonal::Interval] between 1/1 and self
+  # @example
+  #   Tonal::ReducedRatio.new(3,2).to_interval
+  #   => (3/2) ((3/2) / (1/1))
+  #
+  def to_interval
+    Tonal::Interval.new(self, 1/1r)
   end
 
   # @return [Tonal::Cents] difference between ratio (upper) and self (lower)
@@ -574,6 +530,106 @@ class Tonal::Ratio
   end
   alias :comb :combination
 
+  # @return [Tonal::Ratio] self raised to the given power and root
+  # @example
+  #   Tonal::ReducedRatio.new(3,2).power(2) => 9/8
+  # @param power [Numeric]
+  # @param root [Numeric, nil]
+  # @param approximant [Integer] the index of the approximant to use
+  # @param by_method [Symbol] the method used to calculate approximation of the root intervalic ratio
+  # @param from [Symbol] whether to calculate the root interval from the lower or upper ratio of the interval
+  #
+  def power(power, root=nil, approximant: 0, by_method: :continued_fraction, from: :lower_ratio)
+    to_interval.root_interval(power:, root:, approximant:, by_method:, from:).intervalic_ratio
+  end
+
+  # ==================================
+  # Display
+  # ==================================
+
+  # @return [String] symbolic representation of Tonal::Ratio
+  #
+  def label
+    # Return label, if defined; or see inspect
+    @label || inspect
+  end
+
+  # @return [String] the string representation of Tonal::Ratio
+  # @example
+  #   Tonal::Ratio.new(3, 2).inspect => "3/2"
+  #
+  def inspect
+    # Return the "antecedent/consequent", if antecedent is less than 7 digits long; or
+    # Return the floating point representation rounded to PRECISION digits
+    ((Math.log10(antecedent).to_i + 1) <= 6 ? "#{antecedent}/#{consequent}" : "#{to_f.round(PRECISION)}")
+  end
+  alias :to_s :inspect
+
+  # ==================================
+  # Arithmetic operations
+  # ==================================
+
+  # @return [Tonal::Ratio] result of adding self and rhs
+  # @example
+  #   Tonal::Ratio.new(3,2) + Tonal::Ratio.new(4,3) => (17/12)
+  # @param rhs [Numeric, Tonal::Ratio]
+  #
+  def +(rhs)
+    operate(rhs, :+)
+  end
+
+  # @return [Tonal::Ratio] result of subtracting rhs from self
+  # @example
+  #   Tonal::Ratio.new(3,2) - Tonal::Ratio.new(4,3) => (1/6)
+  # @param rhs [Numeric, Tonal::Ratio]
+  #
+  def -(rhs)
+    operate(rhs, :-)
+  end
+
+  # @return [Tonal::Ratio] result of multiplying self and rhs
+  # @example
+  #   Tonal::Ratio.new(3,2) * Tonal::Ratio.new(4,3) => (2/1)
+  # @param rhs [Numeric, Tonal::Ratio]
+  #
+  def *(rhs)
+    operate(rhs, :*)
+  end
+
+  # @return [Tonal::Ratio] result of dividing self by rhs
+  # @example
+  #   Tonal::Ratio.new(3,2) / Tonal::Ratio.new(4,3) => (9/8)
+  # @param rhs [Numeric, Tonal::Ratio]
+  #
+  def /(rhs)
+    operate(rhs, :/)
+  end
+
+  # @return [Tonal::Ratio] result of raising self to the rhs power
+  # @example
+  #   Tonal::Ratio.new(3,2) ** 2 => (9/4)
+  # @param rhs [Numeric, Tonal::Ratio]
+  #
+  def **(rhs)
+    operate(rhs, :**)
+  end
+
+  # @return [Tonal::Ratio] the mediant (Farey) sum of self and another number
+  # @example
+  #   Tonal::Ratio.new(3,2).mediant_sum(4/3r) => (7/5)
+  # @param number [Numeric, Tonal::Ratio]
+  #
+  def mediant_sum(number)
+    self.class.new(antecedent + number.numerator, consequent + number.denominator)
+  end
+  alias :mediant :mediant_sum
+  alias :farey_sum :mediant_sum
+
+  # @return [Integer] comparison of self to rhs
+  # @example
+  #   Tonal::Ratio.new(3,2) <=> Tonal::Ratio.new(4,3) => 1
+  # @param rhs [Tonal::Ratio]
+  #
   def <=>(rhs)
     left = consequent == 0 ? Float::INFINITY : Rational(antecedent, consequent)
     right = rhs.denominator == 0 ? Float::INFINITY : Rational(rhs.numerator, rhs.denominator)
@@ -636,11 +692,5 @@ class Tonal::Ratio
     when :**
       klass.new(Rational(antecedent, consequent) ** rhs.to_r)
     end
-  end
-end
-
-module Ratio
-  def self.[](u, l=nil)
-    Tonal::Ratio.new(u, l)
   end
 end

@@ -60,7 +60,7 @@ RSpec.describe Tonal::ExtendedRatio do
   describe "#interval_between" do
     it "returns the interval between two partials" do
       er = described_class.new(partials: [4, 5, 6])
-      expect(er.interval_between(0,2).ratio).to eq(3/2r)
+      expect(er.interval_between(0,2).intervalic_ratio).to eq(4/3r)
     end
 
     it "returns nil if the index is not within the number of partials" do
@@ -126,7 +126,7 @@ describe Tonal::SubharmonicExtendedRatio do
   describe "#interval_between" do
     it "returns the interval between two partials" do
       ser = described_class.new(partials: [105, 84, 70, 60])
-      expect(ser.interval_between(0,2).ratio).to eq(3/2r)
+      expect(ser.interval_between(0,2).intervalic_ratio).to eq(4/3r)
     end
   end
 

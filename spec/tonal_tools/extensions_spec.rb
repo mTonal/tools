@@ -180,13 +180,13 @@ RSpec.describe "Extensions" do
 
     describe "#to_interval" do
       it "returns the interval between 1/1 and self" do
-        expect((3/2r).to_interval).to eq Tonal::Interval.new(1/1r, 3/2r)
+        expect((3/2r).to_interval).to eq Tonal::Interval.new(3/2r, 1/1r)
       end
     end
 
     describe "#cents_difference_with" do
       it "returns the cents difference between self and the given ratio" do
-        expect((1/1r).cents_difference_with(3/2r)).to eq 701.96
+        expect((3/2r).cents_difference_with(1/1r)).to eq 701.96
       end
     end
 
@@ -224,9 +224,15 @@ RSpec.describe "Extensions" do
       end
     end
 
-    describe "#pr" do
+    describe "#root" do
+      it "returns self raised to the given root" do
+        expect((3/2r).root(2)).to eq 1.224744871391589
+      end
+    end
+
+    describe "#power" do
       it "returns self raised to the given power/root" do
-        expect((3/2r).pr(3,2)).to eq 1.8371173070873836
+        expect((3/2r).power(3,2)).to eq 1.8371173070873832
       end
     end
   end
@@ -365,7 +371,7 @@ RSpec.describe "Extensions" do
 
       context "with one element" do
         it "takes the first element as the upper ratio and 1/1 as the lower ratio" do
-          expect([3].to_interval).to eq Tonal::Interval.new(1/1r, 3/2r)
+          expect([3].to_interval).to eq Tonal::Interval.new(3/2r, 1/1r)
         end
       end
     end
