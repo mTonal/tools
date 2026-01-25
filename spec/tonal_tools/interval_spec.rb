@@ -158,7 +158,7 @@ RSpec.describe Tonal::Interval do
     end
 
     describe "#approximate" do
-      let(:arg) { 2.edo(12) }
+      let(:arg) { 2.ed(12) }
 
       it "returns the intervalic ratio approximated by the continued fraction method within a cents tolerance" do
         expect(described_class.new(arg).approximate.intervalic_ratio).to eq 9/8r

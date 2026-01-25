@@ -95,7 +95,44 @@ class Tonal::Cents
   end
   alias :to_s :inspect
 
+  # Operator overloads
   #
+  # @return [Tonal::Cents, Numeric] result of operation
+  # @example
+  #   Tonal::Cents.new(cents: 200) - Tonal::Cents.new(cents: 100) => 100.0
+  # @param rhs [Tonal::Cents, Numeric]
+  #
+  def -(rhs)
+    method_missing(:-, rhs)
+  end
+
+  # @return [Tonal::Cents, Numeric] result of operation
+  # @example
+  #   Tonal::Cents.new(cents: 100) + Tonal::Cents.new(cents: 200) => 300.0
+  # @param rhs [Tonal::Cents, Numeric]
+  #
+  def +(rhs)
+    method_missing(:+, rhs)
+  end
+
+  # @return [Tonal::Cents, Numeric] result of operation
+  # @example
+  #  Tonal::Cents.new(cents: 200) * 2 => 400.0
+  # @param rhs [Tonal::Cents, Numeric]
+  #
+  def *(rhs)
+    method_missing(:*, rhs)
+  end
+
+  # @return [Tonal::Cents, Numeric] result of operation
+  # @example
+  #   Tonal::Cents.new(cents: 400) / 2 => 200.0
+  # @param rhs [Tonal::Cents, Numeric]
+  #
+  def /(rhs)
+    method_missing(:/, rhs)
+  end
+
   # Challenges to comparing floats
   # https://www.rubydoc.info/gems/rubocop/RuboCop/Cop/Lint/FloatComparison
   # https://embeddeduse.com/2019/08/26/qt-compare-two-floats/

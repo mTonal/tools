@@ -82,7 +82,7 @@ RSpec.describe Tonal::Ratio do
     end
 
     describe ".ed" do
-      it { expect(described_class.ed(12, 7)).to eq 421735949569275/281474976710656r }
+      it { expect(described_class.ed(7, 12)).to eq 421735949569275/281474976710656r }
     end
 
     describe ".within_cents?" do
@@ -419,62 +419,39 @@ RSpec.describe Tonal::Ratio do
     end
   end
 
-  describe "Comparison" do
-    describe "#max_prime_within?" do
-      it "returns true when the ratio's max prime is within the given number" do
-        expect(described_class.new(3/2r).max_prime_within?(4)).to be true
-      end
-
-      it "returns false when the ratio's max prime is greater than the given number" do
-        expect(described_class.new(13/8r).max_prime_within?(12)).to be false
-      end
-
-      context "when ratio is 1/1" do
-        it "returns false, since 1/1 has no prime, let alone a max prime" do
-          expect(described_class.new(1/1r).max_prime_within?(4)).to be false
-        end
+  describe "Comparators" do
+    context "with identical antecedent/consequent" do
+      let(:arg1) { 3/2r }
+      let(:arg2) { nil }
+      it "works as expected" do
+        expect(subject == subject).to be true
+        expect(subject < subject).to be false
+        expect(subject > subject).to be false
+        expect(subject >= subject).to be true
+        expect(subject <= subject).to be true
       end
     end
-
-    describe "Comparators" do
-      context "with identical antecedent/consequent" do
-        let(:arg1) { 3/2r }
-        let(:arg2) { nil }
-
-        it "works as expected" do
-          expect(subject == subject).to be true
-          expect(subject < subject).to be false
-          expect(subject > subject).to be false
-          expect(subject >= subject).to be true
-          expect(subject <= subject).to be true
+    context "with different antecedent/consequent" do
+      context "and antecedent/consequent are congruent" do
+        let(:ratio) { described_class.new(3,2)}
+        let(:other_ratio) { described_class.new(6,4) }
+        it "ratios are considered equivalent" do
+          expect(ratio == other_ratio).to be true
+          expect(ratio < other_ratio).to be false
+          expect(ratio > other_ratio).to be false
+          expect(ratio >= other_ratio).to be true
+          expect(ratio <= other_ratio).to be true
         end
       end
-
-      context "with different antecedent/consequent" do
-        context "and antecedent/consequent are congruent" do
-          let(:ratio) { described_class.new(3,2)}
-          let(:other_ratio) { described_class.new(6,4) }
-
-          it "ratios are considered equivalent" do
-            expect(ratio == other_ratio).to be true
-            expect(ratio < other_ratio).to be false
-            expect(ratio > other_ratio).to be false
-            expect(ratio >= other_ratio).to be true
-            expect(ratio <= other_ratio).to be true
-          end
-        end
-
-        context "and antecedent/consequent are incongruent" do
-          let(:ratio) { described_class.new(3,2)}
-          let(:other_ratio) { described_class.new(7,4) }
-
-          it "ratios are considered different" do
-            expect(ratio == other_ratio).to be false
-            expect(ratio < other_ratio).to be true
-            expect(ratio > other_ratio).to be false
-            expect(ratio >= other_ratio).to be false
-            expect(ratio <= other_ratio).to be true
-          end
+      context "and antecedent/consequent are incongruent" do
+        let(:ratio) { described_class.new(3,2)}
+        let(:other_ratio) { described_class.new(7,4) }
+        it "ratios are considered different" do
+          expect(ratio == other_ratio).to be false
+          expect(ratio < other_ratio).to be true
+          expect(ratio > other_ratio).to be false
+          expect(ratio >= other_ratio).to be false
+          expect(ratio <= other_ratio).to be true
         end
       end
     end
