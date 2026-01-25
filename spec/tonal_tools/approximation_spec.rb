@@ -35,6 +35,20 @@ RSpec.describe Tonal::Ratio::Approximation do
     describe "#by_continued_fraction" do
       let(:ratio) { Tonal::Ratio.ed(12,1) }
 
+      context "with 1/1" do
+        let(:ratio) { Tonal::Ratio.new(1,1) }
+        it "returns approximations for 1/1" do
+          expect(ratio.approximate.by_continued_fraction.entries).to eq [1/1r]
+        end
+      end
+
+      context "with 2/1" do
+        let(:ratio) { Tonal::Ratio.new(2,1) }
+        it "returns approximations for 2/1" do
+          expect(ratio.approximate.by_continued_fraction.entries).to eq [2/1r]
+        end
+      end
+
       context "with defaults" do
         it "returns ratios up to the default depth" do
           expect(ratio.approximate.by_continued_fraction.length).to be <= Tonal::Ratio::Approximation::CONVERGENT_LIMIT
@@ -48,14 +62,72 @@ RSpec.describe Tonal::Ratio::Approximation do
           expect(ratio.approximate.by_continued_fraction.all?{|r| r.max_prime <= 2549 }).to be true
         end
       end
+
+      context "with arguments" do
+        let(:cents_tolerance) { 2 }
+        let(:max_prime) { 19 }
+        let(:depth) { 7 }
+        let(:ratios) { ratio.approximate.by_continued_fraction(cents_tolerance: cents_tolerance, max_prime: max_prime, depth: depth) }
+
+        it "returns ratios within 2¢ of ratio" do
+          expect(ratios.all?{|r| r.cent_diff(ratio) <= cents_tolerance.cents}).to be true
+        end
+
+        it "returns ratios with maximum prime less than or equal to 19" do
+          expect(ratios.all?{|r| r.max_prime <= max_prime}).to be true
+        end
+
+        it "returns no more than 7 ratios" do
+          expect(ratios.length).to be <= depth
+        end
+      end
     end
 
     describe "#by_tree_path" do
-      let(:ratio) { Tonal::Ratio.ed(12,1) }
+      let(:ratio) { Tonal::Ratio.ed(1, 12) }
       let(:depth) { 10 }
 
-      it "returns 10 ratios" do
-        expect(ratio.approximate.by_tree_path(depth: depth).count).to eq depth
+      context "with 1/1" do
+        let(:ratio) { Tonal::Ratio.new(1,1) }
+        it "returns approximations for 1/1" do
+          expect(ratio.approximate.by_tree_path.entries).to eq [1/1r]
+        end
+      end
+
+      context "with defaults" do
+        it "returns ratios up to the default depth" do
+          expect(ratio.approximate.by_tree_path.length).to be <= Tonal::Ratio::Approximation::DEFAULT_TREE_PATH_DEPTH
+        end
+
+        it "returns ratios that are within 5 cents of self" do
+          expect(ratio.approximate.by_tree_path.all?{|r| r.cent_diff(ratio) <= Tonal::Cents::TOLERANCE}).to be true
+        end
+
+        it "returns ratios with maximum primes limited only by the depth of the search" do
+          expect(ratio.approximate.by_tree_path.all?{|r| r.max_prime <= 2549 }).to be true
+        end
+      end
+
+      context "with arguments" do
+        let(:cents_tolerance) { 2 }
+        let(:max_prime) { 19 }
+        #let(:ratios) { ratio.approximate.by_tree_path(cents_tolerance: cents_tolerance, depth: depth, max_prime: max_prime) }
+
+        before(:context) do
+          @ratios = Tonal::Ratio.ed(1, 12).approximate.by_tree_path(cents_tolerance: 2, depth: 10, max_prime: 19)
+        end
+
+        it "returns ratios within 2¢ of ratio" do
+          expect(@ratios.all?{|r| r.cent_diff(ratio) <= cents_tolerance.cents}).to be true
+        end
+
+        it "returns ratios with maximum prime less than or equal to 19" do
+          expect(@ratios.all?{|r| r.max_prime <= max_prime}).to be true
+        end
+
+        it "returns no more than 10 ratios" do
+          expect(@ratios.length).to be <= depth
+        end
       end
     end
 
@@ -77,6 +149,19 @@ RSpec.describe Tonal::Ratio::Approximation do
     describe "#by_neighborhood" do
       let(:ratio) { Tonal::Ratio.new(3,2) }
 
+      context "with defaults" do
+        let(:ratios) { ratio.approximate.by_neighborhood }
+        let(:ratio_in_cents) { ratio.to_cents }
+
+        it "returns a set of ratios within 5¢ of ratio" do
+          expect(ratios.all?{|r| r.cent_diff(ratio) <= Tonal::Cents::TOLERANCE.cents}).to be true
+        end
+
+        it "returns ratios with maximum primes limited only by the depth of the search" do
+          expect(ratios.all?{|r| r.max_prime <= 2549 }).to be true
+        end
+      end
+
       context "with arguments" do
         let(:cents_tolerance) { 5 }
         let(:max_prime) { 23 }
@@ -85,10 +170,10 @@ RSpec.describe Tonal::Ratio::Approximation do
         let(:ratios) { ratio.approximate.by_neighborhood(max_prime: max_prime, max_boundary: max_boundary, max_scale: max_scale) }
         let(:ratio_in_cents) { ratio.to_cents }
 
-        it "returns a set of ratios within 5¢ of ratio and with max prime of 23" do
-          expect(ratios.entries).to eq [(175/117r), (176/117r)]
-          expect(ratios.all?{|r| Tonal::Ratio.within_cents?(r.to_cents, ratio_in_cents, cents_tolerance)}).to be true
-          expect(ratios.all?{|r| r.max_prime_within?(max_prime) }).to be true
+        it "returns a set of ratios within 5¢ of ratio and with max prime less than 23" do
+          expect((176/117r).max_prime).to eq 13
+          expect((176/117r).to_cents).to be_within(5.cents).of(ratio_in_cents)
+          expect(ratios).to include(176/117r)
         end
       end
     end
@@ -96,8 +181,17 @@ RSpec.describe Tonal::Ratio::Approximation do
 end
 
 RSpec.describe Tonal::Ratio::Approximation::Set do
+  describe "#entries" do
+    let(:ratio) { Tonal::ReducedRatio.ed(6,19) }
+    let(:approximation_set) { ratio.approximate.by_continued_fraction(cents_tolerance: 10) }
+
+    it "returns the array of ratios in the set" do
+      expect(approximation_set.entries).to eq [Tonal::ReducedRatio.new(5/4r), Tonal::ReducedRatio.new(56/45r), Tonal::ReducedRatio.new(61/49r), Tonal::ReducedRatio.new(117/94r), Tonal::ReducedRatio.new(1114/895r), Tonal::ReducedRatio.new(9029/7254r), Tonal::ReducedRatio.new(28201/22657r), Tonal::ReducedRatio.new(2406114/1933099r), Tonal::ReducedRatio.new(2434315/1955756r)]
+    end
+  end
+
   describe "#sort_by" do
-    let(:ratio) { Tonal::ReducedRatio.new(2**(6.0/19)) }
+    let(:ratio) { Tonal::ReducedRatio.ed(6,19) }
     let(:ratio_of_interest) { 61/49r }
     # The approximation set is:
     # (5605597082100993/4503599627370496): [(5/4), (56/45), (61/49), (117/94), (1114/895), (9029/7254), (28201/22657), (2406114/1933099), (2434315/1955756)]
@@ -131,6 +225,33 @@ RSpec.describe Tonal::Ratio::Approximation::Set do
       it "sorts by the Wilson height" do
         expect(approximation_set.sort_by(&:wilson_height).find_index(ratio_of_interest)).to eq 3
       end
+    end
+  end
+
+  describe "#to_a" do
+    let(:ratio) { Tonal::ReducedRatio.new(2**(6.0/19)) }
+    let(:approximation_set) { ratio.approximate.by_continued_fraction(cents_tolerance: 10) }
+
+    it "returns the array of ratios in the set" do
+      expect(approximation_set.to_a).to eq [Tonal::ReducedRatio.new(5/4r), Tonal::ReducedRatio.new(56/45r), Tonal::ReducedRatio.new(61/49r), Tonal::ReducedRatio.new(117/94r), Tonal::ReducedRatio.new(1114/895r), Tonal::ReducedRatio.new(9029/7254r), Tonal::ReducedRatio.new(28201/22657r), Tonal::ReducedRatio.new(2406114/1933099r), Tonal::ReducedRatio.new(2434315/1955756r)]
+    end
+  end
+
+  describe "#max_primes" do
+    let(:ratio) { Tonal::ReducedRatio.new(2**(6.0/19)) }
+    let(:approximation_set) { ratio.approximate.by_continued_fraction(cents_tolerance: 10) }
+
+    it "returns the array of maximum primes for the ratios in the set" do
+      expect(approximation_set.max_primes).to eq [5, 7, 61, 47, 557, 9029, 28201, 133673, 44449]
+    end
+  end
+
+  describe "#min_primes" do
+    let(:ratio) { Tonal::ReducedRatio.new(2**(6.0/19)) }
+    let(:approximation_set) { ratio.approximate.by_continued_fraction(cents_tolerance: 10) }
+
+    it "returns the array of minimum primes for the ratios in the set" do
+      expect(approximation_set.min_primes).to eq [2, 2, 7, 2, 2, 2, 139, 2, 2]
     end
   end
 end

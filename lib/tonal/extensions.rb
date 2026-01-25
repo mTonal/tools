@@ -256,10 +256,11 @@ class Integer
 
   # @return [Tonal::ReducedRatio] the ratio 2**(self/modulo)
   # @example
-  #   1.edo(12) => 1.06
+  #   1.ed(12) => 1.06
   # @param modulo
+  # @param equave
   #
-  def edo(modulo) = (2**(Rational(self,modulo))).to_reduced_ratio
+  def ed(modulo, equave: 2/1r) = Tonal::ReducedRatio.ed(self, modulo, equave: equave)
 
   # @return [Integer] the maximum prime factor of self
   # @example

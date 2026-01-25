@@ -258,9 +258,9 @@ RSpec.describe "Extensions" do
       end
     end
 
-    describe "#edo" do
+    describe "#ed" do
       it "returns the numeric 2**(self/modulo)" do
-        expect(1.edo(12)).to eq 1.0594630943592953
+        expect(1.ed(12)).to eq 1.0594630943592953
       end
     end
 

@@ -1,10 +1,11 @@
 class Tonal::Ratio
   class Approximation
+    DEFAULT_MIN_PRIME = 2
     DEFAULT_MAX_PRIME = Float::INFINITY
     DEFAULT_MAX_GRID_SCALE = 100
     DEFAULT_MAX_GRID_BOUNDARY = 5
     DEFAULT_DEPTH = Float::INFINITY
-    DEFAULT_FRACTION_TREE_DEPTH = 10
+    DEFAULT_TREE_PATH_DEPTH = 10
     DEFAULT_SUPERPART_DEPTH = 20
     DEFAULT_NEIGHBORHOOD_DEPTH = 10
     DEFAULT_COMPLEXITY_AMOUNT = 50.0
@@ -27,15 +28,17 @@ class Tonal::Ratio
     # @param cents_tolerance the cents tolerance used to scope the collection
     # @param depth the maximum number of ratios in the collection
     # @param max_prime the maximum prime number to allow in the collection
+    # @param min_prime the minimum prime number to allow in the collection
     # @param conv_limit the number of convergents to limit the ContinuedFraction method
     #
-    def by_continued_fraction(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_DEPTH, max_prime: DEFAULT_MAX_PRIME, conv_limit: CONVERGENT_LIMIT)
+    def by_continued_fraction(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_DEPTH, max_prime: DEFAULT_MAX_PRIME, min_prime: DEFAULT_MIN_PRIME, conv_limit: CONVERGENT_LIMIT)
+      return Set.new(ratio: ratio){|ratios| ratios << ratio} if (antecedent == 1) && (consequent == 1)
       self_in_cents = to_cents
       within = cents_tolerance.kind_of?(Tonal::Cents) ? cents_tolerance : Tonal::Cents.new(cents: cents_tolerance)
       Set.new(ratio: ratio) do |ratios|
         ContinuedFraction.new(antecedent.to_f/consequent, conv_limit).convergents.each do |convergent|
           ratio2 = ratio.class.new(convergent.numerator,convergent.denominator)
-          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && ratio2.max_prime_within?(max_prime)
+          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && (ratio2.max_prime <= max_prime) && (ratio2.min_prime >= min_prime)
           break if ratios.length >= depth
         end
       end
@@ -48,14 +51,17 @@ class Tonal::Ratio
     # @param cents_tolerance the cents tolerance used to scope the collection
     # @param depth the maximum number of ratios in the collection
     # @param max_prime the maximum prime number to allow in the collection
+    # @param min_prime the minimum prime number to allow in the collection
     #
-    def by_tree_path(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_FRACTION_TREE_DEPTH, max_prime: DEFAULT_MAX_PRIME)
+    def by_tree_path(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_TREE_PATH_DEPTH, max_prime: DEFAULT_MAX_PRIME, min_prime: DEFAULT_MIN_PRIME)
+      return Set.new(ratio: ratio){|ratios| ratios << ratio} if (antecedent == 1) && (consequent == 1)
       self_in_cents = to_cents
       within = cents_tolerance.kind_of?(Tonal::Cents) ? cents_tolerance : Tonal::Cents.new(cents: cents_tolerance)
       Set.new(ratio: ratio) do |ratios|
         FractionTree.node(to_f).path.each do |node|
+          next if node.number.infinite?
           ratio2 = ratio.class.new(node.number)
-          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && ratio2.max_prime_within?(max_prime)
+          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && (ratio2.max_prime <= max_prime) && (ratio2.min_prime >= min_prime)
           break if ratios.length >= depth
         end
       end
@@ -68,16 +74,17 @@ class Tonal::Ratio
     # @param cents_tolerance the cents tolerance used to scope the collection
     # @param depth the maximum number of ratios in the collection
     # @param max_prime the maximum prime number to allow in the collection
+    # @param min_prime the minimum prime number to allow in the collection
     # @param superpart if the superior part is the numerator or denominator
     #
-    def by_superparticular(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_SUPERPART_DEPTH, max_prime: DEFAULT_MAX_PRIME, superpart: :upper)
+    def by_superparticular(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_SUPERPART_DEPTH, max_prime: DEFAULT_MAX_PRIME, min_prime: DEFAULT_MIN_PRIME, superpart: :upper)
       self_in_cents = to_cents
       within = cents_tolerance.kind_of?(Tonal::Cents) ? cents_tolerance : Tonal::Cents.new(cents: cents_tolerance)
       Set.new(ratio: ratio) do |ratios|
         n = 1
         while true do
           ratio2 = ratio.class.superparticular(n, factor: ratio.to_r, superpart:)
-          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && ratio2.max_prime_within?(max_prime) && ratio2 != ratio
+          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && (ratio2 != ratio) && (ratio2.max_prime <= max_prime) && (ratio2.min_prime <= min_prime)
           break if ratios.length >= depth
           n += 1
         end
@@ -91,10 +98,11 @@ class Tonal::Ratio
     # @param cents_tolerance the cents tolerance used to scope the collection
     # @param depth the maximum number of ratios in the collection
     # @param max_prime the maximum prime number to allow in the collection
+    # @param min_prime the minimum prime number to allow in the collection
     # @param max_boundary the maximum distance grid ratios will be from the scaled ratio
     # @param max_scale the maximum self will be scaled
     #
-    def by_neighborhood(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_NEIGHBORHOOD_DEPTH, max_prime: DEFAULT_MAX_PRIME, max_boundary: DEFAULT_MAX_GRID_BOUNDARY, max_scale: DEFAULT_MAX_GRID_SCALE)
+    def by_neighborhood(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_NEIGHBORHOOD_DEPTH, max_prime: DEFAULT_MAX_PRIME, min_prime: DEFAULT_MIN_PRIME, max_boundary: DEFAULT_MAX_GRID_BOUNDARY, max_scale: DEFAULT_MAX_GRID_SCALE)
       self_in_cents = to_cents
       within = cents_tolerance.kind_of?(Tonal::Cents) ? cents_tolerance : Tonal::Cents.new(cents: cents_tolerance)
       Set.new(ratio: ratio) do |ratios|
@@ -105,7 +113,7 @@ class Tonal::Ratio
           while boundary <= max_boundary
             vacinity = ratio.respond_to?(:to_basic_ratio) ? to_basic_ratio.scale(scale) : ratio.scale(scale)
             self.class.neighbors(away: boundary, vacinity: vacinity).each do |neighbor|
-              ratios << neighbor if ratio.class.within_cents?(self_in_cents, neighbor.to_cents, within) && neighbor.max_prime_within?(max_prime) && neighbor != ratio
+              ratios << neighbor if (neighbor != ratio) && ratio.class.within_cents?(self_in_cents, neighbor.to_cents, within) && (neighbor.max_prime <= max_prime) && (neighbor.min_prime >= min_prime)
             end
             boundary += 1
           end
@@ -126,10 +134,10 @@ class Tonal::Ratio
       scale = scale.round
       vacinity = ratio.respond_to?(:to_basic_ratio) ? to_basic_ratio.scale(scale) : ratio.scale(scale)
       SortedSet.new([].tap do |ratio_list|
-                      1.upto(boundary) do |away|
-                        ratio_list << self.class.neighbors(away: away, vacinity: vacinity)
-                      end
-                    end.flatten).to_a
+                         1.upto(boundary) do |away|
+                           ratio_list << self.class.neighbors(away: away, vacinity: vacinity)
+                         end
+                       end.flatten).to_a
     end
 
     # @return [Array] an array of Tonal::Ratio neighbors in the scaled ratio's grid neighborhood
@@ -149,10 +157,9 @@ class Tonal::Ratio
        vacinity.class.new(vacinity.antecedent-away, vacinity.consequent+away),
        vacinity.class.new(vacinity.antecedent-away, vacinity.consequent-away)]
     end
-
     class Set
       extend Forwardable
-      def_delegators :@ratios, :count, :length, :min, :max, :entries, :all?, :any?, :reject, :map, :find_index, :to_a
+      def_delegators :@ratios, :count, :length, :min, :max, :entries, :all?, :any?, :reject, :map, :find_index, :to_a, :include?
 
       attr_reader :ratios, :ratio
 
@@ -165,6 +172,22 @@ class Tonal::Ratio
 
       def inspect
         "#{ratio}: #{entries}"
+      end
+
+      def to_cents
+        entries.map(&:to_cents)
+      end
+
+      def max_primes
+        entries.map(&:max_prime)
+      end
+
+      def min_primes
+        entries.map(&:min_prime)
+      end
+
+      def prime_divisions
+        entries.map(&:prime_divisions)
       end
 
       def [](index)

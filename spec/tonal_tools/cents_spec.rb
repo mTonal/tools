@@ -88,6 +88,17 @@ RSpec.describe Tonal::Cents do
     end
   end
 
+  describe "operations" do
+    it "just work" do
+      expect(described_class.new(cents: 100) + described_class.new(cents: 200)).to eq 300.0
+      expect(described_class.new(cents: 100) + 200).to eq 300.0
+      expect(200 + described_class.new(cents: 100)).to eq 300.0
+      expect(200 - described_class.new(cents: 300)).to eq -100.0
+      expect(described_class.new(cents: 200) * 2).to eq 400.0
+      expect(described_class.new(cents: 400) / 2).to eq 200.0
+    end
+  end
+
   describe "methods" do
     let(:cents) { 701.9550008653874 }
 

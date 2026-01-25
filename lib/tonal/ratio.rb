@@ -79,7 +79,7 @@ class Tonal::Ratio
   # @param step the step number in the equal division of the equave
   # @param equave the interval of equivalence, default 2/1
   #
-  def self.ed(modulo, step, equave: 2/1r)
+  def self.ed(step, modulo, equave: 2/1r)
     self.new(2**(step.to_f/modulo), equave: equave)
   end
 
@@ -377,15 +377,10 @@ class Tonal::Ratio
     prime_divisions.flatten(1).map(&:first).min
   end
 
-  # @return [Boolean] whether self's max prime is within the given number
-  # @example
-  #   Tonal::Ratio.new(31/30r).max_prime_within?(7) => false
-  # @param number to compare max prime against
+  # =================================
+  # Measures of complexity
+  # ==================================
   #
-  def max_prime_within?(number)
-    max_prime.nil? ? false : max_prime <= number
-  end
-
   # @return [Integer] the product complexity of self
   # @example
   #   Tonal::ReducedRatio.new(3/2r).benedetti_height => 6
@@ -634,6 +629,18 @@ class Tonal::Ratio
     left = consequent == 0 ? Float::INFINITY : Rational(antecedent, consequent)
     right = rhs.denominator == 0 ? Float::INFINITY : Rational(rhs.numerator, rhs.denominator)
     left <=> right
+  end
+
+  # Set uses Hash as storage and equality of elements is determined according to Object#eql? and Object#hash.
+  #
+  def eql?(other)
+     other.instance_of?(self.class) && to_r == other.to_r
+  end
+
+  def hash
+     p, q = 17, 37
+     p = q * @id.hash
+     p = q * @name.hash
   end
 
   private
