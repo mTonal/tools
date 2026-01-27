@@ -5,7 +5,7 @@ class Tonal::Hertz
 
   # @return [Tonal::Hertz]
   # @example
-  #   Tonal::Hertz.new(1000.0) => 1000.0
+  #   Tonal::Hertz.new(1000.0) => 1000.0 Hz
   # @param arg [Numeric, Tonal::Hertz]
   #
   def initialize(arg)
@@ -15,7 +15,7 @@ class Tonal::Hertz
 
   # @return [Tonal::Hertz] 440 Hz
   # @example
-  #   Tonal::Hertz.a440 => 440.0
+  #   Tonal::Hertz.a440 => 440.0 Hz
   #
   def self.a440
     self.new(440.0)
@@ -40,10 +40,10 @@ class Tonal::Hertz
 
   # @return [String] the string representation of Tonal::Hertz
   # @example
-  #   Tonal::Hertz(1000.0).inspect => "1000.0"
+  #   Tonal::Hertz(1000.0).inspect => "1000.0 Hz"
   #
   def inspect
-    "#{value}"
+    "#{value} Hz"
   end
 
   def <=>(rhs)

@@ -475,16 +475,20 @@ class Tonal::Ratio
     [self.denominator, lhs.denominator].lcm
   end
 
-  # @return [Tonal::Interval] between ratio (upper) and self (lower)
+  # @return [Tonal::Interval] between self and another ratio
   # @example
-  #   Tonal::ReducedRatio.new(133).interval_with(3/2r)
-  #   => (192/133) ((3/2) / (133/128))
-  # @param upper ratio
-  # @param lower ratio
+  #   Tonal::ReducedRatio.new(3,2).interval_with(4/3r)
+  #   => 9/8 (3/2 / 4/3)
+  # @example
+  #   Tonal::ReducedRatio.new(3,2).interval_with(4/3r, is_lower: false)
+  #   => 16/9 (4/3 / 3/2)
+  # @param other_ratio [Tonal::ReducedRatio, Numeric] the ratio to form the interval with
+  # @param is_lower [Boolean] whether other_ratio is the lower ratio of the interval
   #
-  def interval_with(upper, lower=nil)
-    r = self.class.new(upper, lower)
-    Tonal::Interval.new(self, r)
+  def interval_with(other_ratio, is_lower: true)
+    other_ratio = self.class.new(other_ratio)
+    args = is_lower ? [self, other_ratio] : [other_ratio, self]
+    Tonal::Interval.new(*args)
   end
 
   # @return [Tonal::Interval] between 1/1 and self
@@ -493,18 +497,18 @@ class Tonal::Ratio
   #   => (3/2) ((3/2) / (1/1))
   #
   def to_interval
-    Tonal::Interval.new(self, 1/1r)
+    interval_with(1/1r)
   end
 
   # @return [Tonal::Cents] difference between ratio (upper) and self (lower)
   # @example
-  #   Tonal::ReducedRatio.new(133).cents_difference_with(3/2r)
-  #   => 635.62
-  # @param upper ratio
-  # @param lower ratio
+  #   Tonal::ReducedRatio.new(3,2).cents_difference_with(4/3r) => 203.91
+  # @example
+  #   Tonal::ReducedRatio.new(3,2).cents_difference_with(4/3r, is_lower: false) => 996.09
+  # @param other_ratio [Tonal::ReducedRatio, Numeric] the ratio to compare cents difference with
   #
-  def cents_difference_with(upper, lower=nil)
-    interval_with(upper, lower).to_cents
+  def cents_difference_with(other_ratio, is_lower: true)
+    interval_with(other_ratio, is_lower:).to_cents
   end
 
   # @return [Integer] the difference between antecedent and consequent

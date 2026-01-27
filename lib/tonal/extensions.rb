@@ -45,15 +45,15 @@ class Numeric
   # @param reduced
   # @param equave
   #
-  def to_ratio(reduced: false, equave: 2/1r) = reduced ? Tonal::ReducedRatio.new(self, equave: equave) : Tonal::Ratio.new(self, equave: equave)
+  def to_ratio(reduced: false, equave: 2/1r) = reduced ? Tonal::ReducedRatio.new(self, equave:) : Tonal::Ratio.new(self, equave:)
   alias :ratio :to_ratio
 
   # @return [Tonal::ReducedRatio]
   # @example
-  #   {4/5r}.to_reduced_ratio => 8/5
+  #   (4/5r).to_reduced_ratio => 8/5
   # @param equave
   #
-  def to_reduced_ratio(equave: 2/1r) = to_ratio(reduced: true, equave: equave)
+  def to_reduced_ratio(equave: 2/1r) = to_ratio(reduced: true, equave:)
 
   # @return [Float], the degrees on a circle of self
   # @example
@@ -63,9 +63,10 @@ class Numeric
 
   # @return [Tonal::Log] the log of self to the given base
   # @example
-  #   (3/2r).log(10) => 0.17609125905568124
+  #   (3/2r).log(10) => 0.18
   #
-  def log(base) = Tonal::Log.new(logarithmand: self, base: base)
+  def log(base) = Tonal::Log.new(logarithmand: self, base:)
+  alias :to_log :log
 
   # @return [Tonal::Log2] the log2 of self
   # @example
@@ -94,6 +95,8 @@ class Numeric
   def to_cents = Tonal::Cents.new(ratio: self)
 
   # @return [Tonal::Hertz] of self
+  # @example
+  #  (440.0).hz => 440.0 Hz
   #
   def hz = Tonal::Hertz.new(self)
   alias :to_hz :hz
@@ -103,7 +106,7 @@ class Numeric
   #   (5/4r).scale_step(12) => 4\12
   # @param modulo
   #
-  def scale_step(modulo=12) = Tonal::Step.new(ratio: self, modulo: modulo)
+  def scale_step(modulo=12) = Tonal::Step.new(ratio: self, modulo:)
 
   # @return [Float] the log product complexity of self
   # @example
@@ -137,22 +140,25 @@ class Numeric
   # @param equave
   # @param prime_rejects
   #
-  def wilson_height(reduced: false, equave: 2/1r, prime_rejects: [2]) = ratio(reduced: reduced, equave: equave).wilson_height(prime_rejects: prime_rejects)
+  def wilson_height(reduced: false, equave: 2/1r, prime_rejects: [2]) = ratio(reduced:, equave:).wilson_height(prime_rejects:)
 
   # @return [Float] the cents difference between self and its step in the given modulo
   # @example
   #   (3/2r).efficiency(12) => -1.96
   # @param modulo
+  # @param reduced
   #
-  # We want the efficiency from the ratio (self)
-  def efficiency(modulo, reduced: false) = ratio(reduced: reduced).efficiency(modulo)
+  def efficiency(modulo, reduced: false) = ratio(reduced:).efficiency(modulo)
 
   # @return [Tonal::Interval] beween self (upper) and ratio (lower)
   # @example
-  #   (133).interval_with(3/2r) => 133/96 (133/128 / 3/2)
-  # @param other_ratio
+  #   (3/2r).interval_with(4/3r) => 9/8 (3/2 / 4/3)
+  # @example
+  #   (3/2r).interval_with(4/3r, is_lower: false) => 16/9 (4/3 / 3/2)
+  # @param other_ratio the other ratio to form the interval with
+  # @param is_lower [Boolean] if other_ratio is the lower (true) or upper (false) ratio
   #
-  def interval_with(other_ratio) = Tonal::Interval.new(self, other_ratio)
+  def interval_with(other_ratio, is_lower: true) = Tonal::Ratio.new(self).interval_with(other_ratio, is_lower:)
 
   # @return [Tonal::Interval] between 1/1 (lower) and self (upper)
   # @example
@@ -172,7 +178,7 @@ class Numeric
   #   (3/2r).prime_vector => Vector[-1, 1]
   # @param reduced
   #
-  def prime_vector(reduced: false) = ratio(reduced: reduced).prime_vector
+  def prime_vector(reduced: false) = ratio(reduced:).prime_vector
   alias :monzo :prime_vector
   alias :prime_exponent_vector :prime_vector
 
@@ -225,7 +231,7 @@ class Numeric
   # @example
   #   (3/2r).reciprocal => (2/3)
   #
-  def reciprocal = Rational(1,self)
+  def reciprocal = Rational(1, self)
 
   # @return [Numeric] self raised to the given power/root
   # @example
@@ -260,7 +266,7 @@ class Integer
   # @param modulo
   # @param equave
   #
-  def ed(modulo, equave: 2/1r) = Tonal::ReducedRatio.ed(self, modulo, equave: equave)
+  def ed(modulo, equave: 2/1r) = Tonal::ReducedRatio.ed(self, modulo, equave:)
 
   # @return [Integer] the maximum prime factor of self
   # @example
@@ -557,7 +563,7 @@ class Vector
   # @param reduced
   # @param equave
   #
-  def to_ratio(reduced: false, equave: 2/1r) = reduced ? Tonal::ReducedRatio.new(*self, equave: equave) : Tonal::Ratio.new(*self, equave: equave)
+  def to_ratio(reduced: false, equave: 2/1r) = reduced ? Tonal::ReducedRatio.new(*self, equave:) : Tonal::Ratio.new(*self, equave:)
   alias :ratio :to_ratio
 end
 

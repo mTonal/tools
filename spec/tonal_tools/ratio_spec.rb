@@ -940,7 +940,13 @@ RSpec.describe Tonal::ReducedRatio do
 
   describe "#cents_difference_with" do
     it "returns the cent difference between self and the given ratio" do
-      expect(described_class.new(3/2r).cents_difference_with(5/4r)).to eq 315.64
+      expect(described_class.new(3/2r).cents_difference_with(4/3r)).to eq 203.91
+    end
+
+    context "when is_lower is false" do
+      it "returns the cent difference between the given ratio (lower) and self (upper)" do
+        expect(described_class.new(3/2r).cents_difference_with(4/3r, is_lower: false)).to eq(996.09)
+      end
     end
   end
 
