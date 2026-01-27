@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe Tonal::Step do
+RSpec.describe Tonal::Scale::Step do
   let(:modulo) { 31 }
   let(:log) { nil }
   let(:step) { nil }
@@ -69,7 +69,7 @@ RSpec.describe Tonal::Step do
     let(:new_modulo) { 13 }
 
     it "creates a new Step with the number mapped on to the new modulo" do
-      expect(subject.convert(new_modulo)).to eq Tonal::Step.new(ratio: 3/2r, modulo: 13)
+      expect(subject.convert(new_modulo)).to eq described_class.new(ratio: 3/2r, modulo: 13)
     end
   end
 

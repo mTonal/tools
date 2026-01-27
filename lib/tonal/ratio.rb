@@ -178,7 +178,7 @@ class Tonal::Ratio
   #   Tonal::ReducedRatio.new(3,2).step(12) => 7\12
   #
   def step(modulo=12)
-    Tonal::Step.new(ratio: to_r, modulo: modulo)
+    Tonal::Scale::Step.new(ratio: to_r, modulo: modulo)
   end
 
   # @return [Float] degrees

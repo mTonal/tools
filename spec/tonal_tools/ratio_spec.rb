@@ -178,7 +178,7 @@ RSpec.describe Tonal::Ratio do
 
     describe "#step" do
       it "returns the step of self in a given modulo" do
-        expect(subject.step).to eq Tonal::Step.new(modulo: 12, ratio: 3/2r)
+        expect(subject.step).to eq Tonal::Scale::Step.new(modulo: 12, ratio: 3/2r)
       end
     end
 
