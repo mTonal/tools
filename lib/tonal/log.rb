@@ -61,12 +61,12 @@ class Tonal::Log
     Tonal::Cents.new(log: self, precision: precision)
   end
 
-  # @return [Tonal::Step] the nearest step in the given modulo
+  # @return [Tonal::Scale::Step] the nearest step in the given modulo
   # @example
   #   Tonal::Log.new(logarithmand: 3/2r, base: 2).step(12) => 7\12
   #
   def step(modulo)
-    Tonal::Step.new(modulo: modulo, log: self)
+    Tonal::Scale::Step.new(modulo: modulo, log: self)
   end
 
   # @return [String] the string representation of Tonal::Log
@@ -115,4 +115,3 @@ class Tonal::Log
     end
   end
 end
-

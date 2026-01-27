@@ -122,7 +122,7 @@ RSpec.describe Tonal::Log2 do
     let(:modulo) { 12 }
 
     it "returns the step in a given modulo" do
-      expect(subject.step(modulo)).to eq Tonal::Step.new(modulo: 12, step: 1)
+      expect(subject.step(modulo)).to eq Tonal::Scale::Step.new(modulo: 12, step: 1)
     end
   end
 

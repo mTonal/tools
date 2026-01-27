@@ -101,12 +101,12 @@ class Numeric
   def hz = Tonal::Hertz.new(self)
   alias :to_hz :hz
 
-  # @return [Tonal::Step] the step of self in the given modulo
+  # @return [Tonal::Scale::Step] the step of self in the given modulo
   # @example
   #   (5/4r).scale_step(12) => 4\12
   # @param modulo
   #
-  def scale_step(modulo=12) = Tonal::Step.new(ratio: self, modulo:)
+  def scale_step(modulo=12) = Tonal::Scale::Step.new(ratio: self, modulo:)
 
   # @return [Float] the log product complexity of self
   # @example
