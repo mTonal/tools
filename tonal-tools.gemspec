@@ -19,14 +19,14 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = Gem::Requirement.new(">= 3.1")
   spec.required_rubygems_version = Gem::Requirement.new(">= 3.1")
   spec.rubygems_version = "3.5.23"
-  spec.add_runtime_dependency "yaml", ["~> 0.4"]
-  spec.add_runtime_dependency "json", ["~> 2.9"]
-  spec.add_runtime_dependency "prime", ["~> 0.1"]
-  spec.add_runtime_dependency "matrix", ["~> 0.4"]
-  spec.add_runtime_dependency "sorted_set", ["~> 1.0"]
-  spec.add_runtime_dependency "continued_fractions", ["~> 2.1"]
-  spec.add_runtime_dependency "fraction-tree", ["~> 2.1"]
+  spec.add_runtime_dependency "yaml", ["~> 0"]
+  spec.add_runtime_dependency "json", ["~> 2"]
+  spec.add_runtime_dependency "prime", ["~> 0"]
+  spec.add_runtime_dependency "matrix", ["~> 0"]
+  spec.add_runtime_dependency "sorted_set", ["~> 1"]
+  spec.add_runtime_dependency "continued_fractions", ["~> 2"]
+  spec.add_runtime_dependency "fraction-tree", ["~> 2"]
   spec.add_development_dependency "rspec", ["~> 3"]
-  spec.add_development_dependency "byebug", ["~> 11.1"]
-  spec.add_development_dependency "yard", ["~> 0.9"]
+  spec.add_development_dependency "byebug", ["~> 13"]
+  spec.add_development_dependency "yard", ["~> 0"]
 end
