@@ -560,7 +560,8 @@ class Tonal::Ratio
   def inspect
     # Return the "antecedent/consequent", if antecedent is less than 7 digits long; or
     # Return the floating point representation rounded to PRECISION digits
-    ((Math.log10(antecedent).to_i + 1) <= 6 ? "#{antecedent}/#{consequent}" : "#{to_f.round(PRECISION)}")
+    func = -> (n) { n.zero? ? n : Math.log10(n).to_i + 1 }
+    ((func.call(antecedent)) <= 6 ? "#{antecedent}/#{consequent}" : "#{to_f.round(PRECISION)}")
   end
   alias :to_s :inspect
 
