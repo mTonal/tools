@@ -53,6 +53,28 @@ RSpec.describe Tonal::Ratio do
         end
       end
     end
+
+    context "with a zero denominator" do
+      let(:arg1) { 3 }
+      let(:arg2) { 0 }
+
+      it "sets the consequent to zero" do
+        expect(subject.inspect).to eq "3/0"
+        expect(subject.antecedent).to eq 3
+        expect(subject.consequent).to eq 0
+      end
+    end
+
+    context "with a zero numerator", :focus do
+      let(:arg1) { 0 }
+      let(:arg2) { 3 }
+
+      it "sets the antecedent to zero" do
+        expect(subject.inspect).to eq "0/3"
+        expect(subject.antecedent).to eq 0
+        expect(subject.consequent).to eq 3
+      end
+    end
   end
 
   describe "Class methods" do
