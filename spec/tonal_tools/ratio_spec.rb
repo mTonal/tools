@@ -65,7 +65,7 @@ RSpec.describe Tonal::Ratio do
       end
     end
 
-    context "with a zero numerator", :focus do
+    context "with a zero numerator" do
       let(:arg1) { 0 }
       let(:arg2) { 3 }
 
@@ -434,9 +434,9 @@ RSpec.describe Tonal::Ratio do
       end
     end
 
-    describe "#cent_diff" do
+    describe "#cents_difference_with" do
       it "returns the cent difference between self and given ratio" do
-        expect(subject.cent_diff(5/4r)).to eq 315.65
+        expect(subject.cents_difference_with(5/4r)).to eq 315.64
       end
     end
   end
