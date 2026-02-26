@@ -85,6 +85,7 @@ class Tonal::Scale
       # We want the efficiency from the step (self).
       ratio_to_cents - step_to_cents
     end
+    alias :cents_difference :efficiency
 
     def +(rhs)
       self.class.new(step: (rhs % modulo), modulo: modulo)

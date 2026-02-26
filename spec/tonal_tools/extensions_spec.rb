@@ -170,6 +170,12 @@ RSpec.describe "Extensions" do
       it "returns the difference between self and its step for a given modulo" do
         expect((3/2r).efficiency(12)).to eq(-1.96)
       end
+
+      context "when is_step_efficiency is true" do
+        it "returns the difference between self's step and self for a given modulo" do
+          expect((3/2r).efficiency(12, is_step_efficiency: true)).to eq(1.96)
+        end
+      end
     end
 
     describe "#interval_with" do

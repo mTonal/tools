@@ -5,6 +5,7 @@ class Tonal::Ratio
   def_delegators :@approximation, :neighborhood
 
   PRECISION = 2
+  DEFAULT_EQUAVE = 2/1r
 
   attr_reader :antecedent, :consequent, :equave, :reduced_antecedent, :reduced_consequent
 
@@ -16,7 +17,7 @@ class Tonal::Ratio
   # @param antecedent [Numeric, Tonal::Ratio]
   # @param consequent [Numeric, Tonal::Ratio]
   #
-  def initialize(antecedent, consequent=nil, label: nil, equave: 2/1r)
+  def initialize(antecedent, consequent=nil, label: nil, equave: DEFAULT_EQUAVE)
     raise ArgumentError, "Antecedent must be Numeric" unless antecedent.kind_of?(Numeric)
     raise ArgumentError, "Consequent must be Numeric or nil" unless (consequent.kind_of?(Numeric) || consequent.nil?)
 
@@ -79,8 +80,8 @@ class Tonal::Ratio
   # @param step the step number in the equal division of the equave
   # @param equave the interval of equivalence, default 2/1
   #
-  def self.ed(step, modulo, equave: 2/1r)
-    self.new(2**(step.to_f/modulo), equave: equave)
+  def self.ed(step, modulo, equave: DEFAULT_EQUAVE)
+    self.new(2**(step.to_f/modulo), equave:)
   end
 
   # @return [Boolean] if pair of ratios are within the given cents limit
@@ -213,7 +214,7 @@ class Tonal::Ratio
   #   Tonal::Ratio.new(48,14).equave_reduce(3) => 8/7
   # @param equave Numeric
   #
-  def equave_reduce(equave=2/1r)
+  def equave_reduce(equave=DEFAULT_EQUAVE)
     self.class.new(*_equave_reduce(equave))
   end
   alias :reduce :equave_reduce
@@ -224,7 +225,7 @@ class Tonal::Ratio
   #   Tonal::Ratio.new(48,14).equave_reduce!(3) => 8/7
   # @param equave Numeric
   #
-  def equave_reduce!(equave=2/1r)
+  def equave_reduce!(equave=DEFAULT_EQUAVE)
     @antecedent, @consequent = _equave_reduce(equave)
     self
   end
@@ -430,10 +431,10 @@ class Tonal::Ratio
   #   Tonal::ReducedRatio.new(3,2).efficiency(12) => -1.96
   # @param modulo against which the difference of self is compared
   #
-  def efficiency(modulo)
-    # We want the efficiency from the ratio (self).
+  def efficiency(modulo, is_step_efficiency: false)
+    # For single ratios, we normally want the efficiency from the ratio (self).
     # If the step efficiency is X cents, then the ratio efficiency is -X cents.
-    step(modulo).efficiency * -1.0
+    step(modulo).efficiency * (is_step_efficiency ? 1.0 : -1.0)
   end
 
   # @return [Array] the results of ratio dividing and multiplying self
@@ -459,12 +460,13 @@ class Tonal::Ratio
 
   # @return [Tonal::Cents] cent difference between self and other ratio
   # @example
-  #   Tonal::ReducedRatio.new(3,2).cent_diff(4/3r) => 203.92
+  #   Tonal::ReducedRatio.new(3,2).cents_difference_with(4/3r) => 203.92
   # @param other_ratio [Tonal::ReducedRatio, Numeric] from which self's cents is measured
   #
-  def cent_diff(other_ratio)
-    cents - other_ratio.ratio.cents
+  def cents_difference_with(other_ratio)
+    to_cents - other_ratio.ratio.to_cents
   end
+  alias :cent_diff :cents_difference_with
 
   # @return [Integer] the least common multiple with self's denominator and the given number's denominator
   # @example
@@ -649,7 +651,7 @@ class Tonal::Ratio
   end
 
   private
-  def _initialize(antecedent, consequent=nil, label: nil, equave: 2/1r)
+  def _initialize(antecedent, consequent=nil, label: nil, equave: DEFAULT_EQUAVE)
     if consequent
       @antecedent = antecedent.abs
       @consequent = consequent.abs
@@ -668,7 +670,7 @@ class Tonal::Ratio
     raise ArgumentError, "Arguments must be greater than zero" if args.any?{|i| i < 0 }
   end
 
-  def _equave_reduce(equave=2/1r)
+  def _equave_reduce(equave=DEFAULT_EQUAVE)
     case to_r
     when Float::INFINITY
       ante, cons = antecedent, 0

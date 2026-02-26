@@ -109,6 +109,15 @@ RSpec.describe Tonal::Scale::Step do
     it("returns the cents of the ratio") { expect(subject.ratio_to_cents).to eq 701.96 }
   end
 
+  describe "#efficiency" do
+    let(:ratio) { 3/2r }
+    let(:modulo) { 12 }
+
+    it "returns the cents difference between the ratio and step" do
+      expect(subject.efficiency).to eq 1.96
+    end
+  end
+
   describe "#+" do
     let(:increment) { 41 }
     let(:ratio) { 3/2r }

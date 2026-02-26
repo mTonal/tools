@@ -145,10 +145,13 @@ class Numeric
   # @return [Float] the cents difference between self and its step in the given modulo
   # @example
   #   (3/2r).efficiency(12) => -1.96
-  # @param modulo
-  # @param reduced
+  # @example
+  #   (3/2r).efficiency(12, is_step_efficiency: true) => 1.96
+  # @param modulo against which the difference of self is compared
+  # @param reduced if true, self is reduced to the octave before calculating efficiency
+  # @param is_step_efficiency if true, calculates the efficiency of the step instead of the ratio (self). If the step efficiency is X cents, then the ratio efficiency is -X cents.
   #
-  def efficiency(modulo, reduced: false) = ratio(reduced:).efficiency(modulo)
+  def efficiency(modulo, reduced: false, is_step_efficiency: false) = ratio(reduced:).efficiency(modulo, is_step_efficiency:)
 
   # @return [Tonal::Interval] beween self (upper) and ratio (lower)
   # @example
