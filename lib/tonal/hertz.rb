@@ -15,9 +15,9 @@ class Tonal::Hertz
 
   # @return [Tonal::Hertz] 440 Hz
   # @example
-  #   Tonal::Hertz.a440 => 440.0 Hz
+  #   Tonal::Hertz.reference => 440.0 Hz
   #
-  def self.a440
+  def self.reference
     self.new(440.0)
   end
 
@@ -29,13 +29,21 @@ class Tonal::Hertz
     Rational(value)
   end
 
-
   # @return [Rational] self as a float
   # @example
   #   Tonal::Hertz.new(440).to_f => 440.0
   #
   def to_f
     value.to_f
+  end
+
+  # @return [Tonal::Cents] the cents difference between self and a reference frequency
+  # @example
+  #   Tonal::Hertz.new(880).to_cents => 1200.0
+  # @param reference [Tonal::Hertz, Numeric] the reference frequency to compare to
+  #
+  def to_cents(reference: self.class.reference)
+    Tonal::Cents.new(ratio: to_r / reference.to_r)
   end
 
   # @return [String] the string representation of Tonal::Hertz

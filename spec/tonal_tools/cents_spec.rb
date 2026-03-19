@@ -20,7 +20,7 @@ RSpec.describe Tonal::Cents do
     end
 
     context "more than one argument provided" do
-      it "raises and exception" do
+      it "raises an exception" do
         expect{ subject }.to raise_error(ArgumentError, "One of cents:, log: or ratio: must be provided")
       end
     end
@@ -63,7 +63,6 @@ RSpec.describe Tonal::Cents do
       let(:cents) { nil }
       let(:log) { nil }
 
-
       it "returns the ratio" do
         expect(subject.ratio).to eq 3/2r
       end
@@ -75,6 +74,16 @@ RSpec.describe Tonal::Cents do
       it "returns the log" do
         expect(subject.log).to eq 0.5849625007211562
       end
+    end
+  end
+
+  describe "#reduced_ratio" do
+    let(:log) { Math.log2(3/2r) }
+    let(:ratio) { nil }
+    let(:cents) { nil }
+
+    it "returns the reduced ratio" do
+      expect(subject.reduced_ratio).to eq 3/2r
     end
   end
 
