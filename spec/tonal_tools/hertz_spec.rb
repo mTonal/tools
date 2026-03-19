@@ -3,6 +3,12 @@ require "spec_helper"
 RSpec.describe Tonal::Hertz do
   let(:number) { 400 }
 
+  describe ".reference" do
+    it "returns 440 Hz" do
+      expect(described_class.reference).to eq described_class.new(440.0)
+    end
+  end
+
   describe "comparison" do
     let(:hertz) { described_class.new(number) }
 
@@ -27,6 +33,22 @@ RSpec.describe Tonal::Hertz do
 
       it "returns true" do
         expect(hertz).to eq other_hertz
+      end
+    end
+  end
+
+  describe "#to_cents" do
+    let(:hertz) { described_class.new(number) }
+
+    it "returns the cents difference from the default reference frequency, 440 Hz" do
+      expect(hertz.to_cents).to eq -165.0
+    end
+
+    context "with a custom reference frequency" do
+      let(:reference) { described_class.new(200) }
+
+      it "returns the cents difference from the custom reference frequency" do
+        expect(hertz.to_cents(reference: reference)).to eq 1200.0
       end
     end
   end

@@ -3,6 +3,7 @@ class Tonal::Cents
   include Comparable
 
   def_delegators :@log, :logarithm, :logarithmand, :base
+  def_delegators :@ratio, :numerator, :denominator, :to_reduced_ratio, :to_ratio
 
   HUNDREDTHS_ROUNDOFF = -2
   FLOAT_PRECISION = 100
@@ -39,6 +40,8 @@ class Tonal::Cents
       @ratio = derive_ratio(ratio: ratio)
     end
   end
+
+  alias :reduced_ratio :to_reduced_ratio
 
   # @return [Tonal::Cents] the default cents tolerance
   # @example
@@ -149,8 +152,8 @@ class Tonal::Cents
   end
 
   def derive_ratio(log: nil, ratio: nil)
-    return Tonal::ReducedRatio.new(log.logarithmand) if log
-    Tonal::ReducedRatio.new(ratio.numerator, ratio.denominator)
+    return Tonal::Ratio.new(log.logarithmand) if log
+    Tonal::Ratio.new(ratio.numerator, ratio.denominator)
   end
 
   def derive_cents(cents: nil, log: nil)
