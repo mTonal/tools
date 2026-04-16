@@ -15,7 +15,7 @@ class Tonal::Cents
 
   # @return [Tonal::Cents]
   # @example
-  #   Tonal::Cents.new(ratio: 2**(2.0/12)) => 200.0
+  #   Tonal::Cents.new(ratio: 2**(2.0/12)) => 200.0 ¢
   # @param cents [Numeric, Tonal::Log2]
   # @param log [Numeric, Tonal::Log2]
   # @param ratio [Numeric, Tonal::Log2]
@@ -45,7 +45,7 @@ class Tonal::Cents
 
   # @return [Tonal::Cents] the default cents tolerance
   # @example
-  #   Tonal::Cents.default_tolerance => 5
+  #   Tonal::Cents.default_tolerance => 5 ¢
   #
   def self.default_tolerance
     self.new(cents: TOLERANCE)
@@ -53,7 +53,7 @@ class Tonal::Cents
 
   # @return [Float] value of self
   # @example
-  #   Tonal::Cents.new(ratio: 2**(1.0/12)).value => 100.00
+  #   Tonal::Cents.new(ratio: 2**(1.0/12)).value => 100.00 ¢
   #
   def value(precision: @precision)
     @value.round(precision)
@@ -64,7 +64,7 @@ class Tonal::Cents
   # @return
   #   [Tonal::Cents] nearest hundredth cent value
   # @example
-  #   Tonal::Cents.new(cents: 701.9550008653874).nearest_hundredth => 700.0
+  #   Tonal::Cents.new(cents: 701.9550008653874).nearest_hundredth => 700.0 ¢
   #
   def nearest_hundredth
     self.class.new(cents: value.round(Tonal::Cents::HUNDREDTHS_ROUNDOFF).to_f)
@@ -73,7 +73,7 @@ class Tonal::Cents
   # @return
   #   [Tonal::Cents] nearest hundredth cent difference
   # @example
-  #   Tonal::Cents.new(cents: 701.9550008653874).nearest_hundredth_difference => 1.96
+  #   Tonal::Cents.new(cents: 701.9550008653874).nearest_hundredth_difference => 1.96 ¢
   #
   def nearest_hundredth_difference
     self.class.new(cents: (value - nearest_hundredth))
@@ -91,10 +91,10 @@ class Tonal::Cents
   # @return
   #   [String] the string representation of Tonal::Cents
   # @example
-  #   Tonal::Cents.new(100.0).inspect => "100.0"
+  #   Tonal::Cents.new(100.0).inspect => 100.0 ¢
   #
   def inspect
-    "#{value.round(@precision)}"
+    "#{value.round(@precision)} ¢"
   end
   alias :to_s :inspect
 
@@ -102,7 +102,7 @@ class Tonal::Cents
   #
   # @return [Tonal::Cents, Numeric] result of operation
   # @example
-  #   Tonal::Cents.new(cents: 200) - Tonal::Cents.new(cents: 100) => 100.0
+  #   Tonal::Cents.new(cents: 200) - Tonal::Cents.new(cents: 100) => 100.0 ¢
   # @param rhs [Tonal::Cents, Numeric]
   #
   def -(rhs)
@@ -111,7 +111,7 @@ class Tonal::Cents
 
   # @return [Tonal::Cents, Numeric] result of operation
   # @example
-  #   Tonal::Cents.new(cents: 100) + Tonal::Cents.new(cents: 200) => 300.0
+  #   Tonal::Cents.new(cents: 100) + Tonal::Cents.new(cents: 200) => 300.0 ¢
   # @param rhs [Tonal::Cents, Numeric]
   #
   def +(rhs)
@@ -120,7 +120,7 @@ class Tonal::Cents
 
   # @return [Tonal::Cents, Numeric] result of operation
   # @example
-  #  Tonal::Cents.new(cents: 200) * 2 => 400.0
+  #  Tonal::Cents.new(cents: 200) * 2 => 400.0 ¢
   # @param rhs [Tonal::Cents, Numeric]
   #
   def *(rhs)
@@ -129,7 +129,7 @@ class Tonal::Cents
 
   # @return [Tonal::Cents, Numeric] result of operation
   # @example
-  #   Tonal::Cents.new(cents: 400) / 2 => 200.0
+  #   Tonal::Cents.new(cents: 400) / 2 => 200.0 ¢
   # @param rhs [Tonal::Cents, Numeric]
   #
   def /(rhs)
