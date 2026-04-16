@@ -91,10 +91,10 @@ class Tonal::Cents
   # @return
   #   [String] the string representation of Tonal::Cents
   # @example
-  #   Tonal::Cents.new(100.0).inspect => "100.0"
+  #   Tonal::Cents.new(100.0).inspect => "100.0 ¢"
   #
   def inspect
-    "#{value.round(@precision)}"
+    "#{value.round(@precision)} ¢"
   end
   alias :to_s :inspect
 

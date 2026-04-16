@@ -142,11 +142,11 @@ class Numeric
   #
   def wilson_height(reduced: false, equave: 2/1r, prime_rejects: [2]) = ratio(reduced:, equave:).wilson_height(prime_rejects:)
 
-  # @return [Float] the cents difference between self and its step in the given modulo
+  # @return [Tonal::Cents] the cents difference between self and its step in the given modulo
   # @example
-  #   (3/2r).efficiency(12) => -1.96
+  #   (3/2r).efficiency(12) => -1.96 ¢
   # @example
-  #   (3/2r).efficiency(12, is_step_efficiency: true) => 1.96
+  #   (3/2r).efficiency(12, is_step_efficiency: true) => 1.96 ¢
   # @param modulo against which the difference of self is compared
   # @param reduced if true, self is reduced to the octave before calculating efficiency
   # @param is_step_efficiency if true, calculates the efficiency of the step instead of the ratio (self). If the step efficiency is X cents, then the ratio efficiency is -X cents.
