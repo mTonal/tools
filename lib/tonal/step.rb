@@ -86,6 +86,15 @@ class Tonal::Scale
     end
     alias :cents_difference :efficiency
 
+    # @return [Boolean] true if the step is coprime to the modulo
+    # @example
+    #   Tonal::Scale::Step.new(step: 5, modulo: 12).coprime? => true
+    #   Tonal::Scale::Step.new(step: 6, modulo: 12).coprime? => false
+    #
+    def coprime?
+      step.coprime?(modulo)
+    end
+
     def +(rhs)
       self.class.new(step: (rhs % modulo), modulo: modulo)
     end
