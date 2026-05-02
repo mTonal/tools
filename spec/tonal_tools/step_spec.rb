@@ -118,6 +118,26 @@ RSpec.describe Tonal::Scale::Step do
     end
   end
 
+  describe "#coprime?" do
+    context "when step is coprime to modulo" do
+      let(:step) { 5 }
+      let(:modulo) { 12 }
+
+      it "returns true" do
+        expect(subject.coprime?).to be true
+      end
+    end
+
+    context "when step is not coprime to modulo" do
+      let(:step) { 6 }
+      let(:modulo) { 12 }
+
+      it "returns false" do
+        expect(subject.coprime?).to be false
+      end
+    end
+  end
+
   describe "#+" do
     let(:increment) { 41 }
     let(:ratio) { 3/2r }
