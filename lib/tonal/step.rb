@@ -48,7 +48,6 @@ class Tonal::Scale
     def step_to_r
       Rational(step, modulo)
     end
-    alias :to_r :step_to_r
 
     # @return [Rational] of the ratio
     # @example
@@ -59,15 +58,14 @@ class Tonal::Scale
       ratio.to_r
     end
 
-    # @return [Tonal::Cents] measure of step in cents
+    # @return [Tonal::Cents] measure of tempered in cents
     # @example
-    #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).step_to_cents
+    #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).tempered_to_cents
     #   => 696.77
     #
-    def step_to_cents
+    def tempered_to_cents
       tempered.to_cents
     end
-    alias :to_cents :step_to_cents
 
     # @return [Tonal::Cents] measure of ratio in cents
     # @example
@@ -78,13 +76,13 @@ class Tonal::Scale
       ratio.to_cents
     end
 
-    # @return [Tonal::Cents] the difference between the step and the ratio
+    # @return [Tonal::Cents] the difference between the tempered number and the ratio
     # @example
     #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).efficiency => 5.19 ¢
     #
     def efficiency
-      # We want the efficiency from the step (self). The step is the tempered approximation of the ratio, so we want to know how far off the step is from the ratio. So we take the ratio and subtract the step.
-      ratio_to_cents - step_to_cents
+      # We want the efficiency from the step (self). The tempered value is the tempered approximation of the ratio, so we want to know how far off the step is from the ratio. So we take the ratio and subtract the tempered value.
+      ratio_to_cents - tempered_to_cents
     end
     alias :cents_difference :efficiency
 
