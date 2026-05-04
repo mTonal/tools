@@ -85,34 +85,28 @@ RSpec.describe Tonal::Scale::Step do
     end
   end
 
-  describe "#to_r" do
-    let(:ratio) { 3/2r }
-
-    it("returns the rational of the step") { expect(subject.to_r).to eq 18/31r }
-  end
-
   describe "#ratio_to_r" do
     let(:ratio) { 3/2r }
 
     it("returns the rational of the ratio") { expect(subject.ratio_to_r).to eq 3/2r }
   end
 
-  describe "#step_to_cents" do
+  describe "#tempered_to_cents" do
     let(:ratio) { 3/2r }
 
-    it("returns the cents of the step") { expect(subject.step_to_cents).to eq 696.77 }
-  end
-
-  describe "#to_cents" do
-    let(:ratio) { 3/2r }
-
-    it("returns the cents of the step") { expect(subject.to_cents).to eq 696.77 }
+    it("returns the cents of the tempered") { expect(subject.tempered_to_cents).to eq 696.77 }
   end
 
   describe "#ratio_to_cents" do
     let(:ratio) { 3/2r }
 
     it("returns the cents of the ratio") { expect(subject.ratio_to_cents).to eq 701.96 }
+  end
+
+  describe "#tempered_to_cents" do
+    let(:ratio) { 3/2r }
+
+    it("returns the cents of the tempered") { expect(subject.tempered_to_cents).to eq 696.77 }
   end
 
   describe "#efficiency" do
