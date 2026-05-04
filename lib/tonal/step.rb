@@ -29,7 +29,7 @@ class Tonal::Scale
     end
     alias :to_s :inspect
 
-    # @return [Tonal::Scale::Step] new step with the ratio mapped to the new modulo
+    # @return a new [Tonal::Scale::Step] with the ratio mapped to the new modulo
     # @example
     #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).convert(12)
     #   => 7\12
@@ -38,7 +38,7 @@ class Tonal::Scale
       self.class.new(log: log, modulo: new_modulo)
     end
 
-    # @return [Rational] of the step
+    # @return the [Rational] representation of the step/modulo of self
     # @example
     #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).step_to_r
     #   => (18/31)
@@ -49,7 +49,7 @@ class Tonal::Scale
       Rational(step, modulo)
     end
 
-    # @return [Tonal::Ratio] of the step/modulo
+    # @return the [Tonal::Ratio] representation of the step/modulo of self
     # @example
     #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).step_to_ratio
     #   => 18/31
@@ -58,7 +58,7 @@ class Tonal::Scale
       Tonal::Ratio.new(step, modulo)
     end
 
-    # @return [Rational] of the ratio
+    # @return the [Rational] representation of the ratio of self
     # @example
     #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).ratio_to_r
     #   => (3/2)
@@ -67,7 +67,7 @@ class Tonal::Scale
       ratio.to_r
     end
 
-    # @return [Tonal::Cents] measure of tempered in cents
+    # @return the [Tonal::Cents] measure of tempered in cents
     # @example
     #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).tempered_to_cents
     #   => 696.77
@@ -76,7 +76,7 @@ class Tonal::Scale
       tempered.to_cents
     end
 
-    # @return [Tonal::Cents] measure of ratio in cents
+    # @return the [Tonal::Cents] measure of ratio in cents
     # @example
     #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).ratio_to_cents
     #   => 701.96
@@ -85,7 +85,7 @@ class Tonal::Scale
       ratio.to_cents
     end
 
-    # @return [Tonal::Cents] the difference between the tempered number and the ratio
+    # @return the [Tonal::Cents] measure of the difference between the tempered number and the ratio
     # @example
     #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).efficiency => 5.19 ¢
     #
