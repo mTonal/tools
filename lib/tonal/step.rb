@@ -41,10 +41,12 @@ class Tonal::Scale
     # @return [Rational] of the step
     # @example
     #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).step_to_r
-    #   => (6735213777669305/4503599627370496)
+    #   => (18/31)
+    #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 34).step_to_r
+    #   => (10/17)
     #
     def step_to_r
-      tempered.to_r
+      Rational(step, modulo)
     end
     alias :to_r :step_to_r
 
