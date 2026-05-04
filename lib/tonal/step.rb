@@ -49,6 +49,15 @@ class Tonal::Scale
       Rational(step, modulo)
     end
 
+    # @return [Tonal::Ratio] of the step/modulo
+    # @example
+    #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).step_to_ratio
+    #   => 18/31
+    #
+    def step_to_ratio
+      Tonal::Ratio.new(step, modulo)
+    end
+
     # @return [Rational] of the ratio
     # @example
     #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).ratio_to_r
