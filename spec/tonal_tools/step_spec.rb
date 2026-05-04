@@ -85,6 +85,12 @@ RSpec.describe Tonal::Scale::Step do
     end
   end
 
+  describe "#step_to_ratio" do
+    let(:ratio) { 3/2r }
+    let(:modulo) { 34 }
+    it("returns the ratio of the step/module") { expect(subject.step_to_ratio).to eq Tonal::Ratio.new(20, 34) }
+  end
+
   describe "#ratio_to_r" do
     let(:ratio) { 3/2r }
 

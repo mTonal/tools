@@ -1,4 +1,4 @@
 module Tonal
   TOOLS_PRODUCER = "mTonal"
-  TOOLS_VERSION = "8.5.2"
+  TOOLS_VERSION = "8.5.3"
 end
