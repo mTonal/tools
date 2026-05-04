@@ -76,13 +76,19 @@ RSpec.describe Tonal::Scale::Step do
   describe "#step_to_r" do
     let(:ratio) { 3/2r }
 
-    it("returns the rational of the step") { expect(subject.step_to_r).to eq 6735213777669305/4503599627370496r }
+    it("returns the rational of the step") { expect(subject.step_to_r).to eq 18/31r }
+
+    context "when the step and modulo have a common factor" do
+      let(:modulo) { 34 }
+
+      it("returns the rational of the step reduced to lowest terms") { expect(subject.step_to_r).to eq 10/17r }
+    end
   end
 
   describe "#to_r" do
     let(:ratio) { 3/2r }
 
-    it("returns the rational of the step") { expect(subject.to_r).to eq 6735213777669305/4503599627370496r }
+    it("returns the rational of the step") { expect(subject.to_r).to eq 18/31r }
   end
 
   describe "#ratio_to_r" do
