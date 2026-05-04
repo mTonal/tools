@@ -104,6 +104,10 @@ class Tonal::Scale
       step.coprime?(modulo)
     end
 
+    # @return a new [Tonal::Scale::Step] with the step added to the current step
+    # @example
+    #   Tonal::Scale::Step.new(step: 5, modulo: 12) + Tonal::Scale::Step.new(step: 7, modulo: 12) => 0\12
+    #
     def +(rhs)
       self.class.new(step: (rhs % modulo), modulo: modulo)
     end
