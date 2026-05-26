@@ -10,7 +10,7 @@ class Tonal::Hertz
   #
   def initialize(arg)
     raise ArgumentError, "Argument is not Numeric or Tonal::Hertz" unless arg.kind_of?(Numeric) || arg.kind_of?(self.class)
-    @value = arg.kind_of?(self.class) ? arg.inspect : arg
+    @value = arg.kind_of?(self.class) ? arg.value : arg
   end
 
   # @return [Tonal::Hertz] 440 Hz
@@ -45,6 +45,16 @@ class Tonal::Hertz
   def to_cents(reference: self.class.reference)
     Tonal::Cents.new(ratio: to_r / reference.to_r)
   end
+
+  # @return [Tonal::Midi::Note] the midi representation of self
+  # @example
+  #   Tonal::Hertz.new(440).to_midi => 69.0 MIDI
+  # @param reference [Tonal::Hertz, Numeric] the reference frequency to compare to
+  #
+  def to_midi_note
+    Tonal::Midi::Note.new(frequency: to_f)
+  end
+  alias :to_midi :to_midi_note
 
   # @return [String] the string representation of Tonal::Hertz
   # @example

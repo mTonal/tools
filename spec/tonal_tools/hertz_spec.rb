@@ -53,6 +53,24 @@ RSpec.describe Tonal::Hertz do
     end
   end
 
+  describe "#to_midi" do
+    let(:frequency) { described_class.new(number) }
+    let(:expected_midi_note) { Tonal::Midi::Note.new(frequency: frequency) }
+
+    it "returns the midi difference from the default reference frequency, 440 Hz" do
+      expect(frequency.to_midi).to eq expected_midi_note
+    end
+# (number: A4_MIDI_NUMBER, frequency: nil)
+    context "with a custom reference frequency" do
+      let(:frequency) { described_class.new(200) }
+      let(:expected_midi_note) { Tonal::Midi::Note.new(frequency: frequency) }
+
+      it "returns the midi difference from the custom reference frequency" do
+        expect(frequency.to_midi).to eq expected_midi_note
+      end
+    end
+  end
+
   describe "#value" do
     it "returns the value that was input" do
       expect(described_class.new(number).value).to eq 400
