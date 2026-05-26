@@ -12,6 +12,7 @@ module Tonal
   require "tonal/log"
   require "tonal/log2"
   require "tonal/approximation"
+  require "tonal/midi"
   require "tonal/ratio"
   require "tonal/reduced_ratio"
   require "tonal/extended_ratio"
