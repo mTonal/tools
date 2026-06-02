@@ -4,6 +4,7 @@ module Tonal::Midi
 
     REFERENCE_FREQUENCY = 440.0
     A4_MIDI_NUMBER = 69
+    C4_MIDI_NUMBER = 60
 
     attr_reader :number, :frequency
 
@@ -32,7 +33,7 @@ module Tonal::Midi
     end
 
     def <=>(other)
-      number <=> other.number
+      number <=> (other.kind_of?(self.class) ? other.number : other)
     end
   end
 end

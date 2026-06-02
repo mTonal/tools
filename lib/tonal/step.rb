@@ -58,6 +58,22 @@ class Tonal::Scale
       Tonal::Ratio.new(step, modulo)
     end
 
+    # @return the [Tonal::Midi::Note] representation of the step
+    #
+    # @example
+    #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).step_to_midi
+    #   => 78
+    #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 12).step_to_midi
+    #   => 67
+    #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 12).step_to_midi(midi_root: Tonal::Midi::Note::A4_MIDI_NUMBER)
+    #   => 76
+    #
+    # @param midi_root [Integer] the MIDI number that corresponds to the 0 step of the scale. Default is C4 (60 MIDI).
+    #
+    def step_to_midi(midi_root: Tonal::Midi::Note::C4_MIDI_NUMBER)
+      Tonal::Midi::Note.new(number: step + midi_root)
+    end
+
     # @return the [Rational] representation of the ratio of self
     # @example
     #   Tonal::Scale::Step.new(ratio: 3/2r, modulo: 31).ratio_to_r
