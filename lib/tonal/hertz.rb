@@ -1,6 +1,8 @@
 class Tonal::Hertz
   include Comparable
 
+  REFERENCE_FREQUENCY = 440.0
+
   attr_reader :value
 
   # @return [Tonal::Hertz]
@@ -18,7 +20,7 @@ class Tonal::Hertz
   #   Tonal::Hertz.reference => 440.0 Hz
   #
   def self.reference
-    self.new(440.0)
+    self.new(REFERENCE_FREQUENCY)
   end
 
   # @return [Rational] self as a rational
@@ -50,9 +52,10 @@ class Tonal::Hertz
   # @example
   #   Tonal::Hertz.new(440).to_midi => 69.0 MIDI
   # @param reference [Tonal::Hertz, Numeric] the reference frequency to compare to
+  # @param modulo [Integer] the modulo to use for the MIDI note calculation
   #
-  def to_midi_note
-    Tonal::Midi::Note.new(frequency: to_f)
+  def to_midi_note(modulo: Tonal::Midi::Note::DEFAULT_MODULO)
+    Tonal::Midi::Note.new(frequency: to_f, modulo: modulo)
   end
   alias :to_midi :to_midi_note
 

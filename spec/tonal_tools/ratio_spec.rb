@@ -198,6 +198,46 @@ RSpec.describe Tonal::Ratio do
       end
     end
 
+    describe "#to_hertz" do
+      it "returns the reference frequency for the 1/1 ratio by default" do
+        expect(described_class.new(1/1r).to_hertz.to_f).to eq 440.0
+      end
+
+      it "returns the hertz of self" do
+        expect(subject.to_hertz).to be_a_kind_of(Tonal::Hertz)
+        expect(subject.to_hertz.to_f).to eq 660.0
+      end
+
+      context "with a custom reference frequency" do
+        let(:reference) { 220.0 }
+
+        it "returns the hertz of self with respect to the custom reference frequency" do
+          expect(subject.to_hertz(reference: reference)).to be_a_kind_of(Tonal::Hertz)
+          expect(subject.to_hertz(reference: reference).to_f).to eq 330.0
+        end
+      end
+    end
+
+    describe "#to_midi" do
+      it "returns the MIDI note of A440 for the 1/1 ratio by default" do
+        expect(described_class.new(1/1r).to_midi.number).to eq 69
+      end
+
+      it "returns the midi of self" do
+        expect(subject.to_midi).to be_a_kind_of(Tonal::Midi::Note)
+        expect(subject.to_midi.number).to eq 76
+      end
+
+      context "with a custom reference frequency" do
+        let(:reference) { 220.0 }
+
+        it "returns the midi of self with respect to the custom reference frequency" do
+          expect(subject.to_midi(reference: reference)).to be_a_kind_of(Tonal::Midi::Note)
+          expect(subject.to_midi(reference: reference).number).to eq 64
+        end
+      end
+    end
+
     describe "#step" do
       it "returns the step of self in a given modulo" do
         expect(subject.step).to eq Tonal::Scale::Step.new(modulo: 12, ratio: 3/2r)

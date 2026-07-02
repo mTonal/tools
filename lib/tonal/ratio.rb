@@ -174,6 +174,25 @@ class Tonal::Ratio
   end
   alias :cents :to_cents
 
+  # @return [Tonal::Hertz] the hertz of self with respect to a reference frequency
+  # @example
+  #   Tonal::Ratio.new(3,2).to_hertz => 660.0
+  # @param reference [Numeric] the reference frequency
+  #
+  def to_hertz(reference: Tonal::Hertz.reference)
+    Tonal::Hertz.new(reference.to_f * to_f)
+  end
+
+  # @return [Tonal::Midi::Note] the midi representation of self with respect to a reference frequency
+  # @example
+  #   Tonal::Ratio.new(3,2).to_midi => 76 MIDI
+  # @param reference [Numeric] the reference frequency
+  # @param modulo [Integer] the modulo for the MIDI note
+  #
+  def to_midi(reference: Tonal::Hertz.reference, modulo: Tonal::Midi::Note::DEFAULT_MODULO)
+    to_hertz(reference: reference).to_midi(modulo: modulo)
+  end
+
   # @return [Integer] the step of self in the given modulo
   # @example
   #   Tonal::ReducedRatio.new(3,2).step(12) => 7\12
