@@ -51,11 +51,12 @@ class Tonal::Hertz
   # @return [Tonal::Midi::Note] the midi representation of self
   # @example
   #   Tonal::Hertz.new(440).to_midi => 69.0 MIDI
-  # @param reference [Tonal::Hertz, Numeric] the reference frequency to compare to
   # @param modulo [Integer] the modulo to use for the MIDI note calculation
+  # @param reference_number [Integer] the MIDI note number that anchors the conversion
+  # @param reference_frequency [Numeric] the frequency (Hz) that anchors the conversion
   #
-  def to_midi_note(modulo: Tonal::Midi::Note::DEFAULT_MODULO)
-    Tonal::Midi::Note.new(frequency: to_f, modulo: modulo)
+  def to_midi_note(modulo: Tonal::Midi::Note::DEFAULT_MODULO, reference_number: Tonal::Midi::Note::A4_MIDI_NUMBER, reference_frequency: Tonal::Hertz::REFERENCE_FREQUENCY)
+    Tonal::Midi::Note.new(frequency: to_f, modulo: modulo, reference_number: reference_number, reference_frequency: reference_frequency)
   end
   alias :to_midi :to_midi_note
 

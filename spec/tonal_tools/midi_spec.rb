@@ -54,6 +54,21 @@ RSpec.describe Tonal::Midi::Note do
         expect(midi.frequency(round: 2)).to eq 339.29
       end
     end
+
+    context "with a custom reference_number and reference_frequency" do
+      it "anchors the number/frequency conversion on the given reference instead of A4/440" do
+        midi = described_class.new(frequency: 523.26, modulo: 31, reference_number: 60, reference_frequency: 261.63)
+        expect(midi.reference_number).to eq 60
+        expect(midi.reference_frequency).to eq 261.63
+        expect(midi.number).to eq 91
+      end
+
+      it "defaults to A4_MIDI_NUMBER and REFERENCE_FREQUENCY" do
+        midi = described_class.new(number: number)
+        expect(midi.reference_number).to eq described_class::A4_MIDI_NUMBER
+        expect(midi.reference_frequency).to eq Tonal::Hertz::REFERENCE_FREQUENCY
+      end
+    end
   end
 
   describe "#frequency" do

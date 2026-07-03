@@ -236,6 +236,22 @@ RSpec.describe Tonal::Ratio do
           expect(subject.to_midi(reference: reference).number).to eq 64
         end
       end
+
+      context "with a custom modulo" do
+        let(:reference) { 261.63 }
+
+        it "scales self's offset from the reference by modulo, without shifting the reference note itself" do
+          expect(described_class.new(1/1r).to_midi(reference: reference).number).to eq 60
+          expect(described_class.new(2/1r).to_midi(reference: reference).number).to eq 72
+          expect(described_class.new(1/1r).to_midi(reference: reference, modulo: 31).number).to eq 60
+          expect(described_class.new(2/1r).to_midi(reference: reference, modulo: 31).number).to eq 91
+        end
+
+        it "keeps the resulting frequency exact" do
+          note = described_class.new(2/1r).to_midi(reference: reference, modulo: 31)
+          expect(note.frequency).to eq 523.26
+        end
+      end
     end
 
     describe "#step" do
