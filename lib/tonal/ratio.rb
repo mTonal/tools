@@ -187,10 +187,13 @@ class Tonal::Ratio
   # @example
   #   Tonal::Ratio.new(3,2).to_midi => 76 MIDI
   # @param reference [Numeric] the reference frequency
-  # @param modulo [Integer] the modulo for the MIDI note
+  # @param modulo [Integer] the number of steps per octave used to scale self's offset from reference. The
+  #   reference frequency's own MIDI note number is always computed independently of modulo.
   #
   def to_midi(reference: Tonal::Hertz.reference, modulo: Tonal::Midi::Note::DEFAULT_MODULO)
-    to_hertz(reference: reference).to_midi(modulo: modulo)
+    reference_hertz = Tonal::Hertz.new(reference)
+    reference_number = reference_hertz.to_midi_note.number
+    to_hertz(reference: reference_hertz).to_midi_note(modulo: modulo, reference_number: reference_number, reference_frequency: reference_hertz.to_f)
   end
 
   # @return [Integer] the step of self in the given modulo

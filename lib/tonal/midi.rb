@@ -6,7 +6,7 @@ module Tonal::Midi
     C4_MIDI_NUMBER = 60
     DEFAULT_MODULO = 12
 
-    attr_reader :number, :modulo
+    attr_reader :number, :modulo, :reference_number, :reference_frequency
 
     # @return [Tonal::Midi::Note]
     # @example
@@ -15,20 +15,24 @@ module Tonal::Midi
     # @param number [Integer, nil] the MIDI note number. Mutually exclusive with frequency:
     # @param frequency [Numeric, Tonal::Hertz, nil] the frequency in Hz. Mutually exclusive with number:
     # @param modulo [Integer] the number of steps per octave
+    # @param reference_number [Integer] the MIDI note number that anchors the number/frequency conversion
+    # @param reference_frequency [Numeric] the frequency (Hz) that anchors the number/frequency conversion
     #
-    def initialize(number: nil, frequency: nil, modulo: DEFAULT_MODULO)
+    def initialize(number: nil, frequency: nil, modulo: DEFAULT_MODULO, reference_number: A4_MIDI_NUMBER, reference_frequency: Tonal::Hertz::REFERENCE_FREQUENCY)
       raise ArgumentError, "Provide either number: or frequency:, not both" if number && frequency
 
       @modulo = modulo
+      @reference_number = reference_number
+      @reference_frequency = reference_frequency.to_f
       if frequency
         raise ArgumentError, "Frequency argument is not Numeric or Tonal::Hertz" unless frequency.kind_of?(Numeric) || frequency.kind_of?(Tonal::Hertz)
         @frequency = Tonal::Hertz.new(frequency)
-        @number = (A4_MIDI_NUMBER + modulo * Math.log2(frequency.to_f / Tonal::Hertz::REFERENCE_FREQUENCY)).round
+        @number = (@reference_number + modulo * Math.log2(frequency.to_f / @reference_frequency)).round
       else
-        number = A4_MIDI_NUMBER if number.nil?
+        number = @reference_number if number.nil?
         raise ArgumentError, "Number argument is not Integer" unless number.kind_of?(Integer)
         @number = number
-        @frequency = Tonal::Hertz.new(Tonal::Hertz::REFERENCE_FREQUENCY * (2 ** ((number - A4_MIDI_NUMBER) / modulo.to_f)))
+        @frequency = Tonal::Hertz.new(@reference_frequency * (2 ** ((number - @reference_number) / modulo.to_f)))
       end
     end
 
