@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.files       = Dir.glob(["lib/**/*", "data/**/*"])
   spec.required_ruby_version = Gem::Requirement.new(">= 3.1")
   spec.required_rubygems_version = Gem::Requirement.new(">= 3.1")
-  spec.rubygems_version = "3.5.23"
+  spec.rubygems_version = "4.0.17"
   spec.add_runtime_dependency "yaml", ["~> 0"]
   spec.add_runtime_dependency "json", ["~> 2"]
   spec.add_runtime_dependency "prime", ["~> 0"]

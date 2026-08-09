@@ -20,7 +20,7 @@ module Tonal::ExtendableRatio
       during_initialize(*partials)
     elsif ratios
       first = ratios.first
-      partials = ratios.map{|r| r * first}
+      partials = ratios.map{|r| (r * first).to_r}
       during_initialize(*partials)
     end
   end

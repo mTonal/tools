@@ -432,6 +432,15 @@ RSpec.describe "Extensions" do
           expect(efr.inspect).to eq "4:5:6"
         end
       end
+
+      context "when list of elements are Tonal::Ratio" do
+        let(:ratios) { [Tonal::Ratio.new(1, 1), Tonal::Ratio.new(5, 4), Tonal::Ratio.new(3, 2)] }
+        it "returns an ExtendedRatio constructed from the array elements as ratios" do
+          efr = ratios.to_efr(as: :ratios)
+          expect(efr).to be_a_kind_of(Tonal::ExtendedRatio)
+          expect(efr.inspect).to eq "4:5:6"
+        end
+      end
     end
 
     describe "#to_sefr" do
@@ -446,6 +455,15 @@ RSpec.describe "Extensions" do
           sefr = [4, 5, 6].to_sefr(as: :partials)
           expect(sefr).to be_a_kind_of(Tonal::SubharmonicExtendedRatio)
           expect(sefr.inspect).to eq "6:5:4"
+        end
+      end
+
+      context "when list of elements are Tonal::Ratio" do
+        let(:ratios) { [Tonal::Ratio.new(1, 1), Tonal::Ratio.new(5, 4), Tonal::Ratio.new(3, 2)] }
+        it "returns a SubharmonicExtendedRatio constructed from the array elements as ratios" do
+          sefr = ratios.to_sefr(as: :ratios)
+          expect(sefr).to be_a_kind_of(Tonal::SubharmonicExtendedRatio)
+          expect(sefr.inspect).to eq "15:12:10"
         end
       end
     end
