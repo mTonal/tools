@@ -535,6 +535,25 @@ RSpec.describe Tonal::Ratio do
     end
   end
 
+  describe "#hash" do
+    let(:ratio) { described_class.new(5/4r) }
+    let(:ratio_copy) { described_class.new(10,8) }
+    let(:other_ratio) { described_class.new(3/2r) }
+
+    it "differs for ratios with different values" do
+      expect(ratio.hash).not_to eq other_ratio.hash
+    end
+
+    it "is equal for equal ratios" do
+      expect(ratio.hash).to eq ratio_copy.hash
+    end
+
+    it "works with Hash-backed collections" do
+      expect([ratio, ratio_copy, other_ratio].uniq.count).to eq 2
+      expect(Set[ratio, ratio_copy].size).to eq 1
+    end
+  end
+
   describe "Operators" do
     let(:arg1) { 3/2r }
     let(:arg2) { nil }
@@ -998,6 +1017,20 @@ RSpec.describe Tonal::Ratio do
 end
 
 RSpec.describe Tonal::ReducedRatio do
+  describe "#hash" do
+    it "differs for ratios with different values" do
+      expect(described_class.new(5/4r).hash).not_to eq described_class.new(3/2r).hash
+    end
+
+    it "is equal for equal ratios" do
+      expect(described_class.new(5/4r).hash).to eq described_class.new(10/8r).hash
+    end
+
+    it "is not eql? to a Tonal::Ratio of the same value" do
+      expect(described_class.new(5/4r)).not_to eql Tonal::Ratio.new(5/4r)
+    end
+  end
+
   describe "#to_basic_ratio" do
     it "returns a copy of self as an instance of unreduced ratio" do
       expect(described_class.new(5,4).to_basic_ratio).to be_a_kind_of(Tonal::Ratio)

@@ -666,11 +666,7 @@ class Tonal::Ratio
      other.instance_of?(self.class) && to_r == other.to_r
   end
 
-  def hash
-     p, q = 17, 37
-     p = q * @id.hash
-     p = q * @name.hash
-  end
+  def hash = [self.class, to_r].hash
 
   private
   def _initialize(antecedent, consequent=nil, label: nil, equave: DEFAULT_EQUAVE)
