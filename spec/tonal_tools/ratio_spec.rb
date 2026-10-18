@@ -442,6 +442,67 @@ RSpec.describe Tonal::Ratio do
       end
     end
 
+    context "with a large but factorable ratio" do
+      let(:arg1) { 3**26/2**41r }
+
+      it "returns its prime divisions, prime vector and max and min primes" do
+        expect(subject.prime_divisions).to eq [[[3, 26]], [[2, 41]]]
+        expect(subject.prime_vector).to eq Vector[-41, 26]
+        expect(subject.max_prime).to eq 3
+        expect(subject.min_prime).to eq 2
+      end
+    end
+
+    context "with a superparticular ratio" do
+      let(:arg1) { 31/30r }
+
+      it "returns its prime divisions, prime vector and max and min primes" do
+        expect(subject.prime_divisions).to eq [[[31, 1]], [[2, 1], [3, 1], [5, 1]]]
+        expect(subject.prime_vector).to eq Vector[-1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 1]
+        expect(subject.max_prime).to eq 31
+        expect(subject.min_prime).to eq 2
+      end
+    end
+
+    context "with an irrational ratio" do
+      subject { Tonal::ReducedRatio.new(2**(1/7.0)) }
+
+      it "returns nil from the prime methods, quickly" do
+        started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        expect(subject.prime_divisions).to be_nil
+        expect(subject.prime_vector).to be_nil
+        expect(subject.max_prime).to be_nil
+        expect(subject.min_prime).to be_nil
+        expect(Process.clock_gettime(Process::CLOCK_MONOTONIC) - started).to be < 0.5
+      end
+    end
+
+    context "with one prime above the prime limit" do
+      let(:arg1) { 10007/10000r }
+
+      it "returns its prime divisions" do
+        expect(subject.prime_divisions).to eq [[[10007, 1]], [[2, 4], [5, 4]]]
+        expect(subject.prime_vector.count).to eq Prime.each(10007).count
+      end
+    end
+
+    context "with two primes above the prime limit" do
+      let(:arg1) { 10007 * 10009 }
+
+      it "returns nil by default" do
+        expect(subject.prime_divisions).to be_nil
+        expect(subject.prime_vector).to be_nil
+        expect(subject.max_prime).to be_nil
+        expect(subject.min_prime).to be_nil
+      end
+
+      it "factors it when the limit is raised" do
+        expect(subject.prime_divisions(limit: 20_000)).to eq [[[10007, 1], [10009, 1]], []]
+        expect(subject.max_prime(limit: 20_000)).to eq 10009
+        expect(subject.min_prime(limit: 20_000)).to eq 10007
+      end
+    end
+
     describe "#benedetti_height" do
       it "returns the product complexity of the ratio" do
         expect(subject.benedetti_height).to eq 6

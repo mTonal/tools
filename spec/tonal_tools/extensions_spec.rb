@@ -124,6 +124,24 @@ RSpec.describe "Extensions" do
       end
     end
 
+    context "with an irrational number" do
+      it "returns nil from the prime methods" do
+        expect(2**(1/7.0)).to have_attributes(prime_divisions: nil, prime_vector: nil, max_prime: nil, min_prime: nil)
+      end
+    end
+
+    context "with primes above the prime limit" do
+      let(:number) { 10007 * 10009 / 2r }
+
+      it "returns nil by default and factors with a raised limit" do
+        expect(number.max_prime).to be_nil
+        expect(number.prime_divisions(limit: 20_000)).to eq [[[10007, 1], [10009, 1]], [[2, 1]]]
+        expect(number.max_prime(limit: 20_000)).to eq 10009
+        expect(number.min_prime(limit: 20_000)).to eq 2
+        expect(number.prime_vector(limit: 20_000).count).to eq Prime.each(10009).count
+      end
+    end
+
     describe "#benedetti_height" do
       it "returns the product complexity of the number" do
         expect((3/2r).benedetti_height).to eq 6
@@ -261,6 +279,19 @@ RSpec.describe "Extensions" do
     describe "#min_prime" do
       it "returns the minimum prime factor" do
         expect(72.min_prime).to eq 2
+      end
+    end
+
+    describe "#prime_divisions" do
+      it "returns the prime divisions of self, with an empty denominator array" do
+        expect(72.prime_divisions).to eq [[[2, 3], [3, 2]], []]
+      end
+    end
+
+    context "with 1" do
+      it "returns nil max and min primes" do
+        expect(1.max_prime).to be_nil
+        expect(1.min_prime).to be_nil
       end
     end
 

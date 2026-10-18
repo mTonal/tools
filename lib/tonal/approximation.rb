@@ -38,7 +38,7 @@ class Tonal::Ratio
       Set.new(ratio: ratio) do |ratios|
         ContinuedFraction.new(antecedent.to_f/consequent, conv_limit).convergents.each do |convergent|
           ratio2 = ratio.class.new(convergent.numerator,convergent.denominator)
-          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && (ratio2.max_prime <= max_prime) && (ratio2.min_prime >= min_prime)
+          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && max_prime_at_most?(ratio2, max_prime) && !prime_factor_at_most?(ratio2, min_prime - 1)
           break if ratios.length >= depth
         end
       end
@@ -61,7 +61,7 @@ class Tonal::Ratio
         FractionTree.node(to_f).path.each do |node|
           next if node.number.infinite?
           ratio2 = ratio.class.new(node.number)
-          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && (ratio2.max_prime <= max_prime) && (ratio2.min_prime >= min_prime)
+          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && max_prime_at_most?(ratio2, max_prime) && !prime_factor_at_most?(ratio2, min_prime - 1)
           break if ratios.length >= depth
         end
       end
@@ -78,13 +78,15 @@ class Tonal::Ratio
     # @param superpart if the superior part is the numerator or denominator
     #
     def by_superparticular(cents_tolerance: Tonal::Cents::TOLERANCE, depth: DEFAULT_SUPERPART_DEPTH, max_prime: DEFAULT_MAX_PRIME, min_prime: DEFAULT_MIN_PRIME, superpart: :upper)
+      # One of n and n+1 is even, so every candidate has 2 as a factor and none can meet a higher min_prime
+      return Set.new(ratio: ratio) if min_prime > 2
       self_in_cents = to_cents
       within = cents_tolerance.kind_of?(Tonal::Cents) ? cents_tolerance : Tonal::Cents.new(cents: cents_tolerance)
       Set.new(ratio: ratio) do |ratios|
         n = 1
         while true do
           ratio2 = ratio.class.superparticular(n, factor: ratio.to_r, superpart:)
-          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && (ratio2 != ratio) && (ratio2.max_prime <= max_prime) && (ratio2.min_prime <= min_prime)
+          ratios << ratio2 if ratio.class.within_cents?(self_in_cents, ratio2.to_cents, within) && (ratio2 != ratio) && max_prime_at_most?(ratio2, max_prime) && !prime_factor_at_most?(ratio2, min_prime - 1)
           break if ratios.length >= depth
           n += 1
         end
@@ -113,7 +115,7 @@ class Tonal::Ratio
           while boundary <= max_boundary
             vacinity = ratio.respond_to?(:to_basic_ratio) ? to_basic_ratio.scale(scale) : ratio.scale(scale)
             self.class.neighbors(away: boundary, vacinity: vacinity).each do |neighbor|
-              ratios << neighbor if (neighbor != ratio) && ratio.class.within_cents?(self_in_cents, neighbor.to_cents, within) && (neighbor.max_prime <= max_prime) && (neighbor.min_prime >= min_prime)
+              ratios << neighbor if (neighbor != ratio) && ratio.class.within_cents?(self_in_cents, neighbor.to_cents, within) && max_prime_at_most?(neighbor, max_prime) && !prime_factor_at_most?(neighbor, min_prime - 1)
             end
             boundary += 1
           end
@@ -139,6 +141,22 @@ class Tonal::Ratio
                          end
                        end.flatten).to_a
     end
+
+    # Filters approximations without fully factoring them (a Float's convergents
+    # can have huge prime factors). Float::INFINITY skips the factoring.
+    def max_prime_at_most?(candidate, max_prime)
+      return true if max_prime.infinite?
+      Prime.each(max_prime).inject([candidate.antecedent, candidate.consequent]) do |(ante, cons), p|
+        ante /= p while (ante % p).zero?
+        cons /= p while (cons % p).zero?
+        [ante, cons]
+      end.all?{|n| n == 1 }
+    end
+
+    def prime_factor_at_most?(candidate, prime)
+      Prime.each(prime).any?{|p| (candidate.antecedent % p).zero? || (candidate.consequent % p).zero? }
+    end
+    private :max_prime_at_most?, :prime_factor_at_most?
 
     # @return [Array] an array of Tonal::Ratio neighbors in the scaled ratio's grid neighborhood
     # @example

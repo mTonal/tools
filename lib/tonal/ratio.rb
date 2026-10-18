@@ -6,6 +6,7 @@ class Tonal::Ratio
 
   PRECISION = 2
   DEFAULT_EQUAVE = 2/1r
+  PRIME_LIMIT = 10_000
 
   attr_reader :antecedent, :consequent, :equave, :reduced_antecedent, :reduced_consequent
 
@@ -356,21 +357,25 @@ class Tonal::Ratio
     Math.atan2(consequent, antecedent).round(round)
   end
 
-  # @return [Array], self decomposed into its prime factors
+  # @return [Array, nil], self decomposed into its prime factors, or nil if self has a prime factor above limit (e.g. an irrational ratio built from a Float)
   # @example
   #   Tonal::Ratio.new(31/30r).prime_divisions => [[[31, 1]], [[2, 1], [3, 1], [5, 1]]]
+  # @param limit [Integer] the largest prime to factor by
   #
-  def prime_divisions
-    [antecedent.prime_division, consequent.prime_division]
+  def prime_divisions(limit: PRIME_LIMIT)
+    ante = prime_division_within(antecedent, limit)
+    cons = prime_division_within(consequent, limit)
+    [ante, cons] if ante && cons
   end
 
-  # @return [Vector], self represented as a prime vector
+  # @return [Vector, nil], self represented as a prime vector, or nil if self is 1/1 or has a prime factor above limit
   # @example
   #   Tonal::Ratio.new(3/2r).prime_vector => Vector[-1, 1]
+  # @param limit [Integer] the largest prime to factor by
   #
-  def prime_vector
-    pds = prime_divisions
-    return nil if pds.all?(&:empty?)
+  def prime_vector(limit: PRIME_LIMIT)
+    pds = prime_divisions(limit:)
+    return nil if pds.nil? || pds.all?(&:empty?)
 
     max = [pds.first.max{|p| p.first}, pds.last.max{|p| p.first}].compact.max.first
 
@@ -384,20 +389,22 @@ class Tonal::Ratio
   alias :monzo :prime_vector
   alias :prime_exponent_vector :prime_vector
 
-  # @return [Integer] the maximum prime factor of self
+  # @return [Integer, nil] the maximum prime factor of self, or nil if self has a prime factor above limit
   # @example
   #   Tonal::Ratio.new(31/30r).max_prime => 31
+  # @param limit [Integer] the largest prime to factor by
   #
-  def max_prime
-    prime_divisions.flatten(1).map(&:first).max
+  def max_prime(limit: PRIME_LIMIT)
+    prime_divisions(limit:)&.flatten(1)&.map(&:first)&.max
   end
 
-  # @return [Integer] the minimum prime factor of self
+  # @return [Integer, nil] the minimum prime factor of self, or nil if self has a prime factor above limit
   # @example
   #   Tonal::Ratio.new(31/30r).min_prime => 2
+  # @param limit [Integer] the largest prime to factor by
   #
-  def min_prime
-    prime_divisions.flatten(1).map(&:first).min
+  def min_prime(limit: PRIME_LIMIT)
+    prime_divisions(limit:)&.flatten(1)&.map(&:first)&.min
   end
 
   # =================================
@@ -682,6 +689,24 @@ class Tonal::Ratio
     @reduced_antecedent, @reduced_consequent = _equave_reduce(equave)
     @label = label
     @approximation = Approximation.new(ratio: self)
+  end
+
+  # Trial-divides n by the primes up to limit, so a Float's huge binary
+  # fraction is rejected without a full (and very slow) factorization.
+  # A cofactor left below limit**2 has no factor up to limit, so it is prime.
+  def prime_division_within(n, limit)
+    division = []
+    Prime.each(limit) do |prime|
+      break if n <= 1
+      exponent = 0
+      while (n % prime).zero?
+        n /= prime
+        exponent += 1
+      end
+      division << [prime, exponent] if exponent > 0
+    end
+    return division if n <= 1
+    division << [n, 1] if n < limit**2
   end
 
   def raise_if_negative(*args)

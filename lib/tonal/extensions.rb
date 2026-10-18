@@ -180,28 +180,32 @@ class Numeric
   # @example
   #   (3/2r).prime_vector => Vector[-1, 1]
   # @param reduced
+  # @param limit [Integer] the largest prime to factor by, see Tonal::Ratio#prime_divisions
   #
-  def prime_vector(reduced: false) = ratio(reduced:).prime_vector
+  def prime_vector(reduced: false, limit: Tonal::Ratio::PRIME_LIMIT) = ratio(reduced:).prime_vector(limit:)
   alias :monzo :prime_vector
   alias :prime_exponent_vector :prime_vector
 
-  # @return [Array], self decomposed into its prime factors
+  # @return [Array, nil], self decomposed into its prime factors, or nil if self has a prime factor above limit
   # @example
   #   (31/30r).prime_divisions => [[[31, 1]], [[2, 1], [3, 1], [5, 1]]]
+  # @param limit [Integer] the largest prime to factor by, see Tonal::Ratio#prime_divisions
   #
-  def prime_divisions = [self.numerator.prime_division, self.denominator.prime_division]
+  def prime_divisions(limit: Tonal::Ratio::PRIME_LIMIT) = ratio.prime_divisions(limit:)
 
-  # @return [Integer] the maximum prime factor of self
+  # @return [Integer, nil] the maximum prime factor of self, or nil if self has a prime factor above limit
   # @example
   #   (31/30r).max_prime => 31
+  # @param limit [Integer] the largest prime to factor by, see Tonal::Ratio#prime_divisions
   #
-  def max_prime = prime_divisions.flatten(1).map(&:first).max
+  def max_prime(limit: Tonal::Ratio::PRIME_LIMIT) = ratio.max_prime(limit:)
 
-  # @return [Integer] the minimum prime factor of self
+  # @return [Integer, nil] the minimum prime factor of self, or nil if self has a prime factor above limit
   # @example
   #   (31/30r).min_prime => 2
+  # @param limit [Integer] the largest prime to factor by, see Tonal::Ratio#prime_divisions
   #
-  def min_prime = prime_divisions.flatten(1).map(&:first).min
+  def min_prime(limit: Tonal::Ratio::PRIME_LIMIT) = ratio.min_prime(limit:)
 
   # @return [Vector], self expressed as a Vector
   # @example
@@ -270,18 +274,6 @@ class Integer
   # @param equave
   #
   def ed(modulo, equave: 2/1r) = Tonal::ReducedRatio.ed(self, modulo, equave:)
-
-  # @return [Integer] the maximum prime factor of self
-  # @example
-  #  72.max_prime => 3
-  #
-  def max_prime = self.prime_division.map(&:first).max
-
-  # @return [Integer] the minimum prime factor of self
-  # @example
-  #   72.min_prime => 2
-  #
-  def min_prime = self.prime_division.map(&:first).min
 
   # @return [Integer] the factorial of self
   # @example

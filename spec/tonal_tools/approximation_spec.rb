@@ -144,6 +144,20 @@ RSpec.describe Tonal::Ratio::Approximation do
           expect(ratio.approximate.by_superparticular(superpart: :lower, depth: depth).entries).to eq [(346/347r), (347/348r), (348/349r), (349/350r), (350/351r)].map{|r| r * 3/2r}
         end
       end
+
+      context "with a min_prime above 2" do
+        it "returns no approximations, since every superparticular candidate has 2 as a factor" do
+          expect(ratio.approximate.by_superparticular(depth: depth, min_prime: 3).entries).to eq []
+        end
+      end
+
+      context "with a max_prime" do
+        it "returns approximations whose primes are all at most max_prime" do
+          entries = ratio.approximate.by_superparticular(depth: depth, max_prime: 50).entries
+          expect(entries.count).to eq depth
+          expect(entries.map(&:max_prime)).to all(be <= 50)
+        end
+      end
     end
 
     describe "#by_neighborhood" do
